@@ -1,8 +1,8 @@
+package lesson2;
+import java.util.Scanner;
 /*
 Программа, которая находит среднее арифметическое значение двух чисел.
  */
-package lesson2;
-import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) {
