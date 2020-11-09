@@ -1,5 +1,7 @@
+/*
+Программа, которая находит среднее арифметическое значение двух чисел.
+ */
 package lesson2;
-
 import java.util.Scanner;
 
 public class Task1 {
@@ -17,6 +19,3 @@ public class Task1 {
         System.out.println(averageValue);
     }
 }
-/*
-Программа, которая находит среднее арифметическое значение двух чисел.
- */
