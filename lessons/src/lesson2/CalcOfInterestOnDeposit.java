@@ -7,7 +7,7 @@ import java.util.Scanner;
 Вывести накопленную сумму денег за каждый год и начисленные проценты.
  */
 
-public class Task3 {
+public class CalcOfInterestOnDeposit {
     public static void main(String[] args) {
         init();
     }

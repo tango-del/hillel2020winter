@@ -3,7 +3,7 @@ package lesson2;
 Программа, которая находит среднее арифметическое значение произвольного количества чисел
  */
 
-public class Task2 {
+public class AverageArbitraryOfNumbers {
     public static void main(String[] args) {
         findAverageNumber();
     }

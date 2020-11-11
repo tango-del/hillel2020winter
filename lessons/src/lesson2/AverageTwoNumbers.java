@@ -4,7 +4,7 @@ import java.util.Scanner;
 Программа, которая находит среднее арифметическое значение двух чисел.
  */
 
-public class Task1 {
+public class AverageTwoNumbers {
     public static void main(String[] args) {
         findAverageValue();
     }
