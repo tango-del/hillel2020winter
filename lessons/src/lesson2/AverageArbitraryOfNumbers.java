@@ -3,18 +3,29 @@ package lesson2;
 Программа, которая находит среднее арифметическое значение произвольного количества чисел
  */
 
+import java.util.Scanner;
+
 public class AverageArbitraryOfNumbers {
     public static void main(String[] args) {
         findAverageNumber();
     }
 
-    public static void findAverageNumber(){
-        short firstNumber = 54;
-        short secondNumber = 84;
-        short thirdNumber = 352;
-        short fourthNumber = 1244;
-        short fifthNumber = 135;
-        double averageNumber = (double) (firstNumber + secondNumber + thirdNumber + fourthNumber + fifthNumber) / 5;
-        System.out.printf("Average number of %s, %s, %s, %s and %s is: %s", firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber, averageNumber);
+    public static void findAverageNumber() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите общее колличество чисел:");
+        float[] numbers = new float[scanner.nextInt()];
+
+        System.out.println("Введите случайные числа:");
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = scanner.nextFloat();
+        }
+
+        float sumNumber = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sumNumber += numbers[i];
+        }
+        float averageNumber = sumNumber / numbers.length;
+        System.out.printf("Среднее арифметическое значение: %s", averageNumber);
     }
 }
