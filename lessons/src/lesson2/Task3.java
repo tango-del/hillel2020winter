@@ -34,9 +34,12 @@ public class Task3 {
         float[] test = new float[(int) srokVklada + 1];
         for (int i = 0; i < test.length; i++) {
             float blabla = summaVklada * (1 + procentGodovix);
+            float temp = blabla - summaVklada;
             summaVklada = blabla;
             System.out.printf("%s год - %s", i, blabla);
-            System.out.println();
+            System.out.print('\n');
+            System.out.printf("Начисленные проценты - %s", temp);
+            System.out.print('\n');
         }
     }
 }
