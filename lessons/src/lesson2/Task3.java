@@ -14,31 +14,44 @@ public class Task3 {
 
     public static void init() {
         Scanner scanner = new Scanner(System.in);
-//        System.out.println("summa vklada");
-//        double summaVklada = scanner.nextDouble();
-//        System.out.println("procentnaya stavka");
-//        double procentGodovix = scanner.nextDouble() / 100;
-//        System.out.println(procentGodovix);
-//        System.out.println("srok vklada");
-//        double srokVklada = scanner.nextDouble();
-        byte srokVklada = 4;
-        float summaVklada = 15_000;
-        float procentGodovix = 8f / 100;
-//        double adv = (summaVklada * procentGodovix * srokVklada / 365) / 100;
-        float itogSumma = (float) (summaVklada * Math.pow((1 + procentGodovix / 1), srokVklada));
-        float nakoplenSumm = itogSumma - summaVklada;
-        System.out.printf("Итог: %s", itogSumma);
-        System.out.println();
-        System.out.printf("Накопленная сумма: %s", nakoplenSumm);
+        System.out.println("Сумма депозита:");
+        float depositAmount = scanner.nextFloat();
+        System.out.println("Годовая % ставка:");
+        float interestRate = scanner.nextFloat() / 100;
+        System.out.println("Длительность вклада (лет):");
+        float termDeposit = scanner.nextFloat();
 
-        float[] test = new float[(int) srokVklada + 1];
-        for (int i = 0; i < test.length; i++) {
-            float blabla = summaVklada * (1 + procentGodovix);
-            float temp = blabla - summaVklada;
-            summaVklada = blabla;
-            System.out.printf("%s год - %s", i, blabla);
-            System.out.print('\n');
-            System.out.printf("Начисленные проценты - %s", temp);
+        float finalSum = calcFinalSum(depositAmount, interestRate, termDeposit);
+
+        outputTotalSum(finalSum, depositAmount);
+
+        outputPerYearSum(depositAmount, interestRate, termDeposit);
+    }
+
+    //Расчет вклада с ежегодной капитализацией
+    public static float calcFinalSum(float depositAmount, float interestRate, float termDeposit) {
+        float finalSum = (float) (depositAmount * Math.pow((1 + interestRate / 1), termDeposit));
+        return finalSum;
+    }
+
+
+    //Вывод суммарного дохода и накопленной суммы
+    public static void outputTotalSum(float finalSum, float depositAmount) {
+        float totalAmount = finalSum - depositAmount;
+        System.out.printf("Суммарный доход: %s", finalSum);
+        System.out.print('\n');
+        System.out.printf("Накопленная сумма: %s", totalAmount);
+        System.out.print('\n');
+    }
+
+    //Вывод накопленной суммы за каждый год и начисленные проценты
+    public static void outputPerYearSum(float depositAmount, float interestRate, float termDeposit) {
+        int[] eachYear = new int[(int) (termDeposit + 1)];
+        for (int i = 1; i < eachYear.length; i++) {
+            float amountInYear = depositAmount * (1 + interestRate);
+            float temp = amountInYear - depositAmount;
+            depositAmount = amountInYear;
+            System.out.printf("%s год - %s, процент - %s", i, amountInYear, temp);
             System.out.print('\n');
         }
     }
