@@ -38,9 +38,9 @@ public class Task3 {
     //Вывод суммарного дохода и накопленной суммы
     public static void outputTotalSum(float finalSum, float depositAmount) {
         float totalAmount = finalSum - depositAmount;
-        System.out.printf("Суммарный доход: %s", finalSum);
+        System.out.printf("Накопленная сумма: %s", finalSum);
         System.out.print('\n');
-        System.out.printf("Накопленная сумма: %s", totalAmount);
+        System.out.printf("Суммарный доход: %s", totalAmount);
         System.out.print('\n');
     }
 
