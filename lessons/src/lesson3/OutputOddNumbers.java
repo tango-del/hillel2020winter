@@ -10,11 +10,9 @@ public class OutputOddNumbers {
     }
 
     public static void init() {
-        byte[] arrayNumbers = new byte[100];
-        for (byte i = 0; i < arrayNumbers.length; i++) {
-            arrayNumbers[i] = (byte) (i + 1);
-            if (arrayNumbers[i] % 2 != 0) {
-                System.out.println(arrayNumbers[i]);
+        for (int i = 0; i <= 100; i++) {
+            if (i % 2 != 0) {
+                System.out.println(i);
             }
         }
     }
