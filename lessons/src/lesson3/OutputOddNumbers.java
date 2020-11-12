@@ -7,10 +7,12 @@ package lesson3;
 
 public class OutputOddNumbers {
     public static void main(String[] args) {
-        //outputOddWithFor();
-        outputOddWithWhile();
+        outputOddWithFor();
+        //outputOddWithWhile();
+        //outputOddWithDoWhile();
     }
 
+    //output with for
     public static void outputOddWithFor() {
         for (int i = 0; i <= 100; i++) {
             if (i % 2 != 0) {
@@ -19,6 +21,7 @@ public class OutputOddNumbers {
         }
     }
 
+    //output with while
     public static void outputOddWithWhile(){
         int number = 0;
         while (number <= 100) {
@@ -27,5 +30,16 @@ public class OutputOddNumbers {
             }
             number++;
         }
+    }
+
+    //output with do while
+    public static void outputOddWithDoWhile(){
+        int number = 0;
+        do {
+            if (number % 2 != 0) {
+                System.out.println(number);
+            }
+            number++;
+        } while (number <= 100);
     }
 }
