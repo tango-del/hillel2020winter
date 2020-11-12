@@ -3,6 +3,7 @@ package lesson3;
 /*
 Дано число n при помощи цикла for посчитать факториал n!
 Перепишите программы с использованием цикла while.
+Перепишите программы с использованием цикла do - while
  */
 
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class CalculateFactorial {
         long number = scanner.nextInt();
         calculateWithFor(number);
         calculateWithWhile(number);
+        calculateWithDoWhile(number);
     }
 
     public static void calculateWithFor(long number) {
@@ -38,5 +40,16 @@ public class CalculateFactorial {
             count++;
         }
         System.out.printf("Calculated with while : %s", factorial);
+        System.out.println();
+    }
+
+    public static void calculateWithDoWhile(long number) {
+        long factorial = 1;
+        int count = 1;
+        do {
+            factorial *= count;
+            count++;
+        } while (count <= number);
+        System.out.printf("Calculated with do while : %s", factorial);
     }
 }
