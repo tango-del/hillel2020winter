@@ -22,6 +22,7 @@ public class CalculateFactorial {
         calculateWithDoWhile(number);
     }
 
+    //calculate for
     public static void calculateWithFor(long number) {
         long factorial = 1;
         for (int i = 1; i <= number; i++) {
@@ -32,6 +33,7 @@ public class CalculateFactorial {
 
     }
 
+    //calculate while
     public static void calculateWithWhile(long number) {
         long factorial = 1;
         int count = 1;
@@ -43,6 +45,7 @@ public class CalculateFactorial {
         System.out.println();
     }
 
+    //calculate do while
     public static void calculateWithDoWhile(long number) {
         long factorial = 1;
         int count = 1;
