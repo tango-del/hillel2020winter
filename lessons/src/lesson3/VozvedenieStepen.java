@@ -1,7 +1,7 @@
 package lesson3;
 
 /*
-Даны переменные x и n вычислить x^n
+5.Даны переменные x и n вычислить x^n
  */
 
 import java.util.Scanner;
