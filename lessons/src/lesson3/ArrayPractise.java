@@ -13,11 +13,12 @@ public class ArrayPractise {
     public static void init() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input size of array:");
-        int[] array = new int[scanner.nextInt()];
-        fillArray(array);
+//        int[] array = new int[scanner.nextInt()];
+//        fillArray(array);
+        int[] array = new int[]{20, 65, 10, 51, 82, 10, 82, 10, 49, 61};
 
-        int minNumber = findMinNumber(array);
-        System.out.println("Minimum number: " + minNumber);
+        //int minNumber = findMinNumbers(array);
+        findMinNumbers(array);
 
         System.out.println("Array:");
         printArray(array);
@@ -25,22 +26,28 @@ public class ArrayPractise {
     }
 
     //randomize all index in array from 0 to 100
-    public static void fillArray(int[] arr){
+    public static void fillArray(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 101);
         }
     }
 
     //find min number in array
-    public static int findMinNumber(int[] arr) {
-        //start check from 0 index array
+    public static void findMinNumbers(int[] arr) {
+        //ascending search minimum number
         int minNumber = arr[0];
         for (int i = 0; i < arr.length; i++) {
             if (minNumber > arr[i]) {
                 minNumber = arr[i];
             }
         }
-        return minNumber;
+        //descending check to equal numbers
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (minNumber == arr[i]) {
+                System.out.printf("Minimum number: %s at index: %s", arr[i], i);
+                System.out.println();
+            }
+        }
     }
 
     //output array
