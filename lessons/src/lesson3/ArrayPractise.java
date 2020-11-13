@@ -12,12 +12,15 @@ public class ArrayPractise {
 
     public static void init() {
         Scanner scanner = new Scanner(System.in);
-        int[] array = new int[]{20, 15, 82, 51, 10, 65, 59, 43, 16, 49};
-        //fillArray(array);
+        System.out.println("Input size of array:");
+        int[] array = new int[scanner.nextInt()];
+        fillArray(array);
+
+        int minNumber = findMinNumber(array);
+        System.out.println("Minimum number: " + minNumber);
 
         System.out.println("Array:");
         printArray(array);
-
 
     }
 
@@ -26,6 +29,18 @@ public class ArrayPractise {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 101);
         }
+    }
+
+    //find min number in array
+    public static int findMinNumber(int[] arr) {
+        //start check from 0 index array
+        int minNumber = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (minNumber > arr[i]) {
+                minNumber = arr[i];
+            }
+        }
+        return minNumber;
     }
 
     //output array
