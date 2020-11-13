@@ -1,6 +1,7 @@
 package lesson3;
 /*
 Дан массив размерности N, найти наименьший элемент массива и вывести на консоль (если наименьших элементов несколько — вывести их все).
+В массиве из задания 9 найти наибольший элемент.
  */
 
 import java.util.Scanner;
@@ -15,9 +16,10 @@ public class ArrayPractise {
         System.out.println("Input size of array:");
         int[] array = new int[scanner.nextInt()];
         fillArray(array);
-        //int[] array = new int[]{20, 65, 10, 51, 82, 10, 82, 10, 49, 61};
+        //int[] array = new int[]{82, 65, 10, 51, 82, 10, 82, 10, 49, 61};
 
         findMinNumbers(array);
+        findMaxNumbers(array);
 
         System.out.println("Array:");
         printArray(array);
@@ -43,6 +45,23 @@ public class ArrayPractise {
         for (int i = 0; i < arr.length; i++) {
             if (minNumber == arr[i]) {
                 System.out.printf("Min number: %s index: %s", arr[i], i);
+                System.out.println();
+            }
+        }
+    }
+
+    public static void findMaxNumbers(int[] arr) {
+        //descending search max number
+        int maxNumber = arr[arr.length - 1];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (maxNumber < arr[i]) {
+                maxNumber = arr[i];
+            }
+        }
+        //equal max number in array and output with index
+        for (int i = 0; i < arr.length; i++) {
+            if (maxNumber == arr[i]) {
+                System.out.printf("Max number: %s index: %s", arr[i], i);
                 System.out.println();
             }
         }
