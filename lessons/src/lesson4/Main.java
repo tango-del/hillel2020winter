@@ -31,7 +31,6 @@ public class Main {
         car2.fuelCalc(148);
 
         System.out.println("------------");
-        System.out.println(car2.fuelAmount);
         double totalFuelCost = car2.spentFuel * 22;
         System.out.printf("Total distance: %s km. Total refuel: %s. Total fuel cost: %s grn. Remaining fuel: %s", car2.carMileage, car2.spentFuel, totalFuelCost, car2.fuelAmount);
         System.out.println();
