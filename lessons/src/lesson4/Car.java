@@ -1,7 +1,4 @@
 package lesson4;
-/*
-определить сколько надо до заправить топлива при преодолении N км
- */
 
 public class Car {
     int amountTank; //объем бака

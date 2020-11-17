@@ -1,19 +1,4 @@
 package lesson4;
-/*
-в классе Мейн надо определить и вывести на экран сколько надо долить топлива
-и его стоимость если маршрут у нас Одесса - Киев
-
-+ 2 обязательные остановки для дозаправки Кривое Озеро и Жашков
-
-+ сколько будет стоить полная поездка
-
-+ остаток топлива в пункте назначения
-одесса киев 479км
-одесса кривое озеро 179км
-кривое озеро - жавшком 153км
-жашков - киев 148км
-за 1л - 21грн
- */
 
 public class Main {
     public static void main(String[] args) {
@@ -46,8 +31,9 @@ public class Main {
         car2.fuelCalc(148);
 
         System.out.println("------------");
+        System.out.println(car2.fuelAmount);
         double totalFuelCost = car2.spentFuel * 22;
-        System.out.printf("Total distance: %s km. Total refuel: %s. Total fuel cost: %s grn", car2.carMileage, car2.spentFuel, totalFuelCost);
+        System.out.printf("Total distance: %s km. Total refuel: %s. Total fuel cost: %s grn. Remaining fuel: %s", car2.carMileage, car2.spentFuel, totalFuelCost, car2.fuelAmount);
         System.out.println();
     }
 }
