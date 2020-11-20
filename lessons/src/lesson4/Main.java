@@ -11,6 +11,7 @@ public class Main {
 //        car1.fillFuel();
 //        car1.fuelCalc(70);
 //        car1.calcReFillFuel(1000);
+        final short abc = 179;
         System.out.println("------------");
         System.out.println("Making route Odesa - Kyiv");
         Car car2 = new Car(60, 15);
@@ -18,7 +19,7 @@ public class Main {
 
         System.out.println("------------");
         System.out.println("Route from Odesa to Kryve Ozero");
-        car2.fuelCalc(179);
+        car2.fuelCalc(abc);
         car2.fillFuel();
 
         System.out.println("------------");

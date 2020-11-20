@@ -20,13 +20,13 @@ public class Car {
         System.out.println();
     }
 
-    public void quantityMileage(double quantity, double spentFuel) {
+    public void quantityMileage(final double quantity, double spentFuel) {
         carMileage += quantity;
         this.spentFuel += spentFuel;
     }
 
     //определить остаток топлива по преодолении N км
-    public void fuelCalc(int kilometres) {
+    public void fuelCalc(final int kilometres) {
         double spentFuel = kilometres * fuelConsumption / 100;
         fuelAmount -= spentFuel;
         System.out.printf("Fuel remaining after overcoming %s km: %s", kilometres, fuelAmount);
@@ -36,7 +36,7 @@ public class Car {
     }
 
     //определить сколько надо до заправить топлива при преодолении N км
-    public void calcReFillFuel(int kilometres) {
+    public void calcReFillFuel(final int kilometres) {
 //        double currentPossibleDistance = fuelAmount * 100 / fuelConsumption;
 //        double kilometresLeft = currentPossibleDistance - kilometres;
 //        double remainFuel = kilometresLeft * fuelConsumption / 100;
