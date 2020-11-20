@@ -6,12 +6,9 @@ public class Main {
     }
 
     public static void init() {
-        //        Car car1 = new Car(60, 14);
-//        car1.fuelAmount = 20;
-//        car1.fillFuel();
-//        car1.fuelCalc(70);
-//        car1.calcReFillFuel(1000);
-        final short abc = 179;
+        final short distOdesToKryvOz = 179;
+        final short distKryvOzToZhashk = 153;
+        final short distZhashkToKyiv = 148;
         System.out.println("------------");
         System.out.println("Making route Odesa - Kyiv");
         Car car2 = new Car(60, 15);
@@ -19,17 +16,17 @@ public class Main {
 
         System.out.println("------------");
         System.out.println("Route from Odesa to Kryve Ozero");
-        car2.fuelCalc(abc);
+        car2.fuelCalc(distOdesToKryvOz);
         car2.fillFuel();
 
         System.out.println("------------");
         System.out.println("Route from Kryve Ozero to Zhashkiv");
-        car2.fuelCalc(153);
+        car2.fuelCalc(distKryvOzToZhashk);
         car2.fillFuel();
 
         System.out.println("------------");
         System.out.println("Route from Zhashkiv to Kyiv");
-        car2.fuelCalc(148);
+        car2.fuelCalc(distZhashkToKyiv);
 
         System.out.println("------------");
         double totalFuelCost = car2.spentFuel * 22;
