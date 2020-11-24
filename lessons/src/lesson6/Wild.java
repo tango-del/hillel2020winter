@@ -1,11 +1,11 @@
-package lesson5;
+package lesson6;
 
-public class Wild extends Animal {
+public class Wild extends AnimalClass {
     public Wild() {
     }
 
     @Override
-    protected String makeVoice() {
+    public String makeVoice() {
         return "I am a wild animal";
     }
 

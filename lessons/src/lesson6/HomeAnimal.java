@@ -1,23 +1,14 @@
-package lesson5;
+package lesson6;
 
-public class HomeAnimal extends Animal {
+public class HomeAnimal extends AnimalClass {
     public HomeAnimal() {
     }
     private String name;
     private boolean vaccinated;
 
     @Override
-    protected String makeVoice() {
+    public String makeVoice() {
         return "Hello, my name is " + name;
-    }
-
-
-    public boolean isVaccinated(boolean vaccinated) {
-        return vaccinated;
-    }
-
-    public void setVaccinated(boolean vaccinated) {
-        this.vaccinated = vaccinated;
     }
 
     public String getName() {
@@ -26,5 +17,13 @@ public class HomeAnimal extends Animal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isVaccinated(boolean vaccinated) {
+        return this.vaccinated;
+    }
+
+    public void setVaccinated(boolean vaccinated) {
+        this.vaccinated = vaccinated;
     }
 }
