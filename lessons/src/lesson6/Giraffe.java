@@ -6,6 +6,6 @@ public class Giraffe extends Wild {
 
     @Override
     public String makeVoice() {
-        return "I am a wild animal";
+        return "I am a wild animal, Giraffe";
     }
 }

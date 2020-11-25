@@ -1,6 +1,6 @@
 package lesson6;
 
-public class HomeAnimal extends AnimalClass {
+public class HomeAnimal extends Animal {
     public HomeAnimal() {
     }
     private String name;

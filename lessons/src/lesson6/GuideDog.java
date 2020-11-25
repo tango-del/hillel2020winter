@@ -27,4 +27,5 @@ public class GuideDog extends Dog {
     public void setTrained(boolean trained) {
         this.trained = trained;
     }
+
 }

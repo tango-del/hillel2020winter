@@ -1,6 +1,6 @@
 package lesson6;
 
-public class Wild extends AnimalClass {
+public class Wild extends Animal {
     public Wild() {
     }
 
