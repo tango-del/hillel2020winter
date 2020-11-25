@@ -1,4 +1,4 @@
-package lesson6.IntAnimal;
+package lesson6.interfaceAnimal;
 
 public interface InterfaceAnimal {
     default String makeVoice(){

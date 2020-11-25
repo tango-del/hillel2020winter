@@ -1,6 +1,6 @@
 package lesson6;
 
-import lesson6.IntAnimal.InterfaceAnimal;
+import lesson6.interfaceAnimal.InterfaceAnimal;
 
 public class Animal implements InterfaceAnimal {
     public Animal() { }
