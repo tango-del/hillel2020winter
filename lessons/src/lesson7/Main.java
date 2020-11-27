@@ -1,15 +1,11 @@
 package lesson7;
 /*
-Реализовать простую коллекцию для String на базе массива.
-
-добавить следующие методы для работы с коллекцией:
-
-добавлять (add), (по индеку или значению)
-
-удалять(delete), (по индексу или значению)
-
-доставать по индексу (get)
- */
+TODO Реализовать простую коллекцию для String на базе массива.
+ добавить следующие методы для работы с коллекцией:
+ добавлять (add), (по индеку или значению)
+ удалять(delete), (по индексу или значению)
+ доставать по индексу (get)
+*/
 
 import java.util.Arrays;
 
@@ -26,11 +22,43 @@ public class Main {
 
         addSymbolToString(test, 'l',  2);
 
+        System.out.println(Arrays.toString(test));
+
+        removeSymbolFromString(test, 2);
+
+
+
         //массив char переделываю в строку
-        String newff = Arrays.toString(test);
+
+        //String newff = Arrays.toString(test);
 
         //вывод строки
-        System.out.println(newff);
+        //System.out.println(newff);
+
+    }
+
+    public static void removeSymbolFromString(char[] arrChar, int removeSymbolAtIndex) {
+        char[] newArr = new char[arrChar.length - 1];
+        for (int i = 0; i < newArr.length; i++) {
+            if (i >= removeSymbolAtIndex) {
+                newArr[i] = arrChar[i + 1];
+            } else {
+                newArr[i] = arrChar[i];
+            }
+        }
+        System.out.println(Arrays.toString(newArr));
+        /*
+        for (int i = 0; i < newArr.length; i++) {
+            newArr[i] = arrChar[i];
+        }
+        System.out.println("newArr");
+        System.out.println(Arrays.toString(newArr));
+
+        for (int i = removeSymbolAtIndex; i < newArr.length; i++) {
+            newArr[i] = arrChar[i + 1];
+        }
+        System.out.println(Arrays.toString(newArr));
+         */
 
     }
 
