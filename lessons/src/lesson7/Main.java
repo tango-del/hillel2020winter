@@ -17,7 +17,7 @@ public class Main {
 
     public static void init() {
         String string = "Hilllel";
-        Example example = new Example();
+        StringMagic example = new StringMagic();
 
         System.out.println("---addSymbolToString---");
         String updateString = example.addSymbolToString(string, 'l', 2);
@@ -45,6 +45,6 @@ public class Main {
     }
 }
 
-class Example implements StringOperations {
+class StringMagic implements StringOperations {
 
 }
