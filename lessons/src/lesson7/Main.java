@@ -18,22 +18,16 @@ public class Main {
         //копирую символы строки str в массив char
         copySymbols(str, test);
         //вывод
+        System.out.println("---copied test---");
         System.out.println(Arrays.toString(test));
 
         addSymbolToString(test, 'l',  2);
 
+        System.out.println("---add symbol test---");
         System.out.println(Arrays.toString(test));
 
         removeSymbolFromString(test, 2);
 
-
-
-        //массив char переделываю в строку
-
-        //String newff = Arrays.toString(test);
-
-        //вывод строки
-        //System.out.println(newff);
 
     }
 
@@ -43,7 +37,7 @@ public class Main {
         /*
         один проход по массиву циклом в котором
         до индекса removeSymbolAtIndex идёт копирование элементов у другого массива с таким же номером индекса
-        когда номер итерации >= removeSymbolAtIndex значения второго массива начиная с индекса + 1
+        когда номер итерации >= removeSymbolAtIndex копирует значения второго массива начиная с индекса + 1
          */
         for (int i = 0; i < newArr.length; i++) {
             if (i >= removeSymbolAtIndex) {
@@ -52,6 +46,7 @@ public class Main {
                 newArr[i] = arrChar[i];
             }
         }
+        System.out.println("---rem symbol newArr---");
         System.out.println(Arrays.toString(newArr));
         /*
         Два цикла по массиву, первый копирует все символы в новый массив до допустимой длинны
