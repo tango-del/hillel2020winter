@@ -7,6 +7,7 @@ TODO Реализовать простую коллекцию для String на
  добавление по индексу -все элементы что находятся в права от индекса копируем в право
  удалять(delete), (по индексу или значению)
  доставать по индексу (get)
+ искать по значению возвращать индекс
 */
 
 public class Main {
@@ -35,13 +36,33 @@ public class Main {
         System.out.println(ex3);
     }
 
+    public static int searchIndexOfSymbol(String string, char searchChar) {
+        int index = 0;
+        for (int i = 0; i < string.length(); i++) {
+            if (searchChar == string.charAt(i)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
     public static String removeSymbolFromString(String string, char removeChar) {
-        //создание массива char с длиной string - 1
-        char[] newArr = new char[string.length() - 1];
+        //return symbol index in array
+        int index = searchIndexOfSymbol(string, removeChar);
+        //поиск наличия символа в строке и запись номера индекса в переменную index
 
-        copySymbolsToSmallerArray(string, newArr);
-
-        return new String(newArr);
+        /*TODO как сделать проверку на отстутсвие если нужно делать инициализацию
+           i = 0 то он уберёт первый индекс в строке
+         */
+//        for (int i = 0; i < string.length(); i++) {
+//            if (removeChar == string.charAt(i)) {
+//                index = i;
+//                break;
+//            }
+//        }
+        //return вызов метода удаления символа с входными пар-ми строки и индекса
+        return removeSymbolFromString(string, index);
     }
 
     public static String removeSymbolFromString(String string, int removeSymbolAtIndex) {
@@ -72,7 +93,6 @@ public class Main {
             newArr[i] = string.charAt(i + 1);
         }
          */
-
     }
 
     //extend char[] - string and return string
@@ -105,12 +125,6 @@ public class Main {
 
     private static void copySymbolsToLargerArray(String string, char[] arrayStr) {
         for (int i = 0; i < string.length(); i++) {
-            arrayStr[i] = string.charAt(i);
-        }
-    }
-
-    private static void copySymbolsToSmallerArray(String string, char[] arrayStr) {
-        for (int i = 0; i < arrayStr.length; i++) {
             arrayStr[i] = string.charAt(i);
         }
     }
