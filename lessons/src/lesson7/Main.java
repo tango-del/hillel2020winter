@@ -38,7 +38,13 @@ public class Main {
     }
 
     public static void removeSymbolFromString(char[] arrChar, int removeSymbolAtIndex) {
+        //создание массива char с длиной другого массива - 1
         char[] newArr = new char[arrChar.length - 1];
+        /*
+        один проход по массиву циклом в котором
+        до индекса removeSymbolAtIndex идёт копирование элементов у другого массива с таким же номером индекса
+        когда номер итерации >= removeSymbolAtIndex значения второго массива начиная с индекса + 1
+         */
         for (int i = 0; i < newArr.length; i++) {
             if (i >= removeSymbolAtIndex) {
                 newArr[i] = arrChar[i + 1];
@@ -48,16 +54,15 @@ public class Main {
         }
         System.out.println(Arrays.toString(newArr));
         /*
+        Два цикла по массиву, первый копирует все символы в новый массив до допустимой длинны
+        второй цикл начинает итерацию с индекса removeSymbolAtIndex
+        копирует значения второго массива начиная с индекса + 1
         for (int i = 0; i < newArr.length; i++) {
             newArr[i] = arrChar[i];
         }
-        System.out.println("newArr");
-        System.out.println(Arrays.toString(newArr));
-
         for (int i = removeSymbolAtIndex; i < newArr.length; i++) {
             newArr[i] = arrChar[i + 1];
         }
-        System.out.println(Arrays.toString(newArr));
          */
 
     }
