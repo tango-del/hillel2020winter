@@ -14,15 +14,16 @@ import lesson7Test.Collection.StringList;
 
 public class Main {
     public static void main(String[] args) {
-
         StringList stringList = new StringList();
 
         stringList.addString("First");
         stringList.addString("Second");
-        stringList.addString("Third");
         stringList.addString("Four");
 
         System.out.println(stringList.toString());
 
+        stringList.addString("Third", 2);
+
+        System.out.println(stringList.toString());
     }
 }

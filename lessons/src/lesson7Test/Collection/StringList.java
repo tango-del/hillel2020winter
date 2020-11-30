@@ -7,7 +7,7 @@ public class StringList implements StringCollection {
     public String[] args;
 
     public StringList() {
-        this.args = new String[3];
+        this.args = new String[1];
     }
 
     @Override
@@ -23,31 +23,48 @@ public class StringList implements StringCollection {
     //add String to last index that null
     @Override
     public void addString(String arg) {
-        if (checkForEmptyIndexInArray()) {
+        if (checkForEmptyIndex()) {
             for (int i = 0; i < args.length; i++) {
                 if (args[i] == null) {
                     args[i] = arg;
                     break;
                 }
             }
-        } else {
-            extendStringArray();
         }
     }
 
-    private boolean checkForEmptyIndexInArray() {
+    //add String to index and move other elements
+    public void addString(String arg, int index) {
+        if (!checkForEmptyIndex()) {
+            args[index] = arg;
+        } else {
+            moveElementsInArray(arg, index);
+        }
+    }
+
+    private void moveElementsInArray(String arg, int index) {
+        /*прохожу по массиву descending с последнего элемента length - 1
+        до индекса startMoveSymbolsAt
+        i = i - 1
+         */
+        for (int i = args.length - 1; i > index; i--) {
+            args[i] = args[i - 1];
+        }
+        //в заданный индекс присваиваю строку arg
+        args[index] = arg;
+    }
+
+    private boolean checkForEmptyIndex() {
         int count = 0;
         for (int i = 0; i < args.length; i++) {
-            if (args[i] == null) {
+            if (args[i] != null) {
                 count++;
-                break;
             }
         }
-        if (count > 0) {
-            return true;
-        } else {
-            return false;
+        if (count == args.length) {
+            extendStringArray();
         }
+        return true;
     }
 
     private void extendStringArray() {
