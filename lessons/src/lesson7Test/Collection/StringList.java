@@ -1,4 +1,4 @@
-package lesson7Test;
+package lesson7Test.Collection;
 
 public class StringList implements StringCollection {
 

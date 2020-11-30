@@ -1,7 +1,6 @@
 package lesson7Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import lesson7Test.Collection.StringList;
 
 public class Main {
     public static void main(String[] args) {
