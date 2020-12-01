@@ -1,22 +1,22 @@
-package lesson7Test.Collection;
+package lesson8.Collection;
 
 import java.util.Arrays;
 
-public class StringList implements StringCollection {
+public class StringList<E> implements StringCollection<E> {
 
     private int count;
 
     public String[] args;
 
     public StringList() {
-        this.args = new String[10];
+        this.args = new String[0];
     }
 
     @Override
     public String get(String str) {
         for (int i = 0; i < args.length; i++) {
             if (args[i] == str) {
-                return String.valueOf(i);
+                return "index: " + i;
             }
         }
         return "No matches";
@@ -25,7 +25,7 @@ public class StringList implements StringCollection {
     @Override
     public String get(int index) {
         if (index < args.length) {
-            return args[index];
+            return "String: " + args[index];
         }
         return "Index out of exception";
     }
@@ -64,10 +64,14 @@ public class StringList implements StringCollection {
     }
 
     @Override
-    public void add(String str) {
-        checkFreeIndex();
+    public boolean add(E str) {
+        this.add(str);
+        return true;
+    }
 
-        args[count] = str;
+    private void add(E str, int index) {
+        checkFreeIndex();
+        //args[count] = str;
     }
 
     private void checkFreeIndex() {
@@ -80,44 +84,16 @@ public class StringList implements StringCollection {
         }
         if (i == args.length) {
             extendStringArray();
-            count = i;
+            count = args.length - 1;
         }
     }
 
-    @Override
     public void add(String str, int index) {
-        if (index < 0) {
-            System.out.println("Incorrect index value");
-        } else if (args[index - 1] != null) {
+        if (args[index - 1] != null) {
             extendStringArray();
         }
         moveElementsInArray(str, index);
         args[index] = str;
-    }
-
-//    @Override
-//    public void add(String str, int index) {
-//        if (index < 0) {
-//            System.out.println("Incorrect index value");
-//        } else if(index == args.length) {
-//            extendStringArray();
-//        }
-//        else if (args[index] != null) {
-//            //extendStringArray();
-//            moveElementsInArray(str, index);
-//            //args[index] = str;
-//        } else if (args[index] == null) {
-//            args[index] = str;
-//        }
-//        args[index] = str;
-//        extendStringArray();
-//    }
-
-    private boolean isAbleMoveSymbols(int index) {
-        if (args.length + 1 <= args.length) {
-            return true;
-        }
-        return false;
     }
 
     private void extendStringArray() {
@@ -138,11 +114,11 @@ public class StringList implements StringCollection {
 
     private void moveElementsInArray(String arg, int index) {
         /*прохожу по массиву descending с последнего элемента length - 1
-        до index
+        до индекса startMoveSymbolsAt
         i = i - 1
          */
         for (int i = args.length - 1; i > index; i--) {
-                args[i] = args[i - 1];
+            args[i] = args[i - 1];
         }
         //в заданный индекс присваиваю строку arg
         args[index] = arg;

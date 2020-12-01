@@ -12,5 +12,18 @@ TODO Реализовать простую коллекцию для String на
  -int size(),
  */
 
+import lesson8.Collection.StringList;
+
+import java.util.ArrayList;
+
 public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> str = new ArrayList<>();
+        str.add("1");
+        System.out.println(str.toString());
+        System.out.println(str.add("1"));
+        System.out.println(str.toString());
+
+        StringList<String> string = new StringList<>();
+    }
 }
