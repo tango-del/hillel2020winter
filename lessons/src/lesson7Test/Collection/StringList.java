@@ -44,9 +44,7 @@ public class StringList implements StringCollection {
 
     @Override
     public void remove(int index) {
-        //index 2
         args = decreaseArray(index);
-
     }
 
     private String[] decreaseArray(int index) {
@@ -85,6 +83,7 @@ public class StringList implements StringCollection {
         }
     }
 
+
     @Override
     public void add(String str, int index) {
         if (args[index - 1] != null) {
@@ -95,7 +94,6 @@ public class StringList implements StringCollection {
     }
 
     private void extendStringArray() {
-        int indexValue = args.length / 4;
         //новый массив увеличен на 1
         String[] newArgs = new String[args.length + 1];
         //copy elements to new array
@@ -104,6 +102,7 @@ public class StringList implements StringCollection {
         args = newArgs;
     }
 
+    //copy all elements from old array to new array
     private void copyToExtendArray(String[] args, String[] newArray) {
         for (int i = 0; i < args.length; i++) {
             newArray[i] = args[i];
