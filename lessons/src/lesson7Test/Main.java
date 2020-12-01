@@ -15,15 +15,19 @@ import lesson7Test.Collection.StringList;
 public class Main {
     public static void main(String[] args) {
         StringList stringList = new StringList();
-
-        stringList.addString("First");
-        stringList.addString("Second");
-        stringList.addString("Four");
-
+        stringList.add("1");
+        stringList.add("2");
+        stringList.add("3");
+        System.out.println(stringList.toString());
+        stringList.add("4", 1);
+        stringList.add("5", 2);
+        System.out.println(stringList.toString());
+        stringList.remove(args.length - 1);
+        stringList.remove("2");
         System.out.println(stringList.toString());
 
-        stringList.addString("Third", 2);
-
-        System.out.println(stringList.toString());
+        System.out.println(stringList.get(1));
+        System.out.println(stringList.get("5"));
+        System.out.println(stringList.get("6"));
     }
 }

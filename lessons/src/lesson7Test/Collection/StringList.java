@@ -4,41 +4,109 @@ import java.util.Arrays;
 
 public class StringList implements StringCollection {
 
+    private int count;
+
     public String[] args;
 
     public StringList() {
-        this.args = new String[1];
+        this.args = new String[0];
     }
 
     @Override
-    public void listArgs() {
-//        for (int i = 0; i < args.length; i++) {
-//            System.out.println(args[i]);
-//        }
-        for(String arg : args) {
-            System.out.println(arg);
+    public String get(String str) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] == str) {
+                return "index: " + i;
+            }
         }
+        return "No matches";
     }
 
-    //add String to last index that null
     @Override
-    public void addString(String arg) {
-        if (checkForEmptyIndex()) {
-            for (int i = 0; i < args.length; i++) {
-                if (args[i] == null) {
-                    args[i] = arg;
-                    break;
-                }
+    public String get(int index) {
+        if (index < args.length) {
+            return "String: " + args[index];
+        }
+        return "Index out of exception";
+    }
+
+    @Override
+    public void remove(String str) {
+        int index = 0;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] == str) {
+                index = i;
+                break;
+            }
+        }
+        args = decreaseArray(index);
+    }
+
+    @Override
+    public void remove(int index) {
+        //index 2
+        args = decreaseArray(index);
+
+    }
+
+    private String[] decreaseArray(int index) {
+        String[] newArray = new String[args.length - 1];
+        copyToDecreasedArray(newArray, index);
+        return newArray;
+    }
+
+    private void copyToDecreasedArray(String[] newArray, int index) {
+        for (int i = 0; i < newArray.length; i++) {
+            if (i < index) {
+                newArray[i] = args[i];
+            } else if (i >= index) {
+                newArray[i] = args[i + 1];
             }
         }
     }
 
-    //add String to index and move other elements
-    public void addString(String arg, int index) {
-        if (!checkForEmptyIndex()) {
-            args[index] = arg;
-        } else {
-            moveElementsInArray(arg, index);
+    @Override
+    public void add(String str) {
+        checkFreeIndex();
+        args[count] = str;
+    }
+
+    private void checkFreeIndex() {
+        int i;
+        for (i = 0; i < args.length; i++) {
+            if (args[i] == null) {
+                count = i;
+                break;
+            }
+        }
+        if (i == args.length) {
+            extendStringArray();
+            count = args.length - 1;
+        }
+    }
+
+    @Override
+    public void add(String str, int index) {
+        if (args[index - 1] != null) {
+            extendStringArray();
+        }
+        moveElementsInArray(str, index);
+        args[index] = str;
+    }
+
+    private void extendStringArray() {
+        int indexValue = args.length / 4;
+        //новый массив увеличен на 1
+        String[] newArgs = new String[args.length + 1];
+        //copy elements to new array
+        copyToExtendArray(args, newArgs);
+        //copy link of new array to args
+        args = newArgs;
+    }
+
+    private void copyToExtendArray(String[] args, String[] newArray) {
+        for (int i = 0; i < args.length; i++) {
+            newArray[i] = args[i];
         }
     }
 
@@ -54,39 +122,8 @@ public class StringList implements StringCollection {
         args[index] = arg;
     }
 
-    private boolean checkForEmptyIndex() {
-        int count = 0;
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] != null) {
-                count++;
-            }
-        }
-        if (count == args.length) {
-            extendStringArray();
-        }
-        return true;
-    }
-
-    private void extendStringArray() {
-        int indexValue = args.length / 4;
-        //новый массив увеличен на 1
-        String[] newArgs = new String[args.length + 1];
-        //copy elements to new array
-        copyArray(args, newArgs);
-        //copy link of new array to args
-        args = newArgs;
-    }
-
-    private void copyArray(String[] args, String[] newArray) {
-        for (int i = 0; i < args.length; i++) {
-            newArray[i] = args[i];
-        }
-    }
-
     @Override
     public String toString() {
-        return "StringList{" +
-                "args=" + Arrays.toString(args) +
-                '}';
+        return Arrays.toString(args);
     }
 }
