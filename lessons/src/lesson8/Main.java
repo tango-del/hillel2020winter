@@ -14,9 +14,6 @@ TODO Реализовать простую коллекцию для String на
 
 import lesson8.Collection.StringList;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class Main {
     public static void main(String[] args) {
         StringList<String> string = new StringList<>();
@@ -31,12 +28,11 @@ public class Main {
         System.out.println(string.toString());
         System.out.println(string2.toString());
         System.out.println(string.equals(string2));
-        ArrayList<String> str = new ArrayList<>();
-        str.add("1");
-        str.add("2");
-        str.add("3");
-        System.out.println(str.toString());
-        str.clear();
-        System.out.println(str.toString());
+        string2.removeElement(3);
+        System.out.println(string.equals(string2));
+
+        System.out.println(string2.clear());
+        System.out.println(string2.toString());
+        System.out.println(string2.size());
     }
 }

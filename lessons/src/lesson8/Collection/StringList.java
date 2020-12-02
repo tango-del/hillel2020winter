@@ -9,7 +9,18 @@ public class StringList<E> implements StringCollection<E>{
     public Object[] args;
 
     public StringList() {
-        this.args = new String[0];
+        this.args = new String[10];
+    }
+
+    @Override
+    public int size() {
+        return args.length;
+    }
+
+    @Override
+    public boolean clear() {
+        this.args = new String[10];
+        return true;
     }
 
     @Override

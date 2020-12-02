@@ -10,4 +10,6 @@ public interface StringCollection<E> {
     Object get(Object str);
     Object get(int index);
     boolean contains(Object str);
+    boolean clear();
+    int size();
 }
