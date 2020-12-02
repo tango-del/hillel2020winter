@@ -28,16 +28,6 @@ public class StringList<E> implements StringCollection<E>{
         return result;
     }
 
-    private void checkElementsForEqual(Object[] str, boolean result) {
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] != str[i]) {
-                result = false;
-                break;
-            }
-        }
-        result = true;
-    }
-
     @Override
     public boolean contains(Object str) {
         boolean result = false;
@@ -193,6 +183,4 @@ public class StringList<E> implements StringCollection<E>{
     public String toString() {
         return Arrays.toString(args);
     }
-
-
 }
