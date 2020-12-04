@@ -34,5 +34,7 @@ public class Main {
         System.out.println(string2.clear());
         System.out.println(string2.toString());
         System.out.println(string2.size());
+
+
     }
 }

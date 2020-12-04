@@ -1,4 +1,4 @@
-package lesson7Test.Collection;
+package lesson7.Collection;
 
 public interface StringCollection {
     void add(String str);

@@ -10,41 +10,37 @@ TODO Реализовать простую коллекцию для String на
  искать по значению возвращать индекс   
 */
 
+import lesson7.Collection.StringList;
+
 public class Main {
     public static void main(String[] args) {
         init();
     }
 
     public static void init() {
-        String string = "Hilllel";
-        StringMagic example = new StringMagic();
-
-        System.out.println("---addSymbolToString---");
-        String updateString = example.addSymbolToString(string, 'l', 2);
-        System.out.println(updateString);
-
-        System.out.println("---extendString(string)---");
-        String school = example.extendString(updateString, " School");
-        System.out.println(school);
-
-        System.out.println("---extendString(char[])---");
-        String ex1 = " School";
-        String school2 = example.extendString(updateString, ex1.toCharArray());
-        System.out.println(school2);
-
-        System.out.println("---removeSymbolFromString(index)---");
-        String ex2 = example.removeSymbolFromString(updateString, 2);
-        System.out.println(ex2);
-
-        System.out.println("---removeSymbolFromString(symbol)---");
-        String ex3 = example.removeSymbolFromString(string, 'l');
-        System.out.println(ex3);
-
-        System.out.println("---searchIndexOfSymbol---");
-        System.out.println(example.searchIndexOfSymbol(string, 'l'));
+        StringList string = new StringList();
+        string.add("1");
+        string.add("2");
+        string.add("3");
+        string.add("4");
+        string.add("5");
+        string.add("6");
+        string.add("7");
+        string.add("8");
+        string.add("9");
+        string.add("10");
+        System.out.println(string.toString());
+        string.add("11", 10);
+        string.add("12", 11);
+        string.add("13");
+        System.out.println(string.toString());
+        string.remove(0);
+        string.add("14");
+        string.add("15");
+        string.add("16");
+        string.remove("10");
+        System.out.println(string.toString());
+        System.out.println(string.get("9"));
+        System.out.println(string.get(4));
     }
-}
-
-class StringMagic implements StringOperations {
-
 }
