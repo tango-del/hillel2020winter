@@ -16,8 +16,19 @@ TODO на основе интерфейса - реализовать колле�
 
 import lesson9.Collection.StringLinkedList;
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
+        init();
+    }
 
+    public static void init() {
+        LinkedList<String> str = new LinkedList<>();
+        str.add("1");
+        str.add("2");
+        str.add("3");
+        str.add("4");
+        str.add(1,"1.1");
     }
 }

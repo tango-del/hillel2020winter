@@ -26,31 +26,23 @@ public class StringList implements StringCollection {
 
     @Override
     public boolean remove(Object str) {
-        remove(str, args);
-        return true;
-    }
-
-    private void remove(Object str, Object[] args) {
         int index = 0;
-        for (int i = 0; i < this.args.length; i++) {
-            if (this.args[i] == str) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] == str) {
                 index = i;
                 break;
             }
         }
-        this.args = decreaseArray(index);
+        args = decreaseArray(index);
         count--;
+        return true;
     }
 
     @Override
     public boolean remove(int index) {
-        remove(index, args);
-        return true;
-    }
-
-    private void remove(int index, Object[] args) {
-        this.args = decreaseArray(index);
+        args = decreaseArray(index);
         count--;
+        return true;
     }
 
     private Object[] decreaseArray(int index) {
@@ -71,48 +63,39 @@ public class StringList implements StringCollection {
 
     @Override
     public boolean add(Object str) {
-        add(str, args);
-        return true;
-    }
-
-    private void add(Object str, Object[] args) {
         //check if need extend array
-        if (count >= this.args.length) {
+        if (count >= args.length) {
             extendArray();
         }
-        this.args[count++] = str;
-        System.out.println("count: " + count);
+        args[count++] = str;
+        return true;
     }
 
     @Override
     public boolean add(Object str, int index) {
-        add(str, args, index);
-        return true;
-    }
-
-    private void add(Object str, Object[] args, int index) {
         //check if index negative
         if (index < 0) {
             System.out.println("Incorrect index value");
-        } else if (count >= this.args.length || count + 1 >= this.args.length) {
+        } else if (count >= args.length || count + 1 >= args.length) {
             //check if need extend array
             extendArray();
         }
-        if (this.args[index] == null && index <= count) {
-            this.args[index] = str;
-            if (this.args[index + 1] == null) {
+        if (args[index] == null && index <= count) {
+            args[index] = str;
+            if (args[index + 1] == null) {
                 count++;
             }
-        } else if (this.args[index] != null && index <= count) {
+        } else if (args[index] != null && index <= count) {
             moveElementsOfArray(index);
-            this.args[index] = str;
+            args[index] = str;
             count++;
         }
-        System.out.println("count: " + count);
+        return true;
     }
 
     private void extendArray() {
         //copy elements from old array to new array with new size and copy his link to old array
+        //length = 10  - >  16
         int size = (args.length * 3 / 2) + 1;
         Object[] newArray = new Object[size];
         args = copyArray(newArray);
