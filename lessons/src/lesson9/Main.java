@@ -5,7 +5,7 @@ TODO на основе интерфейса - реализовать колле�
  - boolean addAll(String[] strArr);
  - boolean addAll(Collection strColl);
  - boolean delete (int index); +
- - boolean delete (String str);
+ - boolean delete (String str); +
  - String get(int index); +
  - boolean contains(String str);
  - boolean clear();
@@ -21,36 +21,34 @@ import java.util.LinkedList;
 public class Main {
     public static void main(String[] args) {
         LinkedString example = new LinkedString();
-//        example.add("One");
-//        example.add("Two");
-//        example.add("Three");
-//        example.add("Four");
-//        example.add("Five");
-//        example.printList();
-//        System.out.println("delete Four");
-//        example.delete(4);
-//        example.printList();
-//        System.out.println("add Six");
-//        example.add("Six");
-//        example.printList();
-//        System.out.println("delete Two");
-//        example.delete(1);
-//        example.printList();
+        example.add("One");
+        example.add("Two");
+        example.add(null);
+        example.add("Three");
+        example.add("Four");
+        example.printList();
+        System.out.println("delete null");
+        example.delete(null);
+        example.printList();
+        System.out.println("add five");
+        example.add("Five");
+        example.delete("Four");
+        example.printList();
 
 
-        LinkedList<String> ex = new LinkedList<>();
-        /*
-        header first -> Two
-        Two -> Three -> Four
-        header last -> four
-         */
-        ex.add("One");
-        ex.add("Two");
-        ex.add("Three");
-        ex.add("Four");
-        System.out.println(ex);
-        System.out.println(ex);
 
+//        LinkedList<String> ex = new LinkedList<>();
+//        /*
+//        header first -> Two
+//        Two -> Three -> Four
+//        header last -> four
+//         */
+//        ex.add("One");
+//        ex.add("Two");
+//        ex.add("Three");
+//        ex.add("Four");
+//        System.out.println(ex);
+//        System.out.println(ex);
 //        LinkedList<String> ex2 = new LinkedList<>();
 //        ex2.add("Five");
 //        ex2.add("Six");

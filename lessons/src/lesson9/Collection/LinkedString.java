@@ -47,7 +47,7 @@ public class LinkedString implements Linked {
 
     @Override
     public boolean delete (int index) {
-        //check if index not more ol less then size
+        //check if index not more or less then size
         if (index >= size || index < 0) {
             System.out.println("Null pointer exception");
         }
@@ -73,7 +73,7 @@ public class LinkedString implements Linked {
 
         //if link to next element is null than it`s last element in list
         if (next == null) {
-            //header last save link to previous element is list
+            //header last save link to previous element in list
             last = prev;
         } else {
             //copy next element link.prev to link prev current element
@@ -87,7 +87,42 @@ public class LinkedString implements Linked {
 
     @Override
     public boolean delete(String str) {
-
+        //check if str == null
+        //if (str == null) {
+            Entry temp = first;
+            for (int i = 0; i < size; i++) {
+                //if value is null
+                if (temp.value == null) {
+                    //delete element from list with i = index
+                    delete(i);
+                    return true;
+                }
+                // if value equal str
+                else if (temp.value == str) {
+                    //delete element from list with i = index
+                    delete(i);
+                    return true;
+                }
+                temp = temp.next;
+            }
+            if (temp == null) {
+                System.out.println("No matches");
+            }
+        //}
+//        else {
+//            //if str != null
+//            Entry temp = first;
+//            //set temp link to element with same string (temp.value == str)
+//            for (int i = 0; i < size; i++) {
+//                if (temp.value == str) {
+//                    break;
+//                }
+//                temp = temp.next;
+//            }
+//            if (temp == null) {
+//                System.out.println("No matches");
+//            }
+//        }
         return false;
     }
 
