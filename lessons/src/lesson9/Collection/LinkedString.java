@@ -128,6 +128,10 @@ public class LinkedString implements Linked {
 
     @Override
     public boolean addAll(String[] strArr) {
+        //check array for empty
+        if (strArr.length == 0) {
+            return false;
+        }
         for (String str : strArr) {
             add(str);
         }
