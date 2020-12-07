@@ -6,4 +6,6 @@ public interface Linked {
     String get(int index);
     boolean delete (int index);
     boolean delete (String str);
+    boolean addAll(String[] strArr);
+    boolean addAll(LinkedString strColl);
 }

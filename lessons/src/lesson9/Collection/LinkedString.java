@@ -126,6 +126,31 @@ public class LinkedString implements Linked {
         return false;
     }
 
+    @Override
+    public boolean addAll(String[] strArr) {
+        for (String str : strArr) {
+            add(str);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addAll(LinkedString strColl) {
+        String[] strArr = listToArray(strColl);
+        addAll(strArr);
+        return false;
+    }
+
+    private String[] listToArray (LinkedString strColl) {
+        Entry temp = strColl.first;
+        String[] strArr = new String[strColl.size];
+        for (int i = 0; i < strColl.size; i++) {
+            strArr[i] = temp.value;
+            temp = temp.next;
+        }
+        return strArr;
+    }
+
     public void printList() {
         Entry temp = first;
         System.out.print("[");

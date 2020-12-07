@@ -2,8 +2,8 @@ package lesson9;
 /*
 TODO на основе интерфейса - реализовать коллекцию на основе связного списка
  - boolean add(String str); +
- - boolean addAll(String[] strArr);
- - boolean addAll(Collection strColl);
+ - boolean addAll(String[] strArr); +
+ - boolean addAll(Collection strColl); +
  - boolean delete (int index); +
  - boolean delete (String str); +
  - String get(int index); +
@@ -21,22 +21,35 @@ import java.util.LinkedList;
 public class Main {
     public static void main(String[] args) {
         LinkedString example = new LinkedString();
-        example.add("One");
-        example.add("Two");
+        example.add("1");
+        example.add("2");
         example.add(null);
-        example.add("Three");
-        example.add("Four");
+        example.add("3");
+        example.add("4");
         example.printList();
         System.out.println("delete null");
         example.delete(null);
         example.printList();
-        System.out.println("add five");
-        example.add("Five");
-        example.delete("Four");
+        System.out.println("add 5");
+        example.add("5");
+        example.delete("4");
         example.printList();
 
+        String[] str = new String[3];
+        str[0] = "6";
+        str[1] = "7";
+        str[2] = "8";
+        example.addAll(str);
+        example.printList();
 
+        LinkedString example1 = new LinkedString();
+        example1.add("9");
+        example1.add("10");
+        example1.add("11");
+        example1.printList();
 
+        example.addAll(example1);
+        example.printList();
 //        LinkedList<String> ex = new LinkedList<>();
 //        /*
 //        header first -> Two
