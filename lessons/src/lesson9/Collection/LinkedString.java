@@ -155,6 +155,22 @@ public class LinkedString implements Linked {
         return strArr;
     }
 
+    @Override
+    public boolean clear() {
+        //delete all elements from list
+        for (Entry temp = first; temp != null; temp = temp.next) {
+            Entry next = temp.next;
+            temp.value = null;
+            temp.prev = null;
+            temp.next = null;
+            temp = next;
+        }
+        first = null;
+        last = null;
+        size = 0;
+        return true;
+    }
+
     public void printList() {
         Entry temp = first;
         System.out.print("[");

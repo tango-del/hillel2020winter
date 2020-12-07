@@ -8,4 +8,5 @@ public interface Linked {
     boolean delete (String str);
     boolean addAll(String[] strArr);
     boolean addAll(LinkedString strColl);
+    boolean clear();
 }

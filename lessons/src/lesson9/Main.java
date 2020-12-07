@@ -8,7 +8,7 @@ TODO на основе интерфейса - реализовать колле�
  - boolean delete (String str); +
  - String get(int index); +
  - boolean contains(String str);
- - boolean clear();
+ - boolean clear(); +
  - int size(); +
  - boolean trim();
  - boolean compare(Collection coll);
@@ -49,6 +49,9 @@ public class Main {
         example1.printList();
 
         example.addAll(example1);
+        example.printList();
+
+        example.clear();
         example.printList();
 //        LinkedList<String> ex = new LinkedList<>();
 //        /*
