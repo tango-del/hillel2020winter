@@ -169,9 +169,8 @@ public class LinkedString implements Linked {
         for (Entry temp = first; temp != null; temp = temp.next) {
             Entry next = temp.next;
             temp.value = null;
-            temp.prev = null;
             temp.next = null;
-            temp = next;
+            temp.prev = null;
         }
         first = null;
         last = null;
