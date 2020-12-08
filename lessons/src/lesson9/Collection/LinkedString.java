@@ -6,6 +6,7 @@ public class LinkedString implements Linked {
     Entry first;
     int size;
 
+    //extends list with new object with string value
     @Override
     public boolean add(String str) {
         //add element to end of list
@@ -31,6 +32,7 @@ public class LinkedString implements Linked {
         return size;
     }
 
+    //finds element in list by
     @Override
     public String get(int index) {
         if (index >= size || index < 0) {
@@ -45,8 +47,13 @@ public class LinkedString implements Linked {
         return temp.value;
     }
 
+    /*
+    this method removes object from list,
+    it goes through all list till position in list with number index,
+    deletes all links of object and re-saves previous\next links elements
+     */
     @Override
-    public boolean delete (int index) {
+    public boolean delete(int index) {
         //check if index not more or less then size
         if (index >= size || index < 0) {
             System.out.println("Null pointer exception");
@@ -81,24 +88,37 @@ public class LinkedString implements Linked {
             //delete link current element to next element
             temp.next = null;
         }
+        temp.value = null;
         size--;
         return true;
     }
 
+    /*goes through all list and match str with each values in list
+    if no matches than Entry temp saves link of next element from last element in list witch is null
+    if found matches he saves current int i from loop and send it to method delete(int index)
+     */
     @Override
     public boolean delete(String str) {
         //check if str == null
         //if (str == null) {
+        if (str == null) {
             Entry temp = first;
+            //if value is null
             for (int i = 0; i < size; i++) {
-                //if value is null
                 if (temp.value == null) {
-                    //delete element from list with i = index
                     delete(i);
                     return true;
                 }
+                temp = temp.next;
+            }
+            if (temp == null) {
+                System.out.println("No matches");
+            }
+        } else {
+            Entry temp = first;
+            for (int i = 0; i < size; i++) {
                 // if value equal str
-                else if (temp.value == str) {
+                if (temp.value == str) {
                     //delete element from list with i = index
                     delete(i);
                     return true;
@@ -108,24 +128,11 @@ public class LinkedString implements Linked {
             if (temp == null) {
                 System.out.println("No matches");
             }
-        //}
-//        else {
-//            //if str != null
-//            Entry temp = first;
-//            //set temp link to element with same string (temp.value == str)
-//            for (int i = 0; i < size; i++) {
-//                if (temp.value == str) {
-//                    break;
-//                }
-//                temp = temp.next;
-//            }
-//            if (temp == null) {
-//                System.out.println("No matches");
-//            }
-//        }
+        }
         return false;
     }
 
+    //goes through array and send each element to method add
     @Override
     public boolean addAll(String[] strArr) {
         //check array for empty
@@ -138,6 +145,7 @@ public class LinkedString implements Linked {
         return true;
     }
 
+    //converts all values of list to String array and sends  it to another method
     @Override
     public boolean addAll(LinkedString strColl) {
         String[] strArr = listToArray(strColl);
@@ -145,7 +153,7 @@ public class LinkedString implements Linked {
         return false;
     }
 
-    private String[] listToArray (LinkedString strColl) {
+    private String[] listToArray(LinkedString strColl) {
         Entry temp = strColl.first;
         String[] strArr = new String[strColl.size];
         for (int i = 0; i < strColl.size; i++) {
@@ -155,9 +163,9 @@ public class LinkedString implements Linked {
         return strArr;
     }
 
+    //delete all links from all elements
     @Override
     public boolean clear() {
-        //delete all elements from list
         for (Entry temp = first; temp != null; temp = temp.next) {
             Entry next = temp.next;
             temp.value = null;
@@ -171,6 +179,53 @@ public class LinkedString implements Linked {
         return true;
     }
 
+    //goes through all list and match string with each elements value
+    @Override
+    public boolean contains(String str) {
+        Entry temp = first;
+        for (int i = 0; i < size; i++) {
+            if (temp.value == str) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+
+    //goes through all list and delete all 'Space' of each elements value
+    @Override
+    public boolean trim() {
+        Entry temp = first;
+        for (int i = 0; i < size; i++) {
+            temp.value = temp.value.trim();
+            temp = temp.next;
+        }
+        return true;
+    }
+
+    /*compares each element of two lists, if at least one element not matches with other instantly returns false
+    if each element matchues with other in lists, then returns true
+     */
+    @Override
+    public boolean compare(LinkedString coll) {
+        //check equals sizes of two lists
+        if (size < coll.size || size > coll.size) {
+            return false;
+        } else {
+            Entry firstList = first;
+            Entry secondList = coll.first;
+            for (int i = 0; i < size; i++) {
+                if (firstList.value != secondList.value) {
+                    return false;
+                }
+                firstList = firstList.next;
+                secondList = secondList.next;
+            }
+        }
+        return true;
+    }
+
+    //prints all elements on list
     public void printList() {
         Entry temp = first;
         System.out.print("[");
@@ -195,6 +250,5 @@ public class LinkedString implements Linked {
             this.next = next;
             this.prev = prev;
         }
-
     }
 }

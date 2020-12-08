@@ -9,4 +9,7 @@ public interface Linked {
     boolean addAll(String[] strArr);
     boolean addAll(LinkedString strColl);
     boolean clear();
+    boolean contains(String str);
+    boolean trim();
+    boolean compare(LinkedString coll);
 }
