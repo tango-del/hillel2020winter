@@ -229,8 +229,13 @@ public class LinkedString implements Linked {
         Entry temp = first;
         System.out.print("[");
         for (int i = 0; i < size; i++) {
-            System.out.print(temp.value + ", ");
-            temp = temp.next;
+            if (temp == last) {
+                System.out.print(temp.value);
+            } else {
+                System.out.print(temp.value + ", ");
+                temp = temp.next;
+            }
+
         }
         System.out.print("]\n");
     }
