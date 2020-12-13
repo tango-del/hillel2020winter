@@ -153,16 +153,6 @@ public class LinkedString implements Linked {
         return false;
     }
 
-    private String[] listToArray(LinkedString strColl) {
-        Entry temp = strColl.first;
-        String[] strArr = new String[strColl.size];
-        for (int i = 0; i < strColl.size; i++) {
-            strArr[i] = temp.value;
-            temp = temp.next;
-        }
-        return strArr;
-    }
-
     //delete all links from all elements
     @Override
     public boolean clear() {
@@ -242,6 +232,16 @@ public class LinkedString implements Linked {
 
     public int getSize() {
         return size;
+    }
+
+    private String[] listToArray(LinkedString strColl) {
+        Entry temp = strColl.first;
+        String[] strArr = new String[strColl.size];
+        for (int i = 0; i < strColl.size; i++) {
+            strArr[i] = temp.value;
+            temp = temp.next;
+        }
+        return strArr;
     }
 
     private static class Entry {
