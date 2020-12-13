@@ -25,7 +25,10 @@ public class Main {
         //workWithStringList();
 
         //Iterator with remove duplicates
-        workWithIterator();
+        //workWithIterator();
+
+        //корень квадратного уравнения
+        squareRoot();
     }
     public static void workWithStringList() {
         StringList string = new StringList();
@@ -90,5 +93,28 @@ public class Main {
             }
         } while (str.hasNext());
         System.out.println(str);
+    }
+
+    public static void squareRoot() {
+        /*
+        дискриминант D = b * b - 4 * a * c
+         */
+        double a = 4;
+        double b = -20;
+        double c = 25;
+        double d = b * b - 4 * a * c;
+        if (d > 0) {
+            double x1 = (-b - Math.sqrt(d)) / (2 * a);
+            double x2 = (-b + Math.sqrt(d)) / (2 * a);
+            System.out.println("Два корня");
+            System.out.println(x1);
+            System.out.println(x2);
+        } else if (d == 0) {
+            double x = -b / (2 * a);
+            System.out.println("Одень корень");
+            System.out.println(x);
+        } else {
+            System.out.println("Нету корней");
+        }
     }
 }
