@@ -24,6 +24,7 @@ public class Main {
         //StringList
         //workWithStringList();
 
+        //HomeWork lesson 10
         //Iterator with remove duplicates
         //workWithIterator();
 
