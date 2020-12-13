@@ -26,10 +26,10 @@ public class Main {
 
         //HomeWork lesson 10
         //Iterator with remove duplicates
-        //workWithIterator();
+        workWithIterator();
 
         //корень квадратного уравнения
-        squareRoot();
+        //squareRoot();
     }
     public static void workWithStringList() {
         StringList string = new StringList();
@@ -112,7 +112,7 @@ public class Main {
             System.out.println(x2);
         } else if (d == 0) {
             double x = -b / (2 * a);
-            System.out.println("Одень корень");
+            System.out.println("Один корень");
             System.out.println(x);
         } else {
             System.out.println("Нету корней");

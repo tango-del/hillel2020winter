@@ -1,7 +1,5 @@
 package lesson8.Collection;
 
-import lesson10.Collection.StringColl;
-
 import java.util.Arrays;
 import java.util.Objects;
 
