@@ -10,10 +10,6 @@ TODO Реализовать простую коллекцию для String на
  -boolean equals (Collection str),
  -boolean clear(),
  -int size(),
- Lesson 10 tasks:
- 1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
- 2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
- 3. написать программу для вычисления корней квадратного уравнения
  */
 
 import lesson8.Collection.MyOwnIterator;
@@ -24,12 +20,19 @@ public class Main {
         //StringList
         //workWithStringList();
 
+        /*
+       TODO Lesson 10 tasks:
+        1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
+        2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
+        3. написать программу для вычисления корней квадратного уравнения
+         */
+
         //HomeWork lesson 10
         //Iterator with remove duplicates
         workWithIterator();
 
         //корень квадратного уравнения
-        //squareRoot();
+        squareRoot();
     }
     public static void workWithStringList() {
         StringList string = new StringList();
