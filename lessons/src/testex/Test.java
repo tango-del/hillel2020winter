@@ -1,24 +1,24 @@
 package testex;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Test {
     public static void main(String[] args) {
-        LinkedList<String> str = new LinkedList<>();
-        str.add("one");
-        str.add("two");
-        str.add("three");
-        str.add("four");
+        List<Integer> abc = new ArrayList<>();
+        abc.add(12);
+        abc.add(51);
+        abc.add(64);
+        abc.add(96);
+        abc.add(3);
+        System.out.println(abc);
+        System.out.println(abc.contains(51));
 
-        Iterator<String> iterator = str.iterator();
-        while (iterator.hasNext()) {
-            String s = iterator.next();
-            if (s.equals("two")) {
-                iterator.remove();
-            }
-            System.out.println(s);
-        }
-        System.out.println(str);
+        Set<Integer> test = new HashSet<>(abc);
+        System.out.println(test);
+
     }
 }
