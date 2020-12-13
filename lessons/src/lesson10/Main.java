@@ -25,12 +25,21 @@ public class Main {
 
         MyOwnIterator test = new MyOwnIterator(str.getArgs());
         int i = 0;
-        while (test.hasNext()){
-            if (test.next() != null){
-                System.out.println(test.getArray()[i]);
+//        while (test.hasNext()){
+//            if (test.next() != null){
+//                System.out.println(test.getArray()[i]);
+//                ++i;
+//            }
+//        }
+        StringBuilder a = new StringBuilder();
+        a.append("[");
+        while (test.hasNext()) {
+            if (test.next() != null) {
+                a.append(test.getArray()[i]).append(", ");
                 ++i;
             }
         }
-
+        a.append("]");
+        System.out.println(a);
     }
 }

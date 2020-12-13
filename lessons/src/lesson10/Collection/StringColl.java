@@ -19,8 +19,8 @@ public class StringColl implements Collection {
         args[count++] = str;
         return true;
     }
-
-    public StringColl removeDuplicates(StringColl array) {
+    public StringColl removeDuplicates(StringColl array)
+     {
         StringColl temp = new StringColl();
         for (int i = 0; i < array.size(); i++) {
             if (!array.contains(temp ,args[i])) {

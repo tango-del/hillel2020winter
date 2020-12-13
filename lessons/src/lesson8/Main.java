@@ -10,12 +10,24 @@ TODO Реализовать простую коллекцию для String на
  -boolean equals (Collection str),
  -boolean clear(),
  -int size(),
+ Lesson 10 tasks:
+ 1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
+ 2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
+ 3. написать программу для вычисления корней квадратного уравнения
  */
 
+import lesson8.Collection.MyOwnIterator;
 import lesson8.Collection.StringList;
 
 public class Main {
     public static void main(String[] args) {
+        //StringList
+        //workWithStringList();
+
+        //Iterator with remove duplicates
+        workWithIterator();
+    }
+    public static void workWithStringList() {
         StringList string = new StringList();
         string.add("1");
         string.add("2");
@@ -50,5 +62,33 @@ public class Main {
 
         System.out.println(string.clear());
         System.out.println(string.toString());
+    }
+
+    public static void workWithIterator() {
+        StringList string = new StringList();
+        string.add("1");
+        string.add("1");
+        string.add("2");
+        string.add("3");
+        string.add("4");
+        string.add("4");
+        string.add("1");
+        string.add("5");
+        string.add("5");
+        string.add("6");
+        System.out.println(string);
+
+        StringList abc = string.removeDuplicates(string);
+        System.out.println(abc);
+
+        MyOwnIterator str = new MyOwnIterator(abc.getArgs());
+        System.out.println(str);
+        do {
+            if (str.next() == "5") {
+                str.remove();
+                break;
+            }
+        } while (str.hasNext());
+        System.out.println(str);
     }
 }

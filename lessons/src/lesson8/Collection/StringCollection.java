@@ -8,6 +8,7 @@ public interface StringCollection {
     Object get(Object str);
     Object get(int index);
     boolean contains(Object str);
+    boolean contains(StringList temp , Object str);
     boolean clear();
     int size();
 }

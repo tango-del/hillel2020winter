@@ -1,15 +1,21 @@
 package lesson8.Collection;
 
+import lesson10.Collection.StringColl;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class StringList implements StringCollection {
-    public int count;
+    private int count;
 
-    public Object[] args;
+    private Object[] args;
 
     public StringList() {
         this.args = new String[10];
+    }
+
+    public Object[] getArgs() {
+        return args;
     }
 
     @Override
@@ -22,6 +28,29 @@ public class StringList implements StringCollection {
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean contains(StringList temp, Object str) {
+        boolean result = false;
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.getArgs()[i] == str) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public StringList removeDuplicates(StringList array)
+    {
+        StringList temp = new StringList();
+        for (int i = 0; i < array.size(); i++) {
+            if (!array.contains(temp ,args[i])) {
+                temp.add(array.getArgs()[i]);
+            }
+        }
+        return temp;
     }
 
     @Override
@@ -43,22 +72,6 @@ public class StringList implements StringCollection {
         args = decreaseArray(index);
         count--;
         return true;
-    }
-
-    private Object[] decreaseArray(int index) {
-        Object[] newArray = new Object[args.length - 1];
-        copyToDecreasedArray(newArray, index);
-        return newArray;
-    }
-
-    private void copyToDecreasedArray(Object[] newArray, int index) {
-        for (int i = 0; i < newArray.length; i++) {
-            if (i < index) {
-                newArray[i] = args[i];
-            } else if (i >= index) {
-                newArray[i] = args[i + 1];
-            }
-        }
     }
 
     @Override
@@ -91,29 +104,6 @@ public class StringList implements StringCollection {
             count++;
         }
         return true;
-    }
-
-    private void extendArray() {
-        //copy elements from old array to new array with new size and copy his link to old array
-        //length = 10  - >  16
-        int size = (args.length * 3 / 2) + 1;
-        Object[] newArray = new Object[size];
-        args = copyArray(newArray);
-    }
-
-    //copy all elements from old array to new array
-    private Object[] copyArray(Object[] newArray) {
-        for (int i = 0; i < args.length; i++) {
-            newArray[i] = args[i];
-        }
-        return newArray;
-    }
-
-    //move elements start from args[index] till count + 1
-    private void moveElementsOfArray(int index) {
-        for (int i = count + 1; i > index ; i--) {
-            args[i] = args[i - 1];
-        }
     }
 
     @Override
@@ -163,5 +153,44 @@ public class StringList implements StringCollection {
     @Override
     public String toString() {
         return Arrays.toString(args);
+    }
+
+    private Object[] decreaseArray(int index) {
+        Object[] newArray = new Object[args.length - 1];
+        copyToDecreasedArray(newArray, index);
+        return newArray;
+    }
+
+    private void copyToDecreasedArray(Object[] newArray, int index) {
+        for (int i = 0; i < newArray.length; i++) {
+            if (i < index) {
+                newArray[i] = args[i];
+            } else if (i >= index) {
+                newArray[i] = args[i + 1];
+            }
+        }
+    }
+
+    private void extendArray() {
+        //copy elements from old array to new array with new size and copy his link to old array
+        //length = 10  - >  16
+        int size = (args.length * 3 / 2) + 1;
+        Object[] newArray = new Object[size];
+        args = copyArray(newArray);
+    }
+
+    //copy all elements from old array to new array
+    private Object[] copyArray(Object[] newArray) {
+        for (int i = 0; i < args.length; i++) {
+            newArray[i] = args[i];
+        }
+        return newArray;
+    }
+
+    //move elements start from args[index] till count + 1
+    private void moveElementsOfArray(int index) {
+        for (int i = count + 1; i > index ; i--) {
+            args[i] = args[i - 1];
+        }
     }
 }
