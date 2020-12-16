@@ -23,6 +23,7 @@
 hs_err_pid*
 /.idea/
 /lessons/lessons.iml
-/nardi/
 /hillel2020winter.iml
 /TestMaven/TestMaven.iml
+/lessons/src/test/
+/FirstMaven/FirstMaven.iml

@@ -1,4 +1,3 @@
-package lesson8;
 /*
 TODO Реализовать простую коллекцию для String на базе массива использую интерфейс
  Interface collection:
@@ -10,22 +9,19 @@ TODO Реализовать простую коллекцию для String на
  -boolean equals (Collection str),
  -boolean clear(),
  -int size(),
+ Lesson 10 tasks:
+  1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
+  2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
+  3. написать программу для вычисления корней квадратного уравнения
  */
 
-import lesson8.Collection.MyOwnIterator;
-import lesson8.Collection.StringList;
+import Collection.StringList;
+import Collection.MyOwnIterator;
 
 public class Main {
     public static void main(String[] args) {
         //StringList
-        //workWithStringList();
-
-        /*
-       TODO Lesson 10 tasks:
-        1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
-        2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
-        3. написать программу для вычисления корней квадратного уравнения
-         */
+        workWithStringList();
 
         //HomeWork lesson 10
         //Iterator with remove duplicates

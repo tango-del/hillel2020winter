@@ -1,11 +1,10 @@
-package lesson8.Collection;
+package Collection;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class StringList implements StringCollection {
     private int count;
-
     private Object[] args;
 
     public StringList() {
