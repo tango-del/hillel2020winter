@@ -110,12 +110,15 @@ public class StringListTest {
     public void check9Compare() {
         System.out.println("---test: checkCompare---");
         Assertions.assertFalse(arr.compare(temp));
+        Assertions.assertTrue(arr.compare(arr));
+        Assertions.assertTrue(temp.compare(temp));
     }
 
     @Order(10)
     @Test
     public void check10IsClearedArray() {
         System.out.println("---test: checkIsClearedArray---");
+        Assertions.assertTrue(arr.size() > 0);
         Assertions.assertTrue(arr.clear());
         Assertions.assertEquals(arr.size(), 0);
     }
@@ -124,6 +127,8 @@ public class StringListTest {
     @Test
     public void check11Size() {
         System.out.println("---test: checkSize---");
+        //arr.clear();
         Assertions.assertEquals(0, arr.size());
+        Assertions.assertFalse(arr.size() > 0);
     }
 }
