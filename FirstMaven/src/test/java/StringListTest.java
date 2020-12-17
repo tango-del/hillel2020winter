@@ -3,7 +3,7 @@ import Exceptions.IndexOutOfBoundException;
 import org.junit.jupiter.api.*;
 
 //TODO почему тесты выполняются не последовательно
-@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StringListTest {
     //TODO почитать еще раз про static
     static StringList arr;
@@ -15,12 +15,13 @@ public class StringListTest {
         arr = new StringList();
         for (int i = 0; i < arr.getArgs().length; i++) {
             arr.add(i + 1);
-            if (i < 3) {
-                temp.add(i + 1);
-            }
         }
+        temp.add("1");
+        temp.add("2");
+        temp.add("3");
     }
 
+    @Order(1)
     @Test
     public void check1ContainsInNewCollection() {
         System.out.println("---test: checkContainsInNewCollection---");
@@ -29,14 +30,9 @@ public class StringListTest {
         Assertions.assertFalse(arr.contains(temp, "test"));
     }
 
+    @Order(2)
     @Test
     public void check2RemoveDuplicates() {
-        /*
-        что это тест делает???
-        тут надо создать коллекцию
-        прогнать на удаление дубликатов
-        и потом сравнить с эталонным резельтатом
-         */
         System.out.println("---test: check2RemoveDuplicates---");
         temp.add("2");
         temp.add("1");
@@ -45,64 +41,63 @@ public class StringListTest {
         temp.add("3");
         temp.add("5");
         temp.add("5");
-        System.out.println(temp);
-        StringList newArray = temp.removeDuplicates(temp);
-        System.out.println(newArray);
-        Assertions.assertArrayEquals(newArray.getArgs(), temp.getArgs());
-        //Assertions.assertNotNull(temp = arr.removeDuplicates(arr));
+        StringList uniqueArr = temp.removeDuplicates(temp);
+        StringList testArr = new StringList();
+        testArr.add("1");
+        testArr.add("2");
+        testArr.add("3");
+        testArr.add("4");
+        testArr.add("5");
+        Assertions.assertTrue(uniqueArr.compare(testArr));
+        testArr.add("5");
+        Assertions.assertFalse(uniqueArr.compare(testArr));
     }
 
+    @Order(3)
     @Test
     public void check3Contains() {
-        System.out.println(arr);
         System.out.println("---test: checkContains---");
         Assertions.assertFalse(arr.contains("1234"));
         Assertions.assertTrue(arr.contains("5"));
         Assertions.assertFalse(arr.contains("test message"));
     }
 
+    @Order(4)
     @Test
-    public void checkRemoveByObject() {
-        System.out.println(arr);
+    public void check4RemoveByObject() {
         System.out.println("---test: checkRemoveByObject---");
         Assertions.assertTrue(arr.remove("1"));
         Assertions.assertFalse(arr.remove("test message"));
-        System.out.println(arr);
     }
 
+    @Order(5)
     @Test
-    public void checkRemoveByIndex() {
-        System.out.println(arr);
+    public void check5RemoveByIndex() {
         System.out.println("---test: checkRemoveByIndex---");
         Assertions.assertThrows(IndexOutOfBoundException.class, () -> arr.remove(-1));
         Assertions.assertThrows(IndexOutOfBoundException.class, () -> arr.remove(155));
         Assertions.assertTrue(arr.remove(1));
-        System.out.println(arr);
     }
 
+    @Order(6)
     @Test
-    public void checkAdd() {
-        System.out.println(arr);
+    public void check6Add() {
         System.out.println("---test: checkAdd---");
         Assertions.assertTrue(arr.add(13));
-        System.out.println(arr);
-        //Assertions.assertFalse(arr.add(13, 12));
     }
 
+    @Order(7)
     @Test
-    public void checkAddToIndex() {
-        System.out.println(arr);
+    public void check7AddToIndex() {
         System.out.println("---test: checkAddToIndex---");
         Assertions.assertThrows(IndexOutOfBoundException.class ,() -> arr.add(13, 14));
         Assertions.assertThrows(IndexOutOfBoundException.class ,() -> arr.add(13, -1));
         Assertions.assertTrue(arr.add(13, 2));
-        System.out.println(arr);
     }
 
-
+    @Order(8)
     @Test
-    public void checkGet() {
-        System.out.println(arr);
+    public void check8Get() {
         System.out.println("---test: checkGet---");
         Assertions.assertThrows(IndexOutOfBoundException.class, () -> arr.get(-1));
         Assertions.assertNotNull(arr.get(3));
@@ -110,17 +105,25 @@ public class StringListTest {
         Assertions.assertNull(arr.get(3));
     }
 
+    @Order(9)
     @Test
-    public void checkSize() {
-        System.out.println("---test: checkSize---");
-        Assertions.assertNotEquals(0, arr.size());
+    public void check9Compare() {
+        System.out.println("---test: checkCompare---");
+        Assertions.assertFalse(arr.compare(temp));
     }
 
-
+    @Order(10)
     @Test
-    public void checkIsClearedArray() {
+    public void check10IsClearedArray() {
         System.out.println("---test: checkIsClearedArray---");
         Assertions.assertTrue(arr.clear());
         Assertions.assertEquals(arr.size(), 0);
+    }
+
+    @Order(11)
+    @Test
+    public void check11Size() {
+        System.out.println("---test: checkSize---");
+        Assertions.assertEquals(0, arr.size());
     }
 }

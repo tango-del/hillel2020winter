@@ -1,7 +1,6 @@
 package Collection;
 
 import Exceptions.IndexOutOfBoundException;
-import Exceptions.NoSuchObjectException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -239,6 +238,20 @@ public class StringList implements StringCollection {
     @Override
     public String toString() {
         return Arrays.toString(args);
+    }
+
+    public boolean compare(StringList list) {
+        //check equals lengths of two arrays
+        if (args.length < list.args.length || args.length > list.args.length) {
+            return false;
+        } else {
+            for (int i = 0; i < args.length; i++) {
+                if (args[i] != list.args[i]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private Object[] decreaseArray(int index) {
