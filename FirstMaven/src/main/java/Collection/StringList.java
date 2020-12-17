@@ -286,18 +286,18 @@ public class StringList implements StringCollection {
         return false;
     }
 
-    private boolean checkObjectContains(String str) throws NoSuchObjectException {
-        boolean result = false;
-        for (int i = 0; i < args.length; i++) {
-            //TODO why (args[i] == str) -> false
-            if (args[i].equals(str)) {
-                result = true;
-                return result;
-            }
-        }
-        if (result == false) {
-            throw new NoSuchObjectException(str);
-        }
-        return result;
-    }
+//    private boolean checkObjectContains(String str) throws NoSuchObjectException {
+//        boolean result = false;
+//        for (int i = 0; i < args.length; i++) {
+//            //TODO why (args[i] == str) -> false
+//            if (args[i].equals(str)) {
+//                result = true;
+//                return result;
+//            }
+//        }
+//        if (result == false) {
+//            throw new NoSuchObjectException(str);
+//        }
+//        return result;
+//    }
 }
