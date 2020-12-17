@@ -40,7 +40,8 @@ public class Main {
         string.add("5");
         string.add("6");
         System.out.println(string);
-        System.out.println(string.contains(1));
+        string.add("11", -2);
+        System.out.println(string);
 //        System.out.println(string.remove(8));
 //        System.out.println(string.add("9", 8));
 //        System.out.println(string.contains("1123"));

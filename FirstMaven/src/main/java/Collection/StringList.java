@@ -17,32 +17,54 @@ public class StringList implements StringCollection {
         return args;
     }
 
+//    @Override
+//    public boolean contains(Object str) {
+//        //String abc = String.valueOf(str);
+//        boolean result = false;
+//        try {
+//            result = checkObjectContains((String) str);
+//        } catch (NoSuchObjectException e) {
+//            System.out.println(e.getMessage());
+//            return false;
+//        }
+////        for (int i = 0; i < args.length; i++) {
+////            if (args[i] == str) {
+////                result = true;
+////                break;
+////            }
+////        }
+//        return result;
+//    }
+
     @Override
     public boolean contains(Object str) {
-        //String abc = String.valueOf(str);
-        boolean result = false;
-        try {
-            result = checkObjectContains(String.valueOf(str));
-        } catch (NoSuchObjectException e) {
-            System.out.println(e.getMessage());
-            return false;
+        if (str == null) {
+            for (int i = 0; i < count; i++) {
+                if (args[i] == null) {
+                    return true;
+                }
+            }
+        } else {
+            for (int i = 0; i < count; i++) {
+                //TODO args[i].equals(str) - not same
+                if (str.equals(args[i])) {
+                    return true;
+                }
+            }
         }
-//        for (int i = 0; i < args.length; i++) {
-//            if (args[i] == str) {
-//                result = true;
-//                break;
-//            }
-//        }
-        return result;
+        return false;
     }
 
     @Override
     public boolean contains(StringList temp, Object str) {
         boolean result = false;
         for (int i = 0; i < temp.size(); i++) {
-            if (temp.getArgs()[i] == str) {
+//            if (temp.getArgs()[i] == str) {
+//                return true;
+//                //break;
+//            }
+            if (str.equals(temp.getArgs()[i])) {
                 return true;
-                //break;
             }
         }
         return result;
@@ -60,36 +82,47 @@ public class StringList implements StringCollection {
 
     @Override
     public boolean remove(Object str) {
-        try {
-            checkObjectContains(String.valueOf(str));
-        } catch (NoSuchObjectException e) {
-            System.out.println(e.getMessage());
+//        try {
+//            checkObjectContains((String) str);
+//        } catch (NoSuchObjectException e) {
+//            System.out.println(e.getMessage());
+//            return false;
+//        }
+
+        /*
+        Была проблема в прошлой реализации в том что index = 0
+        и если в цикле условине не было верным то вызывало метод decreaseArray(index)
+        и удаляло элемент под 0-м индексом
+        Здесь же идёт провека сперва на что такой объект есть в массиве, если нету то
+        return false
+         */
+        if (contains(str)) {
+            int index = 0;
+            for (int i = 0; i < args.length; i++) {
+                if (args[i] == str) {
+                    index = i;
+                    break;
+                }
+            }
+            args = decreaseArray(index);
+            count--;
+            return true;
+        } else {
             return false;
         }
-
-        int index = 0;
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] == str) {
-                index = i;
-                break;
-            }
-        }
-        args = decreaseArray(index);
-        count--;
-        return true;
     }
 
     @Override
-    public boolean remove(int index) {
-//        if (index < 0 || index > count) {
+    public boolean remove(int index) throws IndexOutOfBoundException {
+        if (checkIndex(index)) {
+            throw new IndexOutOfBoundException("Incorrect index value");
+        }
+//        try {
+//            checkIndex(index);
+//        } catch (IndexOutOfBoundException e) {
+//            System.out.println(e.getMessage());
 //            return false;
 //        }
-        try {
-            checkIndex(index);
-        } catch (IndexOutOfBoundException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
         args = decreaseArray(index);
         count--;
         return true;
@@ -106,17 +139,21 @@ public class StringList implements StringCollection {
     }
 
     @Override
-    public boolean add(Object str, int index) {
+    public boolean add(Object str, int index) throws IndexOutOfBoundException {
 //        if (index < 0 || index > count) {
 //            System.out.println("Incorrect index value");
 //            return false;
 //        }
-        try {
-            checkIndex(index);
-        } catch (IndexOutOfBoundException e) {
-            System.out.println(e.getMessage());
-            return false;
+        if (index < 0 || index > count) {
+            throw new IndexOutOfBoundException("Incorrect index value");
         }
+//        try {
+//            checkIndex(index);
+//        } catch (IndexOutOfBoundException e) {
+//            throw new IndexOutOfBoundException("Index Out Of Bound Exception");
+//            //System.out.println(e.getMessage());
+//            //return false;
+//        }
         if (count >= args.length || count + 1 >= args.length) {
             //check if need extend array
             extendArray();
@@ -155,11 +192,14 @@ public class StringList implements StringCollection {
 //    }
 
     @Override
-    public Object get(int index) {
-        try {
-            checkIndex(index);
-        } catch (IndexOutOfBoundException e) {
-            return "Index out of exception";
+    public Object get(int index) throws IndexOutOfBoundException {
+//        try {
+//            checkIndex(index);
+//        } catch (IndexOutOfBoundException e) {
+//            return "Index out of exception";
+//        }
+        if (checkIndex(index)) {
+            throw new IndexOutOfBoundException("Incorrect index value");
         }
         return args[index];
 //        if (index < args.length) {
@@ -238,17 +278,19 @@ public class StringList implements StringCollection {
         }
     }
 
-    private void checkIndex(int index) throws IndexOutOfBoundException {
+    private boolean checkIndex(int index) {
         if (index < 0 || index > count) {
-            throw new IndexOutOfBoundException("Index Out Of Bound Exception");
+            return true;
+            //throw new IndexOutOfBoundException("Index Out Of Bound Exception");
         }
+        return false;
     }
 
     private boolean checkObjectContains(String str) throws NoSuchObjectException {
         boolean result = false;
         for (int i = 0; i < args.length; i++) {
             //TODO why (args[i] == str) -> false
-            if (args[i] == str) {
+            if (args[i].equals(str)) {
                 result = true;
                 return result;
             }
