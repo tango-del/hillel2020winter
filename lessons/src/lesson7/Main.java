@@ -25,6 +25,7 @@ public class Main {
         string.add("4");
         string.add("5");
         string.add("6");
+        System.out.println(string);
         string.add("7");
         string.add("8");
         string.add("9");
@@ -42,6 +43,5 @@ public class Main {
         System.out.println(string.toString());
         System.out.println(string.get("9"));
         System.out.println(string.get(4));
-
     }
 }
