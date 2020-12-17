@@ -5,7 +5,7 @@ public interface StringCollection {
     boolean add(Object str, int index);
     boolean remove(Object str);
     boolean remove(int index);
-    Object get(Object str);
+    //int get(Object str);
     Object get(int index);
     boolean contains(Object str);
     boolean contains(StringList temp , Object str);

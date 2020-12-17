@@ -1,6 +1,6 @@
 package Collection;
 
-import Exceptions.IndexOutOfException;
+import Exceptions.IndexOutOfBoundException;
 import Exceptions.NoSuchObjectException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,7 +10,7 @@ public class StringList implements StringCollection {
     private Object[] args;
 
     public StringList() {
-        this.args = new String[10];
+        args = new String[10];
     }
 
     public Object[] getArgs() {
@@ -19,6 +19,7 @@ public class StringList implements StringCollection {
 
     @Override
     public boolean contains(Object str) {
+        //String abc = String.valueOf(str);
         boolean result = false;
         try {
             result = checkObjectContains(String.valueOf(str));
@@ -40,8 +41,8 @@ public class StringList implements StringCollection {
         boolean result = false;
         for (int i = 0; i < temp.size(); i++) {
             if (temp.getArgs()[i] == str) {
-                result = true;
-                break;
+                return true;
+                //break;
             }
         }
         return result;
@@ -85,7 +86,7 @@ public class StringList implements StringCollection {
 //        }
         try {
             checkIndex(index);
-        } catch (IndexOutOfException e) {
+        } catch (IndexOutOfBoundException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -100,7 +101,7 @@ public class StringList implements StringCollection {
         if (count >= args.length) {
             extendArray();
         }
-        args[count++] = str;
+        args[count++] = String.valueOf(str);
         return true;
     }
 
@@ -112,7 +113,7 @@ public class StringList implements StringCollection {
 //        }
         try {
             checkIndex(index);
-        } catch (IndexOutOfException e) {
+        } catch (IndexOutOfBoundException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -133,30 +134,31 @@ public class StringList implements StringCollection {
         return true;
     }
 
-    @Override
-    public Object get(Object str) {
-        String result = "";
-        try {
-            checkObjectContains(String.valueOf(str));
-        } catch (NoSuchObjectException e) {
-            result = "No matches";
-            return result;
-        }
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] == str) {
-                //return String.valueOf(i);
-                result = String.valueOf(i);
-            }
-        }
-        return result;
-        //return "No matches";
-    }
+//    @Override
+//    public int get(Object str) throws NullPointerException {
+//        int result = 0;
+//        try {
+//            checkObjectContains(String.valueOf(str));
+//        } catch (NoSuchObjectException e) {
+//            //result = "No matches";
+//            //return result;
+//            System.out.println("error");
+//        }
+//        for (int i = 0; i < args.length; i++) {
+//            if (args[i] == str) {
+//                //return String.valueOf(i);
+//                result = i;
+//            }
+//        }
+//        return result;
+//        //return "No matches";
+//    }
 
     @Override
     public Object get(int index) {
         try {
             checkIndex(index);
-        } catch (IndexOutOfException e) {
+        } catch (IndexOutOfBoundException e) {
             return "Index out of exception";
         }
         return args[index];
@@ -236,17 +238,19 @@ public class StringList implements StringCollection {
         }
     }
 
-    private void checkIndex(int index) throws IndexOutOfException {
+    private void checkIndex(int index) throws IndexOutOfBoundException {
         if (index < 0 || index > count) {
-            throw new IndexOutOfException("Index Out Of Exception");
+            throw new IndexOutOfBoundException("Index Out Of Bound Exception");
         }
     }
 
     private boolean checkObjectContains(String str) throws NoSuchObjectException {
         boolean result = false;
         for (int i = 0; i < args.length; i++) {
+            //TODO why (args[i] == str) -> false
             if (args[i] == str) {
-                return true;
+                result = true;
+                return result;
             }
         }
         if (result == false) {

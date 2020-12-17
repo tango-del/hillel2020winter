@@ -20,6 +20,7 @@ import Collection.MyOwnIterator;
 
 public class Main {
     public static void main(String[] args) {
+
         //StringList
         workWithStringList();
 
@@ -39,15 +40,16 @@ public class Main {
         string.add("5");
         string.add("6");
         System.out.println(string);
-        System.out.println(string.remove(8));
-        System.out.println(string.add("9", 8));
-        System.out.println(string.contains("1123"));
-        System.out.println(string.contains("2"));
-        System.out.println(string);
-        System.out.println(string.get("3"));
-        System.out.println(string.remove("13"));
-        System.out.println(string.remove("3"));
-        System.out.println(string);
+        System.out.println(string.contains(1));
+//        System.out.println(string.remove(8));
+//        System.out.println(string.add("9", 8));
+//        System.out.println(string.contains("1123"));
+//        System.out.println(string.contains("2"));
+//        System.out.println(string);
+//        System.out.println(string.get("3"));
+//        System.out.println(string.remove("13"));
+//        System.out.println(string.remove("3"));
+//        System.out.println(string);
 //        System.out.println(string.add("7"));
 //        string.add("8");
 //        string.add("9");
