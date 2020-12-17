@@ -210,12 +210,14 @@ public class StringList implements StringCollection {
 
     @Override
     public int size() {
-        return args.length;
+        //return args.length;
+        return count;
     }
 
     @Override
     public boolean clear() {
         this.args = new String[10];
+        count = 0;
         return true;
     }
 
