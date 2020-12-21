@@ -31,8 +31,8 @@ public class Main {
         string.add("9");
         string.add("10");
         System.out.println(string.toString());
-        string.add("11", 10);
-        string.add("12", 11);
+        string.add(10, "11");
+        string.add(11, "12");
         string.add("13");
         System.out.println(string.toString());
         string.remove(0);

@@ -21,7 +21,7 @@ public class StringList implements StringCollection{
     }
 
     @Override
-    public void add(String str, int index) {
+    public void add(int index, String str) {
         //check if index negative
         if (index < 0 || index > count) {
             System.out.println("Incorrect index value");
@@ -57,8 +57,12 @@ public class StringList implements StringCollection{
 
     @Override
     public void remove(int index) {
-        args = decreaseArray(index);
-        count--;
+        if (index < 0 || index > count) {
+            System.out.println("Incorrect index value");
+        } else {
+            args = decreaseArray(index);
+            count--;
+        }
     }
 
     @Override
