@@ -32,7 +32,18 @@ public class StringPairTest {
     public void checkTransformArray() {
         System.out.println("---test: checkTransformArray---");
         //check exception throw
-        Assertions.assertThrows(NullPointerException.class, () -> stringPair.transformArray(arr3));
+        Assertions.assertThrows(NullPointerException.class,
+                () -> stringPair.transformArray(arr3));
+
+        List<Pair> result = stringPair.transformArray(arr1);
+
+        List<Pair> test2 = new ArrayList<>();
+        test2.add(new Pair("Mark", "MArK"));
+        test2.add(new Pair("Octavius", "OCTaVIUS"));
+        test2.add(new Pair("Spider", "SPI1DER"));
+        test2.add(new Pair("Halk", "HaLK"));
+        test2.add(new Pair("Rufallo", "RUFALLO"));
+        Assertions.assertNotEquals(result, test2);
 
         List<Pair> test = new ArrayList<>();
         test.add(new Pair("Mark", "MARK"));
@@ -40,12 +51,13 @@ public class StringPairTest {
         test.add(new Pair("Spider", "SPIDER"));
         test.add(new Pair("Halk", "HALK"));
         test.add(new Pair("Rufallo", "RUFALLO"));
-        List<Pair> result = stringPair.transformArray(arr1);
+
         //check two arrays equals
         Assertions.assertEquals(result, test);
 
+
         List<Pair> testNotNull = stringPair.transformArray(arr2);
-        //check if send empty array method will not reyturn null, instead return new array
+        //check if send empty array method will not return null, instead return new array
         Assertions.assertNotNull(testNotNull);
     }
 }

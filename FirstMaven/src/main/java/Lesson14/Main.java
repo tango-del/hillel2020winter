@@ -1,7 +1,7 @@
 package Lesson14;
 /*
  TODO
-  1 - Имеется коллекция из Integes, использую стримы посчитать среденее значения всех чисел
+  1 - Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
   2 - Имеется коллекция из String, привести все стринги в UPPERCASE
   и вернуть коллекцию List<Pair>in: "one", "two", ...out: {"one":"ONE"}, {"two", "TWO"}, ...
   3 - Имеется коллекция из String, отфильтровать и вывести на экран все значения, которые написаны в loverCase and length = 4
@@ -9,12 +9,28 @@ package Lesson14;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
         //average();
-        strPair();
+        //strPair();
+        //checkStringsForLowCase();
+    }
+
+    public static void checkStringsForLowCase() {
+        List<String> strings = new ArrayList<>();
+        strings.add("Mark");
+        strings.add("sped");
+        strings.add("Octavius");
+        strings.add("ODWw");
+        strings.add("hsee");
+        strings.add("spEd");
+        strings.add("FHGI");
+        strings.add("halk");
+        strings.add("rufallo");
+        System.out.println(strings);
+        OutputStringsLowCase.printStringLowCase(strings);
+
     }
 
     public static void strPair() {
@@ -46,7 +62,7 @@ public class Main {
 
         System.out.println(average.findAverage(iList));
         System.out.println(average.findAverage(iList2));
-        //average.findAverage(iList3);
+        //System.out.println(average.findAverage(iList3));
         average.findAverage2(iList);
         average.findAverage2(iList2);
         //average.findAverage2(iList3);

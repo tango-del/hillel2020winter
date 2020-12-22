@@ -1,5 +1,11 @@
 package Lesson14;
 
+/*
+ TODO
+  Имеется коллекция из String, привести все стринги в UPPERCASE
+  и вернуть коллекцию List<Pair>in: "one", "two", ...out: {"one":"ONE"}, {"two", "TWO"}
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +19,7 @@ public class StringPair {
         //check array not empty
         if (!list.isEmpty()) {
             List<Pair> result = list.stream()
-                    //on each iteration list Array creates new Pair and sets him first\second String
+                    //on each iteration creates new Pair and sets him first\second String
                     .map(i -> new Pair(i, i.toUpperCase()))
                     .collect(Collectors.toList());
             //return link

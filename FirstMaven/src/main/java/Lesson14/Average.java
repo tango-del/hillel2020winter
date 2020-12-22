@@ -3,6 +3,7 @@ package Lesson14;
 /*
  TODO
   Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
+  Throwable Exception I\O Exception -> DataFind
  */
 
 import java.util.List;
@@ -18,9 +19,9 @@ public class Average {
         if (!list.isEmpty()) {
             // writes value in result
             result = list.stream()
-                    .mapToDouble(u -> u)
+                    .mapToDouble(u -> u)//map peek
                     // summarize all elements in array and then divide by array length
-                    .sum() / list.size();
+                    .sum() / list.size();//min max count collect
             //System.out.println(result);
             return result;
         } else {
@@ -31,13 +32,16 @@ public class Average {
 
     //check that array not empty, if false then calculate average number of array
     public double findAverage2(List<Integer> list) throws NullPointerException {
+        //List<Integer> list;
         if (list == null) {
             throw new NullPointerException("Array not initialized");
         }
         double result = 0;
         //check array not empty
+        //List<Integer> list = new ArrayList<>();
         if (!list.isEmpty()) {
             result = list.stream()
+                    // 1, 2, 3, 4
                     //take value of each element in array
                     .mapToInt(Integer::valueOf) // .mapToInt(u -> u)
                     //calculate average number
