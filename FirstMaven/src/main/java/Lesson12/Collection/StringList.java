@@ -1,6 +1,6 @@
-package Collection;
+package Lesson12.Collection;
 
-import Exceptions.IndexOutOfBoundException;
+import Lesson12.Exceptions.IndexOutOfBoundException;
 import java.util.Arrays;
 import java.util.Objects;
 

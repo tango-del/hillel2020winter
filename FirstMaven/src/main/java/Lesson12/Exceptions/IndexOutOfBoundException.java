@@ -1,4 +1,4 @@
-package Exceptions;
+package Lesson12.Exceptions;
 
 public class IndexOutOfBoundException extends RuntimeException {
     public IndexOutOfBoundException(String message) {

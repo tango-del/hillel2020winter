@@ -1,4 +1,4 @@
-package Collection;
+package Lesson12.Collection;
 
 public interface StringCollection {
     boolean add(Object str);

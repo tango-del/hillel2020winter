@@ -1,4 +1,4 @@
-package Collection;
+package Lesson12.Collection;
 
 import java.util.Iterator;
 

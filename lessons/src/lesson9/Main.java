@@ -3,7 +3,7 @@ package lesson9;
 TODO на основе интерфейса - реализовать коллекцию на основе связного списка
  - boolean add(String str); +
  - boolean addAll(String[] strArr); +
- - boolean addAll(Collection strColl); +
+ - boolean addAll(Lesson12.Collection strColl); +
  - boolean delete (int index); +
  - boolean delete (String str); +
  - String get(int index); +
@@ -11,7 +11,7 @@ TODO на основе интерфейса - реализовать колле�
  - boolean clear(); +
  - int size(); +
  - boolean trim(); +
- - boolean compare(Collection coll);
+ - boolean compare(Lesson12.Collection coll);
  */
 
 import lesson9.Collection.LinkedString;

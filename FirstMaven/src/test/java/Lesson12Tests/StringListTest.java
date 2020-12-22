@@ -1,5 +1,7 @@
-import Collection.StringList;
-import Exceptions.IndexOutOfBoundException;
+package Lesson12Tests;
+
+import Lesson12.Collection.StringList;
+import Lesson12.Exceptions.IndexOutOfBoundException;
 import org.junit.jupiter.api.*;
 
 //TODO почему тесты выполняются не последовательно

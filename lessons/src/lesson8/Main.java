@@ -7,7 +7,7 @@ TODO Реализовать простую коллекцию для String на
  -boolean delete (Object o); +
  -Object get(int index); +
  -boolean contain(Object o); +
- -boolean equals (Collection str),
+ -boolean equals (Lesson12.Collection str),
  -boolean clear(),
  -int size(),
  */

@@ -1,4 +1,4 @@
-/*
+package Lesson12;/*
 TODO Реализовать простую коллекцию для String на базе массива использую интерфейс
  Interface collection:
  -boolean add(Object o); +
@@ -6,7 +6,7 @@ TODO Реализовать простую коллекцию для String на
  -boolean delete (Object o); +
  -Object get(int index); +
  -boolean contain(Object o); +
- -boolean equals (Collection str),
+ -boolean equals (Lesson12.Collection str),
  -boolean clear(),
  -int size(),
  Lesson 10 tasks:
@@ -15,8 +15,8 @@ TODO Реализовать простую коллекцию для String на
   3. написать программу для вычисления корней квадратного уравнения
  */
 
-import Collection.StringList;
-import Collection.MyOwnIterator;
+import Lesson12.Collection.StringList;
+import Lesson12.Collection.MyOwnIterator;
 
 public class Main {
     public static void main(String[] args) {
