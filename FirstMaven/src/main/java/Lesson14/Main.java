@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         //average();
+        strPair();
+    }
+
+    public static void strPair() {
+        StringPair str = new StringPair();
         List<String> strings = new ArrayList<>();
         strings.add("Mark");
         strings.add("Octavius");
@@ -22,8 +27,8 @@ public class Main {
         strings.add("Rufallo");
         System.out.println(strings);
 
-        List<String> strings2 = strings.stream().peek(String::toUpperCase).collect(Collectors.toList());
-        System.out.println(strings2);
+        List<Pair> fin = str.transformArray(strings);
+        System.out.println(fin);
     }
 
     public static void average() {
@@ -45,6 +50,5 @@ public class Main {
         average.findAverage2(iList);
         average.findAverage2(iList2);
         //average.findAverage2(iList3);
-
     }
 }

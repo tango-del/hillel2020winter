@@ -5,7 +5,6 @@ package Lesson14;
   Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Average {

@@ -13,7 +13,7 @@ public class AverageTest {
     static Average average;
     static List<Integer> iList;
     static List<Integer> iList2;
-    static List<Integer> iList3; //null
+    static List<Integer> iList3; // null
 
     @BeforeAll
     static void initArray() {
