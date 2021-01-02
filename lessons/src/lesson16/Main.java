@@ -1,16 +1,20 @@
 package lesson16;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
-        String testString = "394";
-        result(testString);
+        //String testString = "394";
+        test();
+        //result(testString);
 
-        /*
+
         char[] start = new char[6];
         char[] temp = new char[]{'1', '2', '3', '4', '5', '6'};
-        System.arraycopy(temp, 0, start, 0, 6);
-         */
+        System.arraycopy(temp, 0, start, 1, 6);
+        System.out.println(Arrays.toString(start));
+
     }
 
     private static int countJ;
