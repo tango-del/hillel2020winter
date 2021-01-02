@@ -2,8 +2,8 @@ package Lesson16;
 
 public class MatrixDraw {
     /**
-    @countJ хранит актуальный индекс куда будут
-    записываться символы в двумерном массиве
+     * @countJ хранит актуальный индекс куда будут
+     * записываться символы в двумерном массиве
      */
     private static int countJ;
 
@@ -33,24 +33,45 @@ public class MatrixDraw {
         // проход циклом по длине String str 36
         for (int k = 0; k < str.length(); k++) { //k = 0 -> 6
             /*
-            на каждой итерации
+            на каждой итерации temp вызывает @getNumberArray, отправляет каждый
+            символ str и записывает ссылку на массив которую возвращает метод
              */
             char[][] temp = getNumberArray(str.charAt(k));
 
+            /*
+            У каждой строки двумерного массива вызывается @System.arraycopy
+            temp[i] - массив у которого будет копировать значения
+            srcPos - начальный индекс с которого начинается копирование
+            matrixTest[i] - в какой массив будет копировать
+            countJ - с какого индекса будет записывать
+            temp[i].length - сколько элементов будет записывать, в данном случае весь массив
+             */
             for (int i = 0; i < temp.length; i++) {
                 System.arraycopy(temp[i], 0, matrixTest[i], countJ, temp[i].length);
             }
-            countJ += 7;
+
+            /*
+            перед новой итерации перезаписывает @countJ что бы хранил последний свободный индекс
+             */
+            countJ += temp.length;
+
             addSpaceBetweenNumbers(matrixTest);
         }
 
+        /*
+        вывод в консоль
+         */
         print(matrixTest);
 
+        /*
+        Обнуляет @countJ
+         */
         clear();
     }
 
     /**
      * Выводит в консоль матрицу двумерного массива
+     *
      * @param matrix
      */
     private static void print(char[][] matrix) {
@@ -76,15 +97,23 @@ public class MatrixDraw {
         countJ = 0;
     }
 
+    /**
+     * Добавляет пробелы в каждый индекс что бы между цифрами был разделитель
+     *
+     * @param matrixTest
+     */
     private static void addSpaceBetweenNumbers(char[][] matrixTest) {
         for (int i = 0; i < matrixTest.length; i++) {
-            matrixTest[i][countJ] = ' ';
+            matrixTest[i][countJ] = ' '; // char 32
             matrixTest[i][countJ] = ' ';
             matrixTest[i][countJ] = ' ';
             matrixTest[i][countJ] = ' ';
             matrixTest[i][countJ] = ' ';
             matrixTest[i][countJ] = ' ';
         }
+        /*
+        увеличивает @countJ что бы хранить свободный индекс
+         */
         ++countJ;
     }
 
@@ -95,6 +124,7 @@ public class MatrixDraw {
      * Проверяет что в String str все символы записаны в виде цифр,
      * true - если хоть один символ не соответствует условию
      * false - если совпадений не быо
+     *
      * @param str
      * @return
      * @throws NullPointerException
@@ -105,7 +135,7 @@ public class MatrixDraw {
         }
         for (int i = 0; i < str.length(); i++) {
             if (!Character.isDigit(str.charAt(i))) {
-            //if (str.charAt(i) < '0' || str.charAt(i) > '9') {
+                //if (str.charAt(i) < '0' || str.charAt(i) > '9') {
                 return true;
             }
         }
@@ -115,6 +145,7 @@ public class MatrixDraw {
     /**
      * Метод возвращает двумерный массив в соответствии символа @number
      * если соответствий нету выкидывает исключение
+     *
      * @param number
      * @return
      * @throws RuntimeException
