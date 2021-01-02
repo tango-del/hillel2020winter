@@ -23,6 +23,8 @@ public class LinkedString implements Linked {
             //it`s not first element so link temp.next copy link newEntry
             temp.next = newEntry;
         }
+
+
         size++;
         return true;
     }
