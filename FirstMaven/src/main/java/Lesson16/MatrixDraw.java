@@ -53,7 +53,7 @@ public class MatrixDraw {
             /*
             перед новой итерации перезаписывает @countJ что бы хранил последний свободный индекс
              */
-            countJ += temp.length;
+            countJ += temp[0].length; // temp[0].length = 7
 
             addSpaceBetweenNumbers(matrixTest);
         }

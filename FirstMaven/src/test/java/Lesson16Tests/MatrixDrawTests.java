@@ -35,7 +35,6 @@ public class MatrixDrawTests {
                                              "$$   $$ $$      \n" +
                                              " $$$$$  $$$$$$$ \n",
                 outputStreamCaptor,toString().replaceAll("\r", ""));
-
     }
 
     @Test
