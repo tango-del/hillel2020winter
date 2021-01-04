@@ -27,14 +27,18 @@ public class MatrixDrawTests {
                                         "$$   $$      $$ $$   $$      $$ \n" +
                                         "$$   $$ $$   $$ $$   $$      $$ \n" +
                                         " $$$$$   $$$$$   $$$$$  $$$$$$$ \n",
-                outputStreamCaptor.toString().replaceAll("\r", ""));
+                outputStreamCaptor
+                        .toString()
+                        .replaceAll("\r", ""));
         Assertions.assertNotEquals(" $$$$$  $$$$$$  \n" +
                                              "$$   $$      $$ \n" +
                                              " $$$$$       $$ \n" +
                                              "$$   $$ $$$$$$$ \n" +
                                              "$$   $$ $$      \n" +
                                              " $$$$$  $$$$$$$ \n",
-                outputStreamCaptor,toString().replaceAll("\r", ""));
+                outputStreamCaptor
+                        .toString()
+                        .replaceAll("\r", ""));
     }
 
     @Test
