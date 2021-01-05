@@ -15,7 +15,7 @@ public class Person {
     private int level;
     private double salary;
     private char grade;
-//    private char _grade;
+    private char _grade;
     private boolean active;
 //    private boolean _active;
 }
