@@ -19,5 +19,5 @@ public abstract class Person {
 
     private Items[] boosts = new Items[4];
 
-
+    private boolean turn;
 }

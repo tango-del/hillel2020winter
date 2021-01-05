@@ -2,6 +2,7 @@ package com.bk.game;
 
 import com.bk.game.dto.Hero;
 import com.bk.game.dto.Monster;
+import com.bk.game.service.GameMech;
 import com.bk.game.service.HeroCreator;
 import java.util.Scanner;
 
@@ -24,6 +25,12 @@ public class StartGame {
         Hero hero = HeroCreator.createHero(rasa, name);
         Monster monster = HeroCreator.createMonster();
 
+        hero.setTurn(true);
 
+        while (hero.getHealth() > 0 && monster.getHealth() > 0) {
+            new GameMech().game(hero, monster);
+        }
+
+        new GameMech().selectWinner(hero, monster);
     }
 }
