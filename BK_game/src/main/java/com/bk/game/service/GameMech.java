@@ -2,9 +2,10 @@ package com.bk.game.service;
 
 import com.bk.game.dto.Hero;
 import com.bk.game.dto.Monster;
+import com.bk.game.dto.enums.Action;
 
 public class GameMech {
-    public void game(Hero hero, Monster monster) {
+    public void game(int action, Hero hero, Monster monster) {
         // person boolean turn getter
         if (hero.isTurn()) {
             System.out.println("----- Hero turn -----");
@@ -14,7 +15,9 @@ public class GameMech {
 
             int ataka = hero.getStamina() + lh + rh;
 
-            monster.setHealth(monster.getHealth() - ataka);
+            double mult = mult(action);
+
+            monster.setHealth(monster.getHealth() - (int) (ataka * mult));
 
             hero.setTurn(false);
             monster.setTurn(true);
@@ -22,10 +25,10 @@ public class GameMech {
 
         } else if (monster.isTurn()) {
             System.out.println("----- Monster turn -----");
-
-
             System.out.println("Hero before ataka H : " + hero.getHealth());
-            hero.setHealth(hero.getHealth() - monster.getStrength());
+            double mult = mult(0);
+
+            hero.setHealth(hero.getHealth() - (int) (monster.getStrength() * mult));
 
             monster.setTurn(false);
             hero.setTurn(true);
@@ -43,6 +46,50 @@ public class GameMech {
             System.out.println("+--------------------+");
             System.out.println("|    Monster WIN     |");
             System.out.println("+--------------------+");
+        }
+    }
+
+    private double mult(int i) {
+        Action a = getAAction(i);
+
+        Action d = getDAction();
+
+        if (a.equals(d)) {
+            System.out.println("0.5");
+            return 0.5d;
+        } else {
+            System.out.println("1.2");
+            return 1.2d;
+        }
+    }
+
+    private Action getAAction(int i) {
+        if (i == 0) {
+            i = (int) (Math.random() * 3) + 1;
+        }
+
+        switch (i) {
+            case 1:
+                return Action.HEAD;
+            case 2:
+                return Action.BODY;
+            case 3:
+                return Action.LEGS;
+            default:
+                return Action.BODY;
+        }
+    }
+
+    private Action getDAction() {
+        switch ((int) (Math.random() * 3) + 1) {
+            case 1:
+                return Action.HEAD;
+            case 2:
+                return Action.BODY;
+            case 3:
+                return Action.LEGS;
+            default:
+                return Action.BODY;
         }
     }
 }

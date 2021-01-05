@@ -28,7 +28,7 @@ public class StartGame {
         hero.setTurn(true);
 
         while (hero.getHealth() > 0 && monster.getHealth() > 0) {
-            new GameMech().game(hero, monster);
+            new GameMech().game(0, hero, monster);
         }
 
         new GameMech().selectWinner(hero, monster);
