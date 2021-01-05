@@ -28,7 +28,18 @@ public class StartGame {
         hero.setTurn(true);
 
         while (hero.getHealth() > 0 && monster.getHealth() > 0) {
-            new GameMech().game(0, hero, monster);
+            if (hero.isTurn()) {
+                System.out.println();
+                System.out.println("---- Select part of bodies ----");
+                System.out.println("1. HEAD");
+                System.out.println("2. BODY");
+                System.out.println("3. LEGS");
+
+                int a = sc.nextInt();
+                new GameMech().game(a, hero, monster);
+            } else {
+                new GameMech().game(0, hero, monster);
+            }
         }
 
         new GameMech().selectWinner(hero, monster);
