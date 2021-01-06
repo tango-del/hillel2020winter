@@ -7,12 +7,16 @@ public class SizeStringCalculator {
         System.out.println(ClassLayout.parseClass(String.class).toPrintable());
         System.out.println("------>");
         String str = new String("test");
+        System.out.println("test");
         System.out.println(ClassLayout.parseInstance(str).toPrintable());
 
         System.out.println("------>");
         String strPoll1 = "test test ";
+        System.out.println("test test ");
         System.out.println(ClassLayout.parseInstance(strPoll1).toPrintable());
+        System.out.println("------>");
         String strPoll2 = "test";
+        System.out.println("test");
         System.out.println(ClassLayout.parseInstance(strPoll2).toPrintable());
     }
 }
