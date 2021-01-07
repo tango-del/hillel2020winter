@@ -45,7 +45,7 @@ public class Main {
             user.setSigns(choose(chooseUser));
             computer.setSigns(choose(chooseComp));
 
-            winnerInRoud(user, computer);
+            winnerInRound(user, computer);
 
             --countGames;
 
@@ -76,7 +76,7 @@ public class Main {
         }
     }
 
-    private static void winnerInRoud(User user, Computer computer) throws UnsupportedSignException {
+    private static void winnerInRound(User user, Computer computer) throws UnsupportedSignException {
         switch (user.getSigns()) {
             case ROCK -> {
                 if (computer.getSigns().equals(Signs.ROCK)) {
