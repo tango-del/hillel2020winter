@@ -139,7 +139,7 @@ public class Start {
     }
 
     /**
-     * Метод записывает поток символов в объект StringBuilder @str
+     * Метод записывает поток символов из StringBuilder @str
      * который переводит в String. В конце закрывает поток.
      *
      * @throws IOException
@@ -193,10 +193,15 @@ public class Start {
     /**
      * Метод принимает два объекта, вызывает у @user заданный Enum
      * с помощью Getter и проходит им через switch. При совпадении
-     * с одним из перечисленных Enum, вызывает еще один switch
-     * в котором вызывает Getter Enum Signs у @computer и при совпадении
-     * с одним из перечисленных Enum : прикрпляет указанную строку в StringBuilder.
-     * По указанному ниже
+     * с одним из перечисленных Enum, вызывает switch в котором
+     * указывает Getter Enum Signs у @computer, при совпадении
+     * с одним из перечисленных Enum : Записывает указанную строку в @StringBuilder.
+     * Исходя из условия ниже у объекта который выйграл
+     * инкрементит @NumberOfRoundsWon если есть победитель.
+     * Если у @user Enum не имеет совпадений в перечисленных case:
+     * StringBuilder записывает указанную строку, вызывает метод для
+     * записи потока символов в файл и выкидывает исключение
+     * @UnsupportedSignException
      *
      * ----------------------------------------------------------
      * ROCK > SCISSORS |  SCISSORS > PAPER    |  PAPER > ROCK
@@ -230,21 +235,6 @@ public class Start {
                         computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
                     }
                 }
-//                if (computer.getSigns().equals(Signs.ROCK)) {
-//                    str.append("user - rock, comp - rock --> NO WINNER")
-//                            .append('\n');
-//                    System.out.println("user - rock, comp - rock --> NO WINNER");
-//                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
-//                    str.append("user - rock, comp - scissors --> USER WIN")
-//                            .append('\n');
-//                    System.out.println("user - rock, comp - scissors --> USER WIN");
-//                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
-//                } else if (computer.getSigns().equals(Signs.PAPER)) {
-//                    str.append("user - rock, comp - paper --> COMP WIN")
-//                            .append('\n');
-//                    System.out.println("user - rock, comp - paper --> COMP WIN");
-//                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
-//                }
             }
             case SCISSORS -> {
                 switch (computer.getSigns()) {
@@ -266,21 +256,6 @@ public class Start {
                         user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
                     }
                 }
-//                if (computer.getSigns().equals(Signs.ROCK)) {
-//                    str.append("user - scrissors, comp - rock -> COMP WIN")
-//                            .append('\n');
-//                    System.out.println("user - scrissors, comp - rock -> COMP WIN");
-//                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
-//                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
-//                    str.append("user - scrissors, comp - scissors --> НИЧЬЯ")
-//                            .append('\n');
-//                    System.out.println("user - scrissors, comp - scissors --> НИЧЬЯ");
-//                } else if (computer.getSigns().equals(Signs.PAPER)) {
-//                    str.append("user - scrissors, comp - paper --> USER WIN")
-//                            .append('\n');
-//                    System.out.println("user - scrissors, comp - paper --> USER WIN");
-//                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
-//                }
             }
             case PAPER -> {
                 switch (computer.getSigns()) {
@@ -302,21 +277,6 @@ public class Start {
                         System.out.println("user - paper, comp - paper --> НИЧЬЯ");
                     }
                 }
-//                if (computer.getSigns().equals(Signs.ROCK)) {
-//                    str.append("user - paper, comp - rock --> USER WIN")
-//                            .append('\n');
-//                    System.out.println("user - paper, comp - rock --> USER WIN");
-//                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
-//                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
-//                    str.append("user - paper, comp - scirssors --> COMP WIN")
-//                            .append('\n');
-//                    System.out.println("user - paper, comp - scirssors --> COMP WIN");
-//                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
-//                } else if (computer.getSigns().equals(Signs.PAPER)) {
-//                    str.append("user - paper, comp - paper --> НИЧЬЯ")
-//                            .append('\n');
-//                    System.out.println("user - paper, comp - paper --> НИЧЬЯ");
-//                }
             }
             default -> {
                 str.append(">EXCEPTION<: ")
