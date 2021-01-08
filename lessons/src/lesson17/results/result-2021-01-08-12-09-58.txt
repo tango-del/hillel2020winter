@@ -1,0 +1,11 @@
+Choose User Name:
+Alex
+Choose count games
+13
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+You choose wrong Sign

@@ -1,0 +1,14 @@
+Choose User Name:
+Adwa
+Choose count games
+3
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+lesson17.exceptions.UnsupportedSignException: You choose wrong Sign
+	at lesson17.Start.choose(Start.java:228)
+	at lesson17.Start.init(Start.java:97)
+	at lesson17.Start.main(Start.java:38)
