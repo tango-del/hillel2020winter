@@ -38,7 +38,16 @@ public class Start {
         init();
     }
 
-    private static void init() throws IOException {
+    /**
+     * Метод проверяет наличие файла куда будет записываться результат выполнения программы,
+     * а так же проверяет наличие каталога где будет хранится этот файл.
+     * Создаёт объект класса @BufferedWriter что бы записать текст в поток вывода символов
+     * в конструкторе создаётся объект @FileWriter который записывает поток символов в указанны
+     * File @fileResults который хранит в себе путь каталога и название файла
+     *
+     * @throws IOException
+     */
+    private static void checkFilesExists() throws IOException {
         // проверка существует ли директория, если нет то создаёт
         if (!makeDirectoryToSaveResults.exists()) {
             makeDirectoryToSaveResults.mkdir();
@@ -52,6 +61,10 @@ public class Start {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void init() throws IOException {
+        checkFilesExists();
 
         Scanner scanner = new Scanner(System.in);
         User user = new User();
@@ -105,13 +118,32 @@ public class Start {
             str.append("Want to continue? Y-y\n");
             playerChooseContinue = scanner.next();
             str.append(playerChooseContinue).append('\n');
-        } while (countGames > 0 && playerChooseContinue.equalsIgnoreCase("Y"));
+        } while (checkGameContinue(countGames, playerChooseContinue));
 
         finalWinner(user, computer);
 
         writeToFile();
     }
 
+    /**
+     * Метод проверяет что колличество заданных игр  > 0
+     * а так же перезаписанная строка @playerChooseContinue
+     * эквиваоентна заданному параметру
+     *
+     * @param countGames
+     * @param playerChooseContinue
+     * @return
+     */
+    private static boolean checkGameContinue(Integer countGames, String playerChooseContinue) {
+        return countGames > 0 && playerChooseContinue.equalsIgnoreCase("Y");
+    }
+
+    /**
+     * Метод записывает поток символов в объект StringBuilder @str
+     * который переводит в String. В конце закрывает поток.
+     *
+     * @throws IOException
+     */
     private static void writeToFile() throws IOException {
         writer.write(str.toString());
         writer.close();
@@ -158,58 +190,133 @@ public class Start {
         System.out.println(computer);
     }
 
+    /**
+     * Метод принимает два объекта, вызывает у @user заданный Enum
+     * с помощью Getter и проходит им через switch. При совпадении
+     * с одним из перечисленных Enum, вызывает еще один switch
+     * в котором вызывает Getter Enum Signs у @computer и при совпадении
+     * с одним из перечисленных Enum : прикрпляет указанную строку в StringBuilder.
+     * По указанному ниже
+     *
+     * ----------------------------------------------------------
+     * ROCK > SCISSORS |  SCISSORS > PAPER    |  PAPER > ROCK
+     * ROCK < PAPER    |  SCISSORS < ROCK     |  PAPER < SCISSORS
+     * ROCK = ROCK     |  SCISSORS = SCISSORS |  PAPER = PAPER
+     * ----------------------------------------------------------
+     * @param user
+     * @param computer
+     * @throws UnsupportedSignException
+     * @throws IOException
+     */
     private static void winnerInRound(User user, Computer computer) throws UnsupportedSignException, IOException {
         switch (user.getSigns()) {
             case ROCK -> {
-                if (computer.getSigns().equals(Signs.ROCK)) {
-                    str.append("user - rock, comp - rock --> NO WINNER")
-                            .append('\n');
-                    System.out.println("user - rock, comp - rock --> NO WINNER");
-                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
-                    str.append("user - rock, comp - scissors --> USER WIN")
-                            .append('\n');
-                    System.out.println("user - rock, comp - scissors --> USER WIN");
-                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
-                } else if (computer.getSigns().equals(Signs.PAPER)) {
-                    str.append("user - rock, comp - paper --> COMP WIN")
-                            .append('\n');
-                    System.out.println("user - rock, comp - paper --> COMP WIN");
-                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                switch (computer.getSigns()) {
+                    case ROCK -> {
+                        str.append("user - rock, comp - rock --> NO WINNER")
+                                .append('\n');
+                        System.out.println("user - rock, comp - rock --> NO WINNER");
+                    }
+                    case SCISSORS -> {
+                        str.append("user - rock, comp - scissors --> USER WIN")
+                                .append('\n');
+                        System.out.println("user - rock, comp - scissors --> USER WIN");
+                        user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                    }
+                    case PAPER -> {
+                        str.append("user - rock, comp - paper --> COMP WIN")
+                                .append('\n');
+                        System.out.println("user - rock, comp - paper --> COMP WIN");
+                        computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                    }
                 }
+//                if (computer.getSigns().equals(Signs.ROCK)) {
+//                    str.append("user - rock, comp - rock --> NO WINNER")
+//                            .append('\n');
+//                    System.out.println("user - rock, comp - rock --> NO WINNER");
+//                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
+//                    str.append("user - rock, comp - scissors --> USER WIN")
+//                            .append('\n');
+//                    System.out.println("user - rock, comp - scissors --> USER WIN");
+//                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+//                } else if (computer.getSigns().equals(Signs.PAPER)) {
+//                    str.append("user - rock, comp - paper --> COMP WIN")
+//                            .append('\n');
+//                    System.out.println("user - rock, comp - paper --> COMP WIN");
+//                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+//                }
             }
             case SCISSORS -> {
-                if (computer.getSigns().equals(Signs.ROCK)) {
-                    str.append("user - scrissors, comp - rock -> COMP WIN")
-                            .append('\n');
-                    System.out.println("user - scrissors, comp - rock -> COMP WIN");
-                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
-                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
-                    str.append("user - scrissors, comp - scissors --> НИЧЬЯ")
-                            .append('\n');
-                    System.out.println("user - scrissors, comp - scissors --> НИЧЬЯ");
-                } else if (computer.getSigns().equals(Signs.PAPER)) {
-                    str.append("user - scrissors, comp - paper --> USER WIN")
-                            .append('\n');
-                    System.out.println("user - scrissors, comp - paper --> USER WIN");
-                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                switch (computer.getSigns()) {
+                    case ROCK -> {
+                        str.append("user - scrissors, comp - rock -> COMP WIN")
+                                .append('\n');
+                        System.out.println("user - scrissors, comp - rock -> COMP WIN");
+                        computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                    }
+                    case SCISSORS -> {
+                        str.append("user - scrissors, comp - scissors --> НИЧЬЯ")
+                                .append('\n');
+                        System.out.println("user - scrissors, comp - scissors --> НИЧЬЯ");
+                    }
+                    case PAPER -> {
+                        str.append("user - scrissors, comp - paper --> USER WIN")
+                                .append('\n');
+                        System.out.println("user - scrissors, comp - paper --> USER WIN");
+                        user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                    }
                 }
+//                if (computer.getSigns().equals(Signs.ROCK)) {
+//                    str.append("user - scrissors, comp - rock -> COMP WIN")
+//                            .append('\n');
+//                    System.out.println("user - scrissors, comp - rock -> COMP WIN");
+//                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+//                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
+//                    str.append("user - scrissors, comp - scissors --> НИЧЬЯ")
+//                            .append('\n');
+//                    System.out.println("user - scrissors, comp - scissors --> НИЧЬЯ");
+//                } else if (computer.getSigns().equals(Signs.PAPER)) {
+//                    str.append("user - scrissors, comp - paper --> USER WIN")
+//                            .append('\n');
+//                    System.out.println("user - scrissors, comp - paper --> USER WIN");
+//                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+//                }
             }
             case PAPER -> {
-                if (computer.getSigns().equals(Signs.ROCK)) {
-                    str.append("user - paper, comp - rock --> USER WIN")
-                            .append('\n');
-                    System.out.println("user - paper, comp - rock --> USER WIN");
-                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
-                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
-                    str.append("user - paper, comp - scirssors --> COMP WIN")
-                            .append('\n');
-                    System.out.println("user - paper, comp - scirssors --> COMP WIN");
-                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
-                } else if (computer.getSigns().equals(Signs.PAPER)) {
-                    str.append("user - paper, comp - paper --> НИЧЬЯ")
-                            .append('\n');
-                    System.out.println("user - paper, comp - paper --> НИЧЬЯ");
+                switch (computer.getSigns()) {
+                    case ROCK -> {
+                        str.append("user - paper, comp - rock --> USER WIN")
+                                .append('\n');
+                        System.out.println("user - paper, comp - rock --> USER WIN");
+                        user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                    }
+                    case SCISSORS -> {
+                        str.append("user - paper, comp - scirssors --> COMP WIN")
+                                .append('\n');
+                        System.out.println("user - paper, comp - scirssors --> COMP WIN");
+                        computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                    }
+                    case PAPER -> {
+                        str.append("user - paper, comp - paper --> НИЧЬЯ")
+                                .append('\n');
+                        System.out.println("user - paper, comp - paper --> НИЧЬЯ");
+                    }
                 }
+//                if (computer.getSigns().equals(Signs.ROCK)) {
+//                    str.append("user - paper, comp - rock --> USER WIN")
+//                            .append('\n');
+//                    System.out.println("user - paper, comp - rock --> USER WIN");
+//                    user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+//                } else if (computer.getSigns().equals(Signs.SCISSORS)) {
+//                    str.append("user - paper, comp - scirssors --> COMP WIN")
+//                            .append('\n');
+//                    System.out.println("user - paper, comp - scirssors --> COMP WIN");
+//                    computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+//                } else if (computer.getSigns().equals(Signs.PAPER)) {
+//                    str.append("user - paper, comp - paper --> НИЧЬЯ")
+//                            .append('\n');
+//                    System.out.println("user - paper, comp - paper --> НИЧЬЯ");
+//                }
             }
             default -> {
                 str.append(">EXCEPTION<: ")
@@ -221,6 +328,18 @@ public class Start {
         }
     }
 
+    /**
+     * Метод принимает число, проходит по нему через switch
+     * при соответствии return указанный Enum
+     * В случаи несоответствии записывает данные в @StringBuilder,
+     * вызывает метод записи в файл и
+     * выкидывает исключение @UnsupportedSignException
+     *
+     * @param number
+     * @return
+     * @throws UnsupportedSignException
+     * @throws IOException
+     */
     private static Signs choose(Integer number) throws UnsupportedSignException, IOException {
         switch (number) {
             case 1:
