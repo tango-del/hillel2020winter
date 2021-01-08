@@ -2,7 +2,6 @@ package lesson17;
 
 import lesson17.enums.Signs;
 import lesson17.exceptions.UnsupportedSignException;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,9 +30,11 @@ public class Start {
     private static final File makeDirectoryToSaveResults = new File(dirWhereSaveFile);
     // Файл который хранит файл заданный в @String nameFile в директории @File makeDirectoryToSaveResults
     private static final File fileResults = new File(makeDirectoryToSaveResults, nameFile);
+
     private static BufferedWriter writer;
     //append(System.lineSeparator()) - добавляет новую строку
     private static final StringBuilder str = new StringBuilder();
+    static Scanner scanner = new Scanner(System.in);
 
 
     public static void main(String[] args) throws IOException {
@@ -58,7 +59,7 @@ public class Start {
     private static void init() throws IOException {
         checkFilesExists();
 
-        Scanner scanner = new Scanner(System.in);
+
         User user = new User(); // user player
         Computer computer = new Computer(); // computer player
 
@@ -79,7 +80,9 @@ public class Start {
         System.out.println("Choose count games");
         str.append("Choose count games")
                 .append(System.lineSeparator());
+
         Integer countGames = scanner.nextInt(); // sets count games
+
         str.append(countGames)
                 .append(System.lineSeparator());
 
@@ -122,16 +125,24 @@ public class Start {
 
             --countGames; //decrease count games
 
-            System.out.println("Want to continue? Y-y");
+            System.out.println("Want to continue? Y-y or N-n");
 
-            str.append("Want to continue? Y-y")
+            str.append("Want to continue? Y-y or N-n")
                     .append(System.lineSeparator());
 
             playerChooseContinue = scanner.next();
-
             str.append(playerChooseContinue)
                     .append(System.lineSeparator());
 
+            while (!playerChooseContinue.equalsIgnoreCase("y") && !playerChooseContinue.equalsIgnoreCase("n")) {
+                System.out.println("Wrong symbol. Try again");
+
+                str.append("Wrong symbol. Try again").append(System.lineSeparator());
+
+                playerChooseContinue = scanner.next();
+
+                str.append(playerChooseContinue).append(System.lineSeparator());
+            }
         } while (checkGameContinue(countGames, playerChooseContinue));
 
         finalWinner(user, computer);
@@ -153,17 +164,18 @@ public class Start {
         if (!makeDirectoryToSaveResults.exists()) {
             makeDirectoryToSaveResults.mkdir();
         }
+
         // проверка существует ли файл с заданным именем, если нет то создаёт
         if (!fileResults.exists()) {
             fileResults.createNewFile();
         }
+
         try {
             writer = new BufferedWriter(new FileWriter(fileResults));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Метод проверяет что колличество заданных игр  > 0
@@ -305,6 +317,7 @@ public class Start {
             }
             case PAPER -> {
                 switch (computer.getSigns()) {
+                    //user - бумага  comp - камень
                     case ROCK -> {
                         str.append("user - paper, comp - rock --> USER WIN")
                                 .append(System.lineSeparator());
@@ -346,7 +359,7 @@ public class Start {
      * @throws UnsupportedSignException
      * @throws IOException
      */
-    private static Signs choose(int number) throws UnsupportedSignException, IOException {
+    private static Signs choose(Integer number) throws UnsupportedSignException, IOException {
         switch (number) {
             case 1:
                 return Signs.ROCK;

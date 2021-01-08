@@ -30,5 +30,4 @@ public abstract class Player {
     public void setSigns(Signs signs) {
         this.signs = signs;
     }
-
 }

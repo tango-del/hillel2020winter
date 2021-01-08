@@ -1,0 +1,99 @@
+Choose User Name:
+213512
+Choose count games
+10
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scrissors, comp - paper --> USER WIN
+Want to continue? Y-y
+y
+>-------------<
+GAME: 2
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - paper --> НИЧЬЯ
+Want to continue? Y-y
+Y
+>-------------<
+GAME: 3
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scrissors, comp - paper --> USER WIN
+Want to continue? Y-y
+y
+>-------------<
+GAME: 4
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - rock --> NO WINNER
+Want to continue? Y-y
+y
+>-------------<
+GAME: 5
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scrissors, comp - rock -> COMP WIN
+Want to continue? Y-y
+y
+>-------------<
+GAME: 6
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - paper --> НИЧЬЯ
+Want to continue? Y-y
+y
+>-------------<
+GAME: 7
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - scissors --> USER WIN
+Want to continue? Y-y
+y
+>-------------<
+GAME: 8
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - paper --> COMP WIN
+Want to continue? Y-y
+y
+>-------------<
+GAME: 9
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - rock --> NO WINNER
+Want to continue? Y-y
+y
+>-------------<
+GAME: 10
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - scirssors --> COMP WIN
+Want to continue? Y-y
+y
+>---------<
+>NO-WINNER<
+>---------<
+Player: 213512, wins: 3 times
+Computer: Computer, wins: 3 times

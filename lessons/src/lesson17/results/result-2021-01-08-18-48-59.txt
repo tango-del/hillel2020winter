@@ -1,0 +1,21 @@
+Choose User Name:
+d
+Choose count games
+3
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - paper --> COMP WIN
+Want to continue? Y-y or N-n
+3
+Wrong symbol. Try again
+4
+4
+>---------<
+>COMP--WON<
+>---------<
+Player: d, wins: 0 times
+Computer: Computer, wins: 1 times

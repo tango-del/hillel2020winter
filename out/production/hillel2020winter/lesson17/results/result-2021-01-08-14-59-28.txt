@@ -1,0 +1,18 @@
+Choose User Name:
+jj
+Choose count games
+0
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - rock --> NO WINNER
+Want to continue? Y-y
+n
+>---------<
+>NO-WINNER<
+>---------<
+Player: jj, wins: 0 times
+Computer: Computer, wins: 0 times
