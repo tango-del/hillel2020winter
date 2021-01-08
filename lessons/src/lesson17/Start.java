@@ -10,12 +10,12 @@ import java.util.Scanner;
 
 /**
  * TODO
- *  Написать консольную игру камень ножницы бумага
- *  - пользователь должен выбирать количество игр и ввести свое имя +
- *  - пользователь должен иметь возможность прервать игру +
- *  - после прекращения игры пользователь должен увидеть результат
- *  - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file
- *  (если файла нет его надо создать, если файл есть то дописать результат в файл) - формат записи выбрать самому
+ * Написать консольную игру камень ножницы бумага
+ * - пользователь должен выбирать количество игр и ввести свое имя +
+ * - пользователь должен иметь возможность прервать игру +
+ * - после прекращения игры пользователь должен увидеть результат
+ * - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file
+ * (если файла нет его надо создать, если файл есть то дописать результат в файл) - формат записи выбрать самому
  */
 
 public class Start {
@@ -90,8 +90,8 @@ public class Start {
             System.out.println("2: scissors"); // ножницы
             System.out.println("3: paper"); // бумага
             //chooseUser = scanner.nextInt(); //user choose sign
-            //chooseUser = (int) (Math.random() * 3) + 1; //user choose sign
-            chooseUser = 53; //user choose sign
+            chooseUser = (int) (Math.random() * 3) + 1; //user choose sign
+
             chooseComp = (int) (Math.random() * 3) + 1; //comp choose sign
 
             user.setSigns(choose(chooseUser));
@@ -109,6 +109,10 @@ public class Start {
 
         finalWinner(user, computer);
 
+        writeToFile();
+    }
+
+    private static void writeToFile() throws IOException {
         writer.write(str.toString());
         writer.close();
     }
@@ -154,7 +158,7 @@ public class Start {
         System.out.println(computer);
     }
 
-    private static void winnerInRound(User user, Computer computer) throws UnsupportedSignException {
+    private static void winnerInRound(User user, Computer computer) throws UnsupportedSignException, IOException {
         switch (user.getSigns()) {
             case ROCK -> {
                 if (computer.getSigns().equals(Signs.ROCK)) {
@@ -208,8 +212,10 @@ public class Start {
                 }
             }
             default -> {
-                str.append(new UnsupportedSignException("You choose wrong Sign"))
+                str.append(">EXCEPTION<: ")
+                        .append("You choose wrong Sign")
                         .append('\n');
+                writeToFile();
                 throw new UnsupportedSignException("You choose wrong Sign");
             }
         }
@@ -224,23 +230,10 @@ public class Start {
             case 3:
                 return Signs.PAPER;
             default:
-                try {
-                    throw new UnsupportedSignException("You choose wrong Sign");
-                } catch (UnsupportedSignException e) {
-                    StringWriter sw = new StringWriter();
-                    e.printStackTrace(new PrintWriter(sw));
-                    String exceptionAsString = sw.toString();
-                    str.append(exceptionAsString);
-                }
-                writer.write(str.toString());
-                writer.close();
-
-//                StringWriter sw = new StringWriter();
-//                PrintWriter pw = new PrintWriter(sw);
-//                new UnsupportedSignException("You choose wrong Sign").printStackTrace(pw);
-//                str.append(pw.toString())
-//                .append('\n');
-//
+                str.append(">EXCEPTION< :")
+                        .append("You choose wrong Sign")
+                        .append('\n');
+                writeToFile();
                 throw new UnsupportedSignException("You choose wrong Sign");
         }
     }
