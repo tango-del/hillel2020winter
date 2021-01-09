@@ -1,0 +1,27 @@
+Choose User Name:
+v
+Choose count games
+3
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - rock --> USER WIN
+Want to continue? Y-y
+y
+>-------------<
+GAME: 2
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - rock --> USER WIN
+Want to continue? Y-y
+3
+>---------<
+>USER--WON<
+>---------<
+Player: v, wins: 2 times
+Computer: Computer, wins: 0 times
