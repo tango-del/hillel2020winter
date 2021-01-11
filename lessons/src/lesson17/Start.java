@@ -2,6 +2,7 @@ package lesson17;
 
 import lesson17.enums.Signs;
 import lesson17.exceptions.UnsupportedSignException;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,9 +13,14 @@ import java.util.Scanner;
  * Написать консольную игру камень ножницы бумага
  * - пользователь должен выбирать количество игр и ввести свое имя +
  * - пользователь должен иметь возможность прервать игру +
- * - после прекращения игры пользователь должен увидеть результат
- * - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file
+ * - после прекращения игры пользователь должен увидеть результат +
+ * - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file +
  * (если файла нет его надо создать, если файл есть то дописать результат в файл) - формат записи выбрать самому
+ *
+ * TODO №2
+ * - не надо харжкодить пути сохранения, у тебя работать будет только на виндовс +
+ * - Функциона для работы с файлами и функционал игры надо вынести в отделный интерфейс и его реализацию
+ * - Подумай как оптимизировать вычислене результата
  */
 
 public class Start {
@@ -25,7 +31,7 @@ public class Start {
     // название файла куда будут записываться результаты выполнения программы (имя файла включает отформатированное локальное время)
     private static final String nameFile = "result-" + currentDateTime.format(formatter) + ".txt";
     // строка с директорией где будет создаваться файл с результатами выполнения программы
-    private static final String dirWhereSaveFile = "C:\\Users\\Tango\\IdeaProjects\\hillel2020winter\\lessons\\src\\lesson17\\results";
+    private static final String dirWhereSaveFile = "HW16-results";
     // Файл который хранит директорию заданную в @String dirWhereSaveFile
     private static final File makeDirectoryToSaveResults = new File(dirWhereSaveFile);
     // Файл который хранит файл заданный в @String nameFile в директории @File makeDirectoryToSaveResults
@@ -49,12 +55,12 @@ public class Start {
      * выбирает Enum @Signs который записывается в него через Setter.
      * Компьютер генерирует случайное число в каждом раунде, после чего
      * вызывается метод для подсчета победителя в раунде.
+     *
+     * @throws IOException
      * @countGames уменьшается на 1.
      * После каждого раунда пользователь выбирает хочет ли продолжить игру.
      * Когда игра заканчивается программа подсчитывает колличество выйгранных раундов
      * у обоих игроков, объявляет победителя, записывает их в файл по указанным параметрам.
-     *
-     * @throws IOException
      */
     private static void init() throws IOException {
         checkFilesExists();
@@ -167,7 +173,7 @@ public class Start {
 
         // проверка существует ли файл с заданным именем, если нет то создаёт
         if (!fileResults.exists()) {
-            fileResults.createNewFile();
+            System.out.println(fileResults.createNewFile());
         }
 
         try {
@@ -205,6 +211,7 @@ public class Start {
      * Метод сверяет у двух объектов @NumberOfRoundsWon
      * Записывает в @StringBuilder результат подходящего условия
      * а так же переопределенный метод @toString у обоих объектов
+     *
      * @param user
      * @param computer
      */
