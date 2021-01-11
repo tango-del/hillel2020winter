@@ -1,0 +1,45 @@
+Choose User Name:
+Tango
+Choose count games
+4
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scissors, comp - scissors --> НИЧЬЯ
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 2
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - scissors --> USER WIN
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 3
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - paper --> НИЧЬЯ
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 4
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scissors, comp - scissors --> НИЧЬЯ
+Want to continue? Y-y or N-n
+y
+>---------<
+>USER--WON<
+>---------<
+Player: Tango, wins: 1 times
+Computer: Computer, wins: 0 times

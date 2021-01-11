@@ -1,4 +1,4 @@
-package lesson17;
+package lesson17.Players;
 
 public class Computer extends Player {
     public Computer() {

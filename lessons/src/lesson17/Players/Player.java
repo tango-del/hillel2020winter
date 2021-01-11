@@ -1,4 +1,4 @@
-package lesson17;
+package lesson17.Players;
 
 import lesson17.enums.Signs;
 
