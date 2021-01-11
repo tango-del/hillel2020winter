@@ -17,7 +17,7 @@ public class FileCreator implements FilesGenerator {
     // название файла куда будут записываться результаты выполнения программы (имя файла включает отформатированное локальное время)
     private static final String nameFile = "result-" + currentDateTime.format(formatter) + ".txt";
     // строка с директорией где будет создаваться файл с результатами выполнения программы
-    private static final String dirWhereSaveFile = "lesson17_HW16_results";
+    private static final String dirWhereSaveFile = "lessons/src/lesson17/results";
     // Файл который хранит директорию заданную в @String dirWhereSaveFile
     private static final File makeDirectoryToSaveResults = new File(dirWhereSaveFile);
     // Файл который хранит файл заданный в @String nameFile в директории @File makeDirectoryToSaveResults
