@@ -1,0 +1,54 @@
+Choose User Name:
+test
+Choose count games
+5
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - scissors --> USER WIN
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 2
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scissors, comp - scissors --> НИЧЬЯ
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 3
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - paper, comp - scissors --> COMP WIN
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 4
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - scissors, comp - rock -> COMP WIN
+Want to continue? Y-y or N-n
+y
+>-------------<
+GAME: 5
+Choose sign:
+1: rock
+2: scissors
+3: paper
+user - rock, comp - scissors --> USER WIN
+Want to continue? Y-y or N-n
+y
+>---------<
+>NO-WINNER<
+>---------<
+Player: test, wins: 2 times
+Computer: Computer, wins: 2 times

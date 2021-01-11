@@ -1,0 +1,11 @@
+Choose User Name:
+test
+Choose count games
+4
+>-------------<
+GAME: 1
+Choose sign:
+1: rock
+2: scissors
+3: paper
+>EXCEPTION< :You choose wrong Sign

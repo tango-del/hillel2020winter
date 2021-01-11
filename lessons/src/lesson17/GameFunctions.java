@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public class GameFunctions implements GameWork {
     private static FileCreator fileCreator = new FileCreator();
+    static int userQuantityWinRounds;
+    static int computerQuantityWinRounds;
 
     /**
      * Метод проверяет что колличество заданных игр  > 0
@@ -25,7 +27,9 @@ public class GameFunctions implements GameWork {
     }
 
     /**
-     * Метод сверяет у двух объектов @NumberOfRoundsWon
+     * Через @setNumberOfRoundsWon в оба объекта
+     * записывается колличество выйгранных раундов @QuantityWinRounds
+     * сверяет у двух объектов @NumberOfRoundsWon
      * Записывает в @StringBuilder результат подходящего условия
      * а так же переопределенный метод @toString у обоих объектов
      *
@@ -34,6 +38,9 @@ public class GameFunctions implements GameWork {
      */
     @Override
     public void finalWinner(User user, Computer computer) {
+        user.setNumberOfRoundsWon(userQuantityWinRounds);
+        computer.setNumberOfRoundsWon(computerQuantityWinRounds);
+
         if (user.getNumberOfRoundsWon() < computer.getNumberOfRoundsWon()) {
             StartGame.str.append(">---------<")
                     .append(System.lineSeparator())
@@ -81,7 +88,7 @@ public class GameFunctions implements GameWork {
      * указывает Getter Enum Signs у @computer, при совпадении
      * с одним из перечисленных Enum : Записывает указанную строку в @StringBuilder.
      * Исходя из условия ниже у объекта который выйграл
-     * инкрементит @NumberOfRoundsWon если есть победитель.
+     * инкрементит @QuantityWinRounds если есть победитель.
      * Если у @user Enum не имеет совпадений в перечисленных case:
      * StringBuilder записывает указанную строку, вызывает метод для
      * записи потока символов в файл и выкидывает исключение
@@ -110,13 +117,13 @@ public class GameFunctions implements GameWork {
                         StartGame.str.append("user - rock, comp - scissors --> USER WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - rock, comp - scissors --> USER WIN");
-                        user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                        ++userQuantityWinRounds;
                     }
                     case PAPER -> {
                         StartGame.str.append("user - rock, comp - paper --> COMP WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - rock, comp - paper --> COMP WIN");
-                        computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                        ++computerQuantityWinRounds;
                     }
                 }
             }
@@ -126,7 +133,7 @@ public class GameFunctions implements GameWork {
                         StartGame.str.append("user - scissors, comp - rock -> COMP WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - rock -> COMP WIN");
-                        computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                        ++computerQuantityWinRounds;
                     }
                     case SCISSORS -> {
                         StartGame.str.append("user - scissors, comp - scissors --> НИЧЬЯ")
@@ -137,24 +144,23 @@ public class GameFunctions implements GameWork {
                         StartGame.str.append("user - scissors, comp - paper --> USER WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - paper --> USER WIN");
-                        user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                        ++userQuantityWinRounds;
                     }
                 }
             }
             case PAPER -> {
                 switch (computer.getSigns()) {
-                    //user - бумага  comp - камень
                     case ROCK -> {
                         StartGame.str.append("user - paper, comp - rock --> USER WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - paper, comp - rock --> USER WIN");
-                        user.setNumberOfRoundsWon(user.getNumberOfRoundsWon() + 1);
+                        ++userQuantityWinRounds;
                     }
                     case SCISSORS -> {
                         StartGame.str.append("user - paper, comp - scissors --> COMP WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - paper, comp - scissors --> COMP WIN");
-                        computer.setNumberOfRoundsWon(computer.getNumberOfRoundsWon() + 1);
+                        ++computerQuantityWinRounds;
                     }
                     case PAPER -> {
                         StartGame.str.append("user - paper, comp - paper --> НИЧЬЯ")
