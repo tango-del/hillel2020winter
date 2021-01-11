@@ -4,18 +4,16 @@ import lesson17.enums.Signs;
 import lesson17.exceptions.UnsupportedSignException;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
  * TODO
- * Написать консольную игру камень ножницы бумага
- * - пользователь должен выбирать количество игр и ввести свое имя +
- * - пользователь должен иметь возможность прервать игру +
- * - после прекращения игры пользователь должен увидеть результат +
- * - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file +
- * (если файла нет его надо создать, если файл есть то дописать результат в файл) - формат записи выбрать самому
+ *  Написать консольную игру камень ножницы бумага
+ *  - пользователь должен выбирать количество игр и ввести свое имя +
+ *  - пользователь должен иметь возможность прервать игру +
+ *  - после прекращения игры пользователь должен увидеть результат +
+ *  - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file +
+ *  (если файла нет его надо создать, если файл есть то дописать результат в файл) - формат записи выбрать самому
  *
  * TODO №2
  *  - не надо харжкодить пути сохранения, у тебя работать будет только на виндовс +
@@ -24,24 +22,10 @@ import java.util.Scanner;
  */
 
 public class Start {
-    // хранит полную локальную дату времени компьютера
-    private static final LocalDateTime currentDateTime = LocalDateTime.now();
-    // форматирует локальную дату по указанным ключам
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
-    // название файла куда будут записываться результаты выполнения программы (имя файла включает отформатированное локальное время)
-    private static final String nameFile = "result-" + currentDateTime.format(formatter) + ".txt";
-    // строка с директорией где будет создаваться файл с результатами выполнения программы
-    private static final String dirWhereSaveFile = "HW16-results";
-    // Файл который хранит директорию заданную в @String dirWhereSaveFile
-    private static final File makeDirectoryToSaveResults = new File(dirWhereSaveFile);
-    // Файл который хранит файл заданный в @String nameFile в директории @File makeDirectoryToSaveResults
-    private static final File fileResults = new File(makeDirectoryToSaveResults, nameFile);
-
-    private static BufferedWriter writer;
-    //append(System.lineSeparator()) - добавляет новую строку
+    private static FileCreator fileCreator = new FileCreator();
     private static final StringBuilder str = new StringBuilder();
+    //append(System.lineSeparator()) - добавляет новую строку
     static Scanner scanner = new Scanner(System.in);
-
 
     public static void main(String[] args) throws IOException {
         init();
@@ -63,7 +47,8 @@ public class Start {
      * у обоих игроков, объявляет победителя, записывает их в файл по указанным параметрам.
      */
     private static void init() throws IOException {
-        checkFilesExists();
+        fileCreator.checkFilesExists();
+        //checkFilesExists();
 
 
         User user = new User(); // user player
@@ -155,34 +140,7 @@ public class Start {
 
         finalWinner(user, computer);
 
-        writeToFile();
-    }
-
-    /**
-     * Метод проверяет наличие файла куда будет записываться результат выполнения программы,
-     * а так же проверяет наличие каталога где будет хранится этот файл.
-     * Создаёт объект класса @BufferedWriter что бы записать текст в поток вывода символов
-     * в конструкторе создаётся объект @FileWriter который записывает поток символов в указанны
-     * File @fileResults который хранит в себе путь каталога и название файла
-     *
-     * @throws IOException
-     */
-    private static void checkFilesExists() throws IOException {
-        // проверка существует ли директория, если нет то создаёт
-        if (!makeDirectoryToSaveResults.exists()) {
-            makeDirectoryToSaveResults.mkdir();
-        }
-
-        // проверка существует ли файл с заданным именем, если нет то создаёт
-        if (!fileResults.exists()) {
-            fileResults.createNewFile();
-        }
-
-        try {
-            writer = new BufferedWriter(new FileWriter(fileResults));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileCreator.writeToFile(str);
     }
 
     /**
@@ -198,16 +156,6 @@ public class Start {
         return countGames > 0 && playerChooseContinue.equalsIgnoreCase("Y");
     }
 
-    /**
-     * Метод записывает поток символов из StringBuilder @str
-     * который переводит в String. В конце закрывает поток.
-     *
-     * @throws IOException
-     */
-    private static void writeToFile() throws IOException {
-        writer.write(str.toString());
-        writer.close();
-    }
 
     /**
      * Метод сверяет у двух объектов @NumberOfRoundsWon
@@ -350,7 +298,7 @@ public class Start {
                 str.append(">EXCEPTION<: ")
                         .append("You choose wrong Sign")
                         .append(System.lineSeparator());
-                writeToFile();
+                fileCreator.writeToFile(str);
                 throw new UnsupportedSignException("You choose wrong Sign");
             }
         }
@@ -380,7 +328,7 @@ public class Start {
                 str.append(">EXCEPTION< :")
                         .append("You choose wrong Sign")
                         .append(System.lineSeparator());
-                writeToFile();
+                fileCreator.writeToFile(str);
                 throw new UnsupportedSignException("You choose wrong Sign");
         }
     }
