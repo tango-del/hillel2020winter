@@ -6,7 +6,6 @@ public class Run {
                 .getPath("")
                 .toAbsolutePath()
                 .toString();
-
         System.out.println("app location path : " + appDirectory);
     }
 }
