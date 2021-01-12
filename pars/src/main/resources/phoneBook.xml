@@ -1,4 +1,4 @@
-<?com.pars.xml version="1.0" encoding="UTF-8"?>
+<?com.pars.com.pars.xml version="1.0" encoding="UTF-8"?>
 <users>
         <user firstName="Alex" lastName="Stepurko" age="33" email="stepurko@info.com" technology="java">
         </user>

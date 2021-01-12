@@ -1,4 +1,4 @@
-package xml.sax;
+package com.pars.xml.sax;
 
 import com.pars.User;
 import org.xml.sax.Attributes;

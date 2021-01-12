@@ -1,4 +1,4 @@
-package xml.dom;
+package com.pars.xml.dom;
 
 import com.pars.User;
 import org.w3c.dom.Document;
@@ -6,7 +6,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import xml.sax.UserSaxExample;
+import com.pars.xml.sax.UserSaxExample;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

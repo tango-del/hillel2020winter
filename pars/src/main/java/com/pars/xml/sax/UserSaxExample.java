@@ -1,4 +1,4 @@
-package xml.sax;
+package com.pars.xml.sax;
 
 import com.pars.Admin;
 import com.pars.User;
