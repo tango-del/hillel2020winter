@@ -1,0 +1,16 @@
+firstName: "Alex"
+lastName: "Stepurko"
+age: 33
+email: "stepurko@info.com"
+technology:
+  - java: true
+  - scala: true
+  - js: true
+  - go: false
+active: true
+test: |
+  Hello
+  World
+test2: >
+  Hello
+  World

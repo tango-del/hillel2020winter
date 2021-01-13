@@ -1,6 +1,5 @@
 package com.pars.json;
 
-
 import com.google.gson.Gson;
 import com.pars.ReadFromFile;
 import com.pars.User;
@@ -17,14 +16,15 @@ public class JsonExampleToList {
         Gson gson = new Gson();
         User[] user = gson.fromJson(json, User[].class);
 
-        List<User> users = Arrays.stream(user).sorted(Comparator.comparing(User::getAge).
-                thenComparing(User::getLastName).reversed()).collect(Collectors.toList());
+        List<User> users = Arrays.stream(user)
+                .sorted(Comparator.comparing(User::getAge))
+                .collect(Collectors.toList());
 
         for (User u : user) {
             System.out.println(u);
         }
 
-        System.out.println("---------");
+        System.out.println("---");
 
         users.forEach(System.out::println);
     }
