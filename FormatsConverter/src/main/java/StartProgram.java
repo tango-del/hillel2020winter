@@ -4,7 +4,17 @@ import java.nio.file.FileSystems;
 
 public class StartProgram {
     /**
-     * Метод начинает работу программы форматирования файлов: .json <---> .yaml
+     * Метод начинает работу программы конвертации файлов: .json <---> .yaml
+     *
+     * Используются библиотеки:
+     * - jackson-core
+     * - jackson-databind
+     * - gson
+     * - jackson-dataformat-yaml
+     * - snakeyaml
+     *
+     * Для сборки в jar используется:
+     * - maven-assembly-plugin
      *
      * @param args - если в аргументы программы не указан путь директории
      * то используется директория где лежит файл .jar файл.

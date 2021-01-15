@@ -21,6 +21,15 @@ public class FileWork implements FileInterface {
 
     private static File fileResult;
 
+    /**
+     * Метод создаёт объект File у которого путь указан в @path имя файла указанно в @fileDir
+     *
+     * Проверка на то что данный файл не создан, если true то создаёт его в системе
+     *
+     * @param path - в качестве строки хранит абсолютную директорию в соответствии
+     * той системы на которой запускается программа
+     * @throws IOException
+     */
     @Override
     public void createFileDir(String path) throws IOException {
         String fileDir = "converted";
@@ -32,6 +41,16 @@ public class FileWork implements FileInterface {
         }
     }
 
+    /**
+     * Метод создаёт File в качестве директории используется @dirConverted
+     * где будут храниться все новые файлы, имя файла берётся у @fileName
+     *
+     * Проверка на то что данный файл не создан, если true то создаёт его в системе
+     *
+     * @param fileName - хранит в с себе название с файла с раширением
+     * @return - возвращает ссылку на созданный файл в указанной директории
+     * @throws IOException
+     */
     @Override
     public File createFileWithExt(String fileName) throws IOException {
         File file = new File(dirConverted, fileName);
@@ -41,6 +60,7 @@ public class FileWork implements FileInterface {
         return file;
     }
 
+    // TODO Объяснить еще раз что делает метод
     @Override
     public String readFileToString(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
@@ -58,8 +78,9 @@ public class FileWork implements FileInterface {
     }
 
     /**
-     * Метод создаёт файл с названием строки @param resultTxt
-     * в директории которая хранится в объекте класса @File dirConverted
+     * Метод создаёт File @fileResult с названием строки @param resultTxt
+     * в директории которая хранится в объекте класса @dirConverted
+     * После проверяет на отсутствие, если true то создаёт его.
      * @throws IOException
      */
     @Override
@@ -75,9 +96,16 @@ public class FileWork implements FileInterface {
     }
 
     /**
-     * Метод
+     * Метод сперва создаёт файл @createFileResultTxt
      *
-     * @param str - Хранит в себе текст для записи в файл
+     * После создаёт объект класса @BufferedWriter что бы записать текст в поток вывода символов
+     * в конструкторе создаётся объект @FileWriter который записывает поток символов в указанны
+     * File @fileResult который хранит в себе путь каталога и название файла.
+     *
+     * После записывает поток символов из StringBuilder @str
+     * который переводит в String. В конце закрывает поток.
+     *
+     * @param str - Хранит в себе строку для записи в файл
      * @throws IOException
      */
     @Override

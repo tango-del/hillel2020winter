@@ -10,10 +10,29 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
+/**
+ * Класс конвертирует формат json в формат yaml
+ */
 public class JsonToYaml implements FormatConverter {
 
     private static FileWork fileWork = new FileWork();
 
+    /**
+     * Метод записывает в строку @json содержимое файла по указанному @pathFile
+     * @jsonNode - записывает обёрнутый Object в Map Tree ??
+     * File @file записывает файл с именем @fileName и указанным расширением
+     * File @fileJson записывает директорию которая хранится в виде строки @pathFile
+     * У объекта @yamlMapper вызывается метод считывание значений у @jsonNode и записывает в File @file
+     *
+     * @timeElapsed записывает разницу времени которая была затрачена на конвертацию из одного файла в другой с его созданием
+     *
+     * В конце указанные данные записываются в StringBuilder
+     *
+     * @param pathFile - абсолютный путь к файлу
+     * @param fileName - имя файла без расширения
+     * @param strBuilder - динамическая запись строк без перезаписи ссылок
+     * @throws IOException
+     */
     @Override
     public void convertFile(String pathFile, String fileName, StringBuilder strBuilder) throws IOException {
         Instant start = Instant.now();
@@ -32,9 +51,9 @@ public class JsonToYaml implements FormatConverter {
 
         File fileJson = new File(pathFile);
 
-        Instant finish = Instant.now();
-
         yamlMapper.writeValue(file, jsonNode);
+
+        Instant finish = Instant.now();
 
         long timeElapsed = Duration.between(start, finish).toMillis();
 
@@ -49,7 +68,5 @@ public class JsonToYaml implements FormatConverter {
                 .append(System.lineSeparator())
                 .append("------------")
                 .append(System.lineSeparator());
-
-
     }
 }
