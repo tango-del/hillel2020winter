@@ -39,14 +39,12 @@ public class JsonToYaml implements FormatConverter {
 
         YAMLMapper yamlMapper = new YAMLMapper();
 
-//        String json = ReadFile.readToString(pathJson);
         String json = fileWork.readFileToString(pathFile);
 
         ObjectMapper objectMapper2 = new ObjectMapper();
 
         JsonNode jsonNode = objectMapper2.readTree(json);
 
-//        File file = FileCreator.checkFileExists(fileName + ".yaml");
         File file = fileWork.createFileWithExt(fileName + ".yaml");
 
         File fileJson = new File(pathFile);

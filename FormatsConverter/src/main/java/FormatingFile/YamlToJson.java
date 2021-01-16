@@ -40,7 +40,6 @@ public class YamlToJson implements FormatConverter {
     public void convertFile(String pathFile, String fileName, StringBuilder strBuilder) throws IOException {
         Instant start = Instant.now();
 
-//        String yam = ReadFile.readToString(pathYaml);
         String yam = fileWork.readFileToString(pathFile);
 
         ObjectMapper objectMapper = new ObjectMapper();

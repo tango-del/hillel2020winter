@@ -54,9 +54,11 @@ public class FileWork implements FileInterface {
     @Override
     public File createFileWithExt(String fileName) throws IOException {
         File file = new File(dirConverted, fileName);
+
         if (!file.exists()) {
             file.createNewFile();
         }
+
         return file;
     }
 

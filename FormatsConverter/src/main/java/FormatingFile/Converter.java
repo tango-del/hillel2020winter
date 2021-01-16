@@ -52,7 +52,10 @@ public class Converter {
                 .filter(file -> file.getName().contains(".json") || file.getName().contains(".yaml"))
                 .map(File::getPath)
                 .forEach(f -> {
-                    String fileName = new File(f.split("[.]", 0)[0]).getName();
+                    //C:\Users\Tango\Desktop\example\20_item.json -> [C:\Users\Tango\Desktop\example\20_item], [json]
+                    //String fileName = new File(f.split("[.]", 0)[0]).getName();
+                    // 20_item.json -> [20_item], [json]
+                    String fileName = new File(f).getName().split("[.]", 0)[0];
                     try {
                         if (f.contains(".json")) {
                             jsonToYaml.convertFile(f, fileName, strBuilder);
