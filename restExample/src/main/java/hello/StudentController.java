@@ -61,8 +61,10 @@ public class StudentController {
     Student updateStudent(@PathVariable UUID id, @RequestParam(required = false) String fName, @RequestParam(required = false) String lName) {
         for (Student st : list) {
             if (st.getId().equals(id)) {
-                if (Objects.nonNull(fName)) st.setFirstName(fName);
-                if (Objects.nonNull(lName)) st.setLastName(lName);
+                st.setFirstName(fName);
+                st.setLastName(lName);
+                //if (Objects.nonNull(fName)) st.setFirstName(fName);
+                //if (Objects.nonNull(lName)) st.setLastName(lName);
             } else {
                 throw new RuntimeException();
             }
