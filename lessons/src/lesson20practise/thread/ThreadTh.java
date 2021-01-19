@@ -9,7 +9,7 @@ public class ThreadTh extends Thread {
     public void run() {
         for (int i = 0; i < 20; i++) {
             try {
-                sleep(10);
+                sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
