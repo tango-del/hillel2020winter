@@ -33,7 +33,7 @@ public class FilesFinder implements SearchFiles {
                 findAndSaveDuplicateFilesInHashMap(filesList, dirChild);
             } else {
                 try {
-                    if (dirChild.length() < 157286400) { // число в байтах
+                    if (dirChild.length() < 314572800) { // число в байтах 314572800 -> 300 МБ
                         FileInputStream fileInput = new FileInputStream(dirChild);
                         byte[] fileData = new byte[(int) dirChild.length()];
                         fileInput.read(fileData);
