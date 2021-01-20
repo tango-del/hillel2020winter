@@ -37,7 +37,7 @@ public class FindDuplicates {
 
         Set<String> filePaths = new HashSet<>();
 
-        Map<String, List<File>> lists = new HashMap<String, List<File>>();
+        Map<String, List<File>> lists = new HashMap<>();
         findDuplicateFiles(lists, f);
 
 
@@ -92,10 +92,10 @@ public class FindDuplicates {
                 findDuplicateFiles(filesList, dirChild);
             } else {
                 try {
-                    if (dirChild.length() < 52428800) {
+                    if (dirChild.length() < 157286400) {
                         // Read file as bytes
                         FileInputStream fileInput = new FileInputStream(dirChild);
-                        byte fileData[] = new byte[(int) dirChild.length()];
+                        byte[] fileData = new byte[(int) dirChild.length()];
                         fileInput.read(fileData);
                         fileInput.close();
                         // Create unique hash for current file
@@ -108,6 +108,7 @@ public class FindDuplicates {
                         identicalList.add(dirChild);
                         // push updated list to Hash table
                         filesList.put(uniqueFileHash, identicalList);
+
                     }
 
                 } catch (IOException e) {
@@ -116,41 +117,41 @@ public class FindDuplicates {
             }
         }
     }
-
-    public static void fddd(File dir) {
-        Map<String, String> map = new HashMap<>();
-
-        List<String> listPath = new ArrayList<>();
-
-        Set<String> check = new HashSet<>();
-
-        Arrays.stream(dir.listFiles())
-                //.sorted(Comparator.comparing(File::length))
-                .filter(file -> file.isFile())
-                .forEach(file -> {
-                    if (file.isFile()) {
-                        //testFile = new File(file.getPath());
-                        //System.out.println("File -> " + file.getName());
-                        if (!check.add(file.getName())) {
-                            System.out.println(file.getPath());
-                        }
-                        //listPath.add(file.getName());
-                        //map.put(file.getName(), file.getParent());
-                    } else {
-                        //System.out.println("Directory -> " + file.getName());
-                        fddd(file);
-                    }
-                });
-
-        System.out.println(check);
-        //System.out.println(map);
-//        if (dir.isFile()) {
-//            System.out.println(dir.getName());
-//        } else {
-//            System.out.println(dir.getName());
-//            for (File ssss : dir.listFiles()) {
-//                fddd(ssss);
-//            }
-//        }
-    }
 }
+
+//    public static void fddd(File dir) {
+//        Map<String, String> map = new HashMap<>();
+//
+//        List<String> listPath = new ArrayList<>();
+//
+//        Set<String> check = new HashSet<>();
+//
+//        Arrays.stream(dir.listFiles())
+//                //.sorted(Comparator.comparing(File::length))
+//                .filter(file -> file.isFile())
+//                .forEach(file -> {
+//                    if (file.isFile()) {
+//                        //testFile = new File(file.getPath());
+//                        //System.out.println("File -> " + file.getName());
+//                        if (!check.add(file.getName())) {
+//                            System.out.println(file.getPath());
+//                        }
+//                        //listPath.add(file.getName());
+//                        //map.put(file.getName(), file.getParent());
+//                    } else {
+//                        //System.out.println("Directory -> " + file.getName());
+//                        fddd(file);
+//                    }
+//                });
+//
+//        System.out.println(check);
+//        //System.out.println(map);
+////        if (dir.isFile()) {
+////            System.out.println(dir.getName());
+////        } else {
+////            System.out.println(dir.getName());
+////            for (File ssss : dir.listFiles()) {
+////                fddd(ssss);
+////            }
+////        }
+//    }
