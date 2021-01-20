@@ -22,9 +22,15 @@ public class StartProgram {
             System.out.println("You choose path: " + pathWhereNeedToScan);
         }
 
-        init(pathWhereNeedToScan);
+        //init(pathWhereNeedToScan);
+
+        feature(pathWhereNeedToScan);
 
         System.out.println(">----PROGRAM FINISH----<");
+    }
+
+    public static void feature(String pathWhereNeedToScan) {
+
     }
 
     /**
