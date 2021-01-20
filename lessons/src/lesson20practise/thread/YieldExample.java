@@ -7,8 +7,8 @@ public class YieldExample {
 
         System.out.println(Thread.currentThread().getName());
 
-        producer.setPriority(10);
-        consumer.setPriority(1);
+//        producer.setPriority(10);
+//        consumer.setPriority(1);
 
         producer.start();
         consumer.start();
@@ -36,7 +36,7 @@ class Consumer extends Thread {
         System.out.println(Thread.currentThread().getName());
         for (int i = 0; i < 11; i++) {
             System.out.println("I am Consumer : Consumed Item " + i);
-            Consumer.yield();
+//            Consumer.yield();
         }
     }
 }
