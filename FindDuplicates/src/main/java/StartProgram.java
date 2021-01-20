@@ -1,36 +1,138 @@
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
+ * 1. Прошел по всем директориям вниз:
+ * - собрал бы все имена файлов в мапу Map<String, List<String>> = Map<ИмяФайла. List<Путей к файлу с таким именем>>
+ * - отфильтровать оставив в мапе только те файла где лист содержит не один элемент
+ *
+ * 2. пройтись по ставленой коллекции и проверить размер файлов если размер не совпадает то файлы разные - удалить из коллекции то что не совпадают
+ * https://mkyong.com/java/how-to-get-file-size-in-java/
+ *
+ * 3. и уже у оставшихся фалой вычислять контрольную сумму
+ * https://www.baeldung.com/java-checksums
+ *
+ * Mkyong.com (https://mkyong.com/java/how-to-get-file-size-in-java/)
+ * How to get file size in Java - Mkyong.com
+ * In Java, we can use `Files.size` to get the size of a file in bytes.
+ *
  * Программа ищет дубликаты файлов. Если в аргументах программы не записан путь директории тогда применяется директория где будет хранится .jar файл
  * В этой же директории создаётся result.txt файл в котором будут записаны абсолютные пути к файлам дубликатам
  */
 public class StartProgram {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        String pathWhereNeedToScan;
-
-        System.out.println(">-----PROGRAM START----<");
-
-        if (args.length == 0) {
-            System.out.println("You didn't choose any directory. So I copied the path where the jar file is located");
-            pathWhereNeedToScan = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
-        } else {
-            pathWhereNeedToScan = args[0];
-            System.out.println("You choose path: " + pathWhereNeedToScan);
-        }
+//        String pathWhereNeedToScan;
+//
+//        System.out.println(">-----PROGRAM START----<");
+//
+//        if (args.length == 0) {
+//            System.out.println("You didn't choose any directory. So I copied the path where the jar file is located");
+//            pathWhereNeedToScan = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+//        } else {
+//            pathWhereNeedToScan = args[0];
+//            System.out.println("You choose path: " + pathWhereNeedToScan);
+//        }
 
         //init(pathWhereNeedToScan);
 
-        feature(pathWhereNeedToScan);
+        Map<String, List<String>> filesList = new HashMap<>();
+
+        File directory = new File("C:\\Users\\Tango\\Desktop\\example");
+
+        fillHashMap(filesList, directory);
+
+        removeAlone(filesList);
+
+//        List<String> newList = deleteFilesWithDifferentSize(filesList);
+
+        deleteFilesWithDifferentSize(filesList);
 
         System.out.println(">----PROGRAM FINISH----<");
     }
 
-    public static void feature(String pathWhereNeedToScan) {
+    /**
+     * Прошел по всем директориям вниз:
+     * - собрал бы все имена файлов в мапу Map<String, List<String>> = Map<ИмяФайла. List<Путей к файлу с таким именем>>
+     */
+    public static void fillHashMap(Map<String, List<String>> filesList, File directory) {
+        for (File file : directory.listFiles()) {
+            if (file.isDirectory()) {
+                fillHashMap(filesList, file);
+            } else {
+                List<String> identicalList = filesList.get(file.getName());
+                if (identicalList == null) {
+                    identicalList = new ArrayList<>();
+                }
+                identicalList.add(file.getPath());
+                filesList.put(file.getName(), identicalList);
+            }
+        }
+    }
+    /**
+     * - отфильтровать оставив в мапе только те файла где лист содержит не один элемент
+     */
+    public static void removeAlone(Map<String, List<String>> filesList) {
+        filesList.entrySet().removeIf(key -> key.getValue().size() == 1);
+    }
 
+    /**
+     * 2. пройтись по ставленой коллекции и проверить размер файлов если размер не совпадает то файлы разные - удалить из коллекции то что не совпадают
+     */
+    public static void deleteFilesWithDifferentSize(Map<String, List<String>> filesList) throws IOException {
+        /*
+        TODO сделать скрин кода + дебаг, узнать как реализовывать поиск дубликатов по размеру
+         спросить  List<String> или List<File>
+         */
+        List<String> newList = new ArrayList<>();
+
+        Set<Long> temp = new HashSet<>();
+
+        for (List<String> list : filesList.values()) {
+
+            list.stream().filter(f -> {
+                try {
+                    return temp.add(Files.size(Paths.get(f)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }).forEach(newList::add);
+
+//            for (int i = 0; i < list.size() - 1; i++) {
+//                Path path = Paths.get(list.get(i));
+//
+//                if (!temp.add(Files.size(path))) {
+//                    newList.add(list.get(i));
+//                }
+//
+//                for (int j = i + 1; j < list.size(); j++) {
+//                    Path path = Paths.get(list.get(i));
+//
+//                    Path path1 = Paths.get(list.get(j));
+//
+//                    if (!temp.add(Files.size(path)) || !temp.add(Files.size(path1))) {
+//
+//                    }
+//
+//                    if (Files.size(path) == Files.size(path1)) {
+//
+//                    }
+//
+//                }
+//
+//            }
+
+
+//            list.stream().forEach(str -> {
+//                Path path = Paths.get(str);
+//            });
+        }
     }
 
     /**
