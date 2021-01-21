@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 1. Прошел по всем директориям вниз:
@@ -88,6 +89,12 @@ public class StartProgram {
         /*
         TODO сделать скрин кода + дебаг, узнать как реализовывать поиск дубликатов по размеру
          спросить  List<String> или List<File>
+
+         https://javadeveloperzone.com/java-basic/java-find-duplicate-objects-in-list/
+
+         https://javarevisited.blogspot.com/2015/06/3-ways-to-find-duplicate-elements-in-array-java.html
+
+         https://stackoverflow.com/questions/7414667/identify-duplicates-in-a-list
          */
         List<String> newList = new ArrayList<>();
 
@@ -95,9 +102,20 @@ public class StartProgram {
 
         for (List<String> list : filesList.values()) {
 
-            list.stream().filter(f -> {
+//            int[] a = { 1, 1, 2, 3, 5, 8, 13, 13 };
+//            List<Integer> list = Arrays.stream(a).boxed().collect(Collectors.toList());
+//
+//            for (Integer ch : list) {
+//                System.out.println(ch + " :  " + Collections.frequency(list, ch));
+//            }
+
+            for (String i : list) {
+                System.out.println(i + " :  " + Collections.frequency(list, i));
+            }
+
+            list.parallelStream().filter(f -> {
                 try {
-                    return temp.add(Files.size(Paths.get(f)));
+                    return !temp.add(Files.size(Paths.get(f)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
