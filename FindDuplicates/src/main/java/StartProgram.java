@@ -1,18 +1,13 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.zip.CRC32;
-import java.util.zip.Checksum;
 
 /**
  * 1. Прошел по всем директориям вниз:
@@ -34,201 +29,21 @@ import java.util.zip.Checksum;
  */
 public class StartProgram {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-//        String pathWhereNeedToScan;
-//
-//        System.out.println(">-----PROGRAM START----<");
-//
-//        if (args.length == 0) {
-//            System.out.println("You didn't choose any directory. So I copied the path where the jar file is located");
-//            pathWhereNeedToScan = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
-//        } else {
-//            pathWhereNeedToScan = args[0];
-//            System.out.println("You choose path: " + pathWhereNeedToScan);
-//        }
+        String pathWhereNeedToScan;
 
-        //init(pathWhereNeedToScan);
+        System.out.println(">-----PROGRAM START----<");
 
-        Map<String, List<String>> filesList = new HashMap<>();
+        if (args.length == 0) {
+            System.out.println("You didn't choose any directory. So I copied the path where the jar file is located");
+            pathWhereNeedToScan = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+        } else {
+            pathWhereNeedToScan = args[0];
+            System.out.println("You choose path: " + pathWhereNeedToScan);
+        }
 
-        File directory = new File("C:\\Games");
-
-        fillHashMap(filesList, directory);
-
-        removeAlone(filesList);
-
-//        List<String> newList = deleteFilesWithDifferentSize(filesList);
-
-        List<String> newList = deleteFilesWithDifferentSize(filesList);
-
-        List<String> newList2 = filterHashSum(newList);
-
-        newList2.forEach(System.out::println);
+        init(pathWhereNeedToScan);
 
         System.out.println(">----PROGRAM FINISH----<");
-    }
-
-    /**
-     * Прошел по всем директориям вниз:
-     * - собрал бы все имена файлов в мапу Map<String, List<String>> = Map<ИмяФайла. List<Путей к файлу с таким именем>>
-     */
-    public static void fillHashMap(Map<String, List<String>> filesList, File directory) {
-        for (File file : directory.listFiles()) {
-            if (file.isDirectory()) {
-                fillHashMap(filesList, file);
-            } else {
-                List<String> identicalList = filesList.get(file.getName());
-                if (identicalList == null) {
-                    identicalList = new ArrayList<>();
-                }
-                identicalList.add(file.getPath());
-                filesList.put(file.getName(), identicalList);
-            }
-        }
-    }
-
-    /**
-     * - отфильтровать оставив в мапе только те файла где лист содержит не один элемент
-     */
-    public static void removeAlone(Map<String, List<String>> filesList) {
-        filesList.entrySet().removeIf(key -> key.getValue().size() == 1);
-    }
-
-    public static List<String> filterHashSum(List<String> newList) throws IOException, NoSuchAlgorithmException {
-
-        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-        Map<String, List<String>> newMap = new HashMap<>();
-
-        Checksum crc32 = new CRC32();
-
-        for (String str : newList) {
-
-            FileInputStream fileInput = new FileInputStream(str);
-            byte[] fileData = new byte[(int) new File(str).length()];
-            fileInput.read(fileData);
-            fileInput.close();
-            String uniqueFileHash = new BigInteger(1, messageDigest.digest(fileData)).toString(16);
-
-//            byte[] bytes = str.getBytes();
-//
-//            crc32.update(bytes, 0, bytes.length);
-//
-//            long checkSumOfFile = crc32.getValue();
-
-            List<String> identicalList = newMap.get(uniqueFileHash);
-            if (identicalList == null) {
-                identicalList = new ArrayList<>();
-            }
-            identicalList.add(str);
-            newMap.put(uniqueFileHash, identicalList);
-        }
-
-        List<String> fileDuplicates = new ArrayList<>();
-
-        for (List<String> files : newMap.values()) {
-            if (files.size() > 1) {
-                fileDuplicates.addAll(files);
-            }
-        }
-        return fileDuplicates;
-    }
-
-    /**
-     * 2. пройтись по ставленой коллекции и проверить размер файлов если размер не совпадает то файлы разные - удалить из коллекции то что не совпадают
-     */
-    public static List<String> deleteFilesWithDifferentSize(Map<String, List<String>> filesList) throws IOException {
-        /*
-        TODO сделать скрин кода + дебаг, узнать как реализовывать поиск дубликатов по размеру
-         спросить  List<String> или List<File>
-
-         Files.size(Paths.get(f)) - long
-
-         Map<Long, List<String>>
-
-         5байт 6байт 8байт 6байт
-
-        тут надо использовать концепцию МарReduse - v
-
-         https://javadeveloperzone.com/java-basic/java-find-duplicate-objects-in-list/
-
-         https://javarevisited.blogspot.com/2015/06/3-ways-to-find-duplicate-elements-in-array-java.html
-
-         https://stackoverflow.com/questions/7414667/identify-duplicates-in-a-list
-         */
-//        List<String> newList = new ArrayList<>();
-
-//        Set<Long> temp = new HashSet<>();
-        List<String> fileDuplicates = new ArrayList<>();
-
-        Map<Long, List<String>> newMap = new HashMap<>();
-
-        for (List<String> list : filesList.values()) {
-            for (String s : list) {
-                long fileSize = Files.size(Paths.get(s));
-                List<String> identicalList = newMap.get(fileSize);
-                if (identicalList == null) {
-                    identicalList = new ArrayList<>();
-                }
-                identicalList.add(s);
-                newMap.put(fileSize, identicalList);
-            }
-        }
-
-        for (List<String> files : newMap.values()) {
-            if (files.size() > 1) {
-                fileDuplicates.addAll(files);
-            }
-        }
-        return fileDuplicates;
-
-//            int[] a = { 1, 1, 2, 3, 5, 8, 13, 13 };
-//            List<Integer> list = Arrays.stream(a).boxed().collect(Collectors.toList());
-//
-//            for (Integer ch : list) {
-//                System.out.println(ch + " :  " + Collections.frequency(list, ch));
-//            }
-//
-//            for (String i : list) {
-//                System.out.println(i + " :  " + Collections.frequency(list, i));
-//            }
-//
-//            list.parallelStream().filter(f -> {
-//                try {
-//                    return !temp.add(Files.size(Paths.get(f)));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                return false;
-//            }).forEach(newList::add);
-
-//            for (int i = 0; i < list.size() - 1; i++) {
-//                Path path = Paths.get(list.get(i));
-//
-//                if (!temp.add(Files.size(path))) {
-//                    newList.add(list.get(i));
-//                }
-//
-//                for (int j = i + 1; j < list.size(); j++) {
-//                    Path path = Paths.get(list.get(i));
-//
-//                    Path path1 = Paths.get(list.get(j));
-//
-//                    if (!temp.add(Files.size(path)) || !temp.add(Files.size(path1))) {
-//
-//                    }
-//
-//                    if (Files.size(path) == Files.size(path1)) {
-//
-//                    }
-//
-//                }
-//
-//            }
-
-
-//            list.stream().forEach(str -> {
-//                Path path = Paths.get(str);
-//            });
-
     }
 
     /**
@@ -245,22 +60,30 @@ public class StartProgram {
      * Вызывает метод @writeToFile который создаст текстовый файл result.txt в указанной директории
      * и запишет в него содержимое @strBuilder
      */
-    public static void init(String pathWhereNeedToScan) throws NoSuchAlgorithmException, IOException {
+    public static void init(String pathWhereNeedToScan) throws IOException, NoSuchAlgorithmException {
         FilesFinder filesFinder = new FilesFinder();
         FileWork fileWork = new FileWork();
         StringBuilder strBuilder = new StringBuilder();
+
         File directory = new File(pathWhereNeedToScan);
-        Map<String, List<File>> lists = new HashMap<>();
 
-        filesFinder.findAndSaveDuplicateFilesInHashMap(lists, directory);
+        Map<String, List<String>> lists = new HashMap<>();
 
-        Set<String> filePaths = filesFinder.fillMapValuesToSetCollection(lists);
+        filesFinder.fillHashMap(lists, directory);
 
-        filePaths.forEach(i -> {
-            strBuilder.append(i)
-                    .append(System.lineSeparator());
-        });
+        filesFinder.removeAlone(lists);
 
-        fileWork.writeToFile(directory, strBuilder);
+        List<String> pathsFileNameAndSizeDuplicates = filesFinder.deleteFilesWithDifferentSize(lists);
+
+        List<String> pathsFileDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
+
+        pathsFileDuplicates.forEach(System.out::println);
+
+//        pathsFileDuplicates.forEach(i -> {
+//            strBuilder.append(i)
+//                    .append(System.lineSeparator());
+//        });
+
+        //fileWork.writeToFile(directory, strBuilder);
     }
 }

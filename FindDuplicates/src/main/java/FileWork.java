@@ -18,7 +18,7 @@ public class FileWork implements FileInterface {
      * @param directory - хранит путь к директории где будет создаваться файл result
      * @throws IOException
      */
-    @Override
+
     public void createFileResultTxt(File directory) throws IOException {
         String resultTxt = "result.txt";
 
@@ -43,7 +43,7 @@ public class FileWork implements FileInterface {
      * @param str - хранит строки которые запишуться в result.txt
      * @throws IOException
      */
-    @Override
+
     public void writeToFile(File directory, StringBuilder str) throws IOException {
         try {
             createFileResultTxt(directory);

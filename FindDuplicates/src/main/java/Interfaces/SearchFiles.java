@@ -12,6 +12,5 @@ import java.util.Set;
  * @value список файлов с контрольной суммой.
  */
 public interface SearchFiles {
-    void findAndSaveDuplicateFilesInHashMap(Map<String, List<File>> filesList, File directory) throws NoSuchAlgorithmException;
-    Set<String> fillMapValuesToSetCollection(Map<String, List<File>> lists);
+
 }
