@@ -8,5 +8,6 @@ import java.io.IOException;
  * в который запишуться абсолютные пути файлов дубликатов
  */
 public interface FileInterface {
-
+    public void createFileResultTxt(File directory) throws IOException;
+    public void writeToFile(File directory, StringBuilder str) throws IOException;
 }

@@ -18,7 +18,7 @@ public class FileWork implements FileInterface {
      * @param directory - хранит путь к директории где будет создаваться файл result
      * @throws IOException
      */
-
+    @Override
     public void createFileResultTxt(File directory) throws IOException {
         String resultTxt = "result.txt";
 
@@ -31,19 +31,19 @@ public class FileWork implements FileInterface {
 
     /**
      * Метод сперва создаёт файл @createFileResultTxt
-     *
+     * <p>
      * После создаёт объект класса @BufferedWriter что бы записать текст в поток вывода символов
      * в конструкторе создаётся объект @FileWriter который записывает поток символов в указанны
      * File @fileResult который хранит в себе путь каталога и название файла.
-     *
+     * <p>
      * После записывает поток символов из StringBuilder @str
      * который переводит в String. В конце закрывает поток.
      *
      * @param directory - хранит путь к директории где будет создаваться файл result
-     * @param str - хранит строки которые запишуться в result.txt
+     * @param str       - хранит строки которые запишуться в result.txt
      * @throws IOException
      */
-
+    @Override
     public void writeToFile(File directory, StringBuilder str) throws IOException {
         try {
             createFileResultTxt(directory);
