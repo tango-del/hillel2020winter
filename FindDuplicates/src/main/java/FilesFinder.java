@@ -40,8 +40,8 @@ public class FilesFinder implements SearchFiles {
 
         Arrays.stream(directory.listFiles())
 //                .filter(file -> file.length() > 1)
-                .filter(file -> Files.isReadable(file.toPath()))
-                .filter(file -> Files.isWritable(file.toPath()))
+                //.filter(file -> Files.isReadable(file.toPath()))
+                //.filter(file -> Files.isWritable(file.toPath()))
 
 //                .filter(file -> !file.isHidden())
 //                .filter(File::exists)

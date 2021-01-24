@@ -1,6 +1,9 @@
 package lesson9;
-/*
-TODO на основе интерфейса - реализовать коллекцию на основе связного списка
+
+import lesson9.Collection.LinkedString;
+
+/**
+ на основе интерфейса - реализовать коллекцию на основе связного списка
  - boolean add(String str); +
  - boolean addAll(String[] strArr); +
  - boolean addAll(Lesson12.Collection strColl); +
@@ -13,8 +16,6 @@ TODO на основе интерфейса - реализовать колле�
  - boolean trim(); +
  - boolean compare(Lesson12.Collection coll);
  */
-
-import lesson9.Collection.LinkedString;
 
 public class Main {
     public static void main(String[] args) {

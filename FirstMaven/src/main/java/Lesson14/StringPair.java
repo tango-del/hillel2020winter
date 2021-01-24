@@ -1,14 +1,13 @@
 package Lesson14;
 
-/*
- TODO
-  Имеется коллекция из String, привести все стринги в UPPERCASE
-  и вернуть коллекцию List<Pair>in: "one", "two", ...out: {"one":"ONE"}, {"two", "TWO"}
- */
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+/**
+ * Имеется коллекция из String, привести все стринги в UPPERCASE
+ * и вернуть коллекцию List<Pair>in: "one", "two", ...out: {"one":"ONE"}, {"two", "TWO"}
+ */
 
 public class StringPair {
 

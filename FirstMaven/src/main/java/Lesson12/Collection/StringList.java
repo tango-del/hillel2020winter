@@ -45,8 +45,7 @@ public class StringList implements StringCollection {
             }
         } else {
             for (int i = 0; i < count; i++) {
-                //TODO args[i].equals(str) - not same
-                if (str.equals(args[i])) {
+                if (str.equals(args[i])) { //args[i].equals(str) - not same
                     return true;
                 }
             }
@@ -304,7 +303,7 @@ public class StringList implements StringCollection {
 //    private boolean checkObjectContains(String str) throws NoSuchObjectException {
 //        boolean result = false;
 //        for (int i = 0; i < args.length; i++) {
-//            //TODO why (args[i] == str) -> false
+//            //why (args[i] == str) -> false
 //            if (args[i].equals(str)) {
 //                result = true;
 //                return result;

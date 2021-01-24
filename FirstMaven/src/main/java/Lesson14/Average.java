@@ -1,12 +1,11 @@
 package Lesson14;
 
-/*
- TODO
-  Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
-  Throwable Exception I\O Exception -> DataFind
- */
-
 import java.util.List;
+
+/**
+ * Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
+ * Throwable Exception I\O Exception -> DataFind
+ */
 
 public class Average {
 

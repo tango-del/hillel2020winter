@@ -62,7 +62,7 @@ public class FileWork implements FileInterface {
         return file;
     }
 
-    // TODO Объяснить еще раз что делает метод
+    // Объяснить еще раз что делает метод
     @Override
     public String readFileToString(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();

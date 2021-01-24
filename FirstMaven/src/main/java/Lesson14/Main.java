@@ -1,14 +1,14 @@
 package Lesson14;
-/*
- TODO
-  1 - Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
-  2 - Имеется коллекция из String, привести все стринги в UPPERCASE
-  и вернуть коллекцию List<Pair>in: "one", "two", ...out: {"one":"ONE"}, {"two", "TWO"}, ...
-  3 - Имеется коллекция из String, отфильтровать и вывести на экран все значения, которые написаны в loverCase and length = 4
- */
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * 1 - Имеется коллекция из Integers, использую стримы посчитать среденее значения всех чисел
+ * 2 - Имеется коллекция из String, привести все стринги в UPPERCASE
+ *     и вернуть коллекцию List<Pair>in: "one", "two", ...out: {"one":"ONE"}, {"two", "TWO"}, ...
+ * 3 - Имеется коллекция из String, отфильтровать и вывести на экран все значения, которые написаны в loverCase and length = 4
+ */
 
 public class Main {
     public static void main(String[] args) {

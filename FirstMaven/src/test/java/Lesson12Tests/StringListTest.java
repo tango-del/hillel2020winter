@@ -4,10 +4,12 @@ import Lesson12.Collection.StringList;
 import Lesson12.Exceptions.IndexOutOfBoundException;
 import org.junit.jupiter.api.*;
 
-//TODO почему тесты выполняются не последовательно
+/**
+ * почему тесты выполняются не последовательно
+ * почитать еще раз про static
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StringListTest {
-    //TODO почитать еще раз про static
     static StringList arr;
     static StringList temp;
 

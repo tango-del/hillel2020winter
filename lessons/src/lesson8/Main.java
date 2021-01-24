@@ -1,30 +1,30 @@
 package lesson8;
-/*
-TODO Реализовать простую коллекцию для String на базе массива использую интерфейс
- Interface collection:
- -boolean add(Object o); +
- -boolean add(index, Object o); +
- -boolean delete (Object o); +
- -Object get(int index); +
- -boolean contain(Object o); +
- -boolean equals (Lesson12.Collection str),
- -boolean clear(),
- -int size(),
- */
 
 import lesson8.Collection.MyOwnIterator;
 import lesson8.Collection.StringList;
 
+/**
+ *  Реализовать простую коллекцию для String на базе массива использую интерфейс
+ *  Interface collection:
+ *  -boolean add(Object o); +
+ *  -boolean add(index, Object o); +
+ *  -boolean delete (Object o); +
+ *  -Object get(int index); +
+ *  -boolean contain(Object o); +
+ *  -boolean equals (Lesson12.Collection str),
+ *  -boolean clear(),
+ *  -int size(),
+ */
 public class Main {
     public static void main(String[] args) {
         //StringList
         //workWithStringList();
 
-        /*
-       TODO Lesson 10 tasks:
-        1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
-        2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
-        3. написать программу для вычисления корней квадратного уравнения
+        /**
+         * Lesson 10 tasks:
+         * 1. Напишите метод, который на вход получает коллекцию объектов, а возвращает коллекцию уже без дубликатов.
+         * 2. Написать итератор по массиву(не коллекции), размер массива заваетя через конструктор (
+         * 3. написать программу для вычисления корней квадратного уравнения
          */
 
         //HomeWork lesson 10
