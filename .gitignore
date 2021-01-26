@@ -22,6 +22,14 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.com.pars.xml
 hs_err_pid*
 /.idea/
+/lessons/src/BK_game/target/
+/lessons/src/AppLocation/target/
+/lessons/src/FirstMaven/target
+/lessons/src/FormatsConverter/target
+/lessons/src/ObjectSize/target
+/lessons/src/pars/target/
+/lessons/src/restExample/target/
+/FindDuplicates/target/
 /lessons/lessons.iml
 /hillel2020winter.iml
 /TestMaven/TestMaven.iml
