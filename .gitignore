@@ -27,7 +27,6 @@ hs_err_pid*
 /lessons/src/FirstMaven/target
 /lessons/src/FormatsConverter/target
 /lessons/src/ObjectSize/target
-/lessons/src/pars/target/
 /lessons/src/restExample/target/
 /FindDuplicates/target/
 /lessons/lessons.iml
@@ -37,3 +36,4 @@ hs_err_pid*
 /BK_game/BK_game.iml
 /ObjectSize/ObjectSize.iml
 /out/
+/pars-practise/target/
