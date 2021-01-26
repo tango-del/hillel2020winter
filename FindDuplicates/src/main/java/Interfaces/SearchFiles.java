@@ -14,7 +14,7 @@ import java.util.Set;
  * @value список файлов с контрольной суммой.
  */
 public interface SearchFiles {
-    public void fillHashMap(Map<String, List<String>> filesList, File directory);
+    public void fillHashMap(Map<String, List<String>> filesList, File directory) throws FileNotFoundException;
     public List<String> deleteFilesWithDifferentSize(Map<String, List<String>> filesList) throws IOException;
     public void removeAlone(Map<String, List<String>> filesList);
     public List<String> filterHashSum(List<String> newList) throws IOException, NoSuchAlgorithmException;

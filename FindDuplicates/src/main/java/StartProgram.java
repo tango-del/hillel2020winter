@@ -1,6 +1,10 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.DosFileAttributes;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -50,7 +54,12 @@ public class StartProgram {
 
         Map<String, List<String>> lists = new HashMap<>();
 
-        filesFinder.fillHashMap(lists, directory);
+        try {
+            filesFinder.fillHashMap(lists, directory);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("invalid file");
+        }
 
         filesFinder.removeAlone(lists);
 

@@ -1,22 +1,17 @@
 import Interfaces.SearchFiles;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public class FilesFinder implements SearchFiles {
-
-    private static boolean checkTest(File file) {
-        return file.renameTo(file);
-    }
 
     /**
      * Метод проходит по массиву @directory.listFiles
@@ -34,34 +29,36 @@ public class FilesFinder implements SearchFiles {
      * @param directory - директория в которой будет происходить анализ всех файлов
      */
     @Override
-    public void fillHashMap(Map<String, List<String>> filesList, File directory) {
+    public void fillHashMap(Map<String, List<String>> filesList, File directory) throws FileNotFoundException {
 
-
-
-        Arrays.stream(directory.listFiles())
+            Arrays.stream(directory.listFiles())
 //                .filter(file -> file.length() > 1)
-                //.filter(file -> Files.isReadable(file.toPath()))
-                //.filter(file -> Files.isWritable(file.toPath()))
+                    .filter(file -> Files.isReadable(file.toPath()))
+                    .filter(file -> !file.isHidden())
 
-//                .filter(file -> !file.isHidden())
 //                .filter(File::exists)
 //                .filter(File::canRead)
-                //.filter(FilesFinder::checkTest)
-                .forEach(file -> {
-                    if (file.isDirectory()) {
+                    .forEach(file -> {
+                        if (file.isDirectory()) {
 //                        System.out.println("dir -> " + file);
-                        fillHashMap(filesList, file);
-                    } else {
+                            try {
+                                fillHashMap(filesList, file);
+                            } catch (FileNotFoundException e) {
+                                System.out.println("svsdvsdv");
+                            }
+                        } else {
 //                        System.out.println("file -> " + file);
-                        String fileName = file.getName();
-                        List<String> identicalList = filesList.get(fileName);
-                        if (identicalList == null) {
-                            identicalList = new ArrayList<>();
+                            String fileName = file.getName();
+                            List<String> identicalList = filesList.get(fileName);
+                            if (identicalList == null) {
+                                identicalList = new ArrayList<>();
+                            }
+                            identicalList.add(file.getPath());
+                            filesList.put(fileName, identicalList);
                         }
-                        identicalList.add(file.getPath());
-                        filesList.put(fileName, identicalList);
-                    }
-                });
+                    });
+
+
     }
 
 //        for (File file : directory.listFiles()) {
