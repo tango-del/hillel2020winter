@@ -18,11 +18,11 @@ public class FilesFinder implements SearchFiles {
      * Первая проверка является ли файл скрытым и его можно прочитать.
      * Дальше у каждого файла в массиве происходит проверка что этот файл является директорией а не файлом, если ответ @true тогда вызывается @recursive этого же метода
      * в который передаётся этот же файл (директория).
-     * <p>
+     *
      * Если ответ @false - тогда создаётся List<String> @identicalList который запрашивает ссылку на List у @filesList по указаному ключу.
-     * <p>
+     *
      * Если HashMap возвращает null -> тогда такого ключа нету, @identicalList инициализируется и в него добавляется абсолютьный путь к фалу.
-     * <p>
+     *
      * После в @filesList добавляется новый key и value
      *
      * @param filesList - HashMap: key -> имя файла, value -> List<String> абсолютный путь к файлу
@@ -32,12 +32,8 @@ public class FilesFinder implements SearchFiles {
     public void fillHashMap(Map<String, List<String>> filesList, File directory) throws FileNotFoundException {
 
             Arrays.stream(directory.listFiles())
-//                .filter(file -> file.length() > 1)
                     .filter(file -> Files.isReadable(file.toPath()))
                     .filter(file -> !file.isHidden())
-
-//                .filter(File::exists)
-//                .filter(File::canRead)
                     .forEach(file -> {
                         if (file.isDirectory()) {
 //                        System.out.println("dir -> " + file);
@@ -83,7 +79,7 @@ public class FilesFinder implements SearchFiles {
 
     /**
      * Метод ищет файлы с одинаковыми размерами и записывает их абсолютные пути в List<String> @fileDuplicates.
-     * <p>
+     *
      * Создаётся HashMap @newMap в котором key - размер файла, value - список с путями к файлам
      * foreach проходит по всем @values у @filesList
      * внутренний foreach проходит по каждому списку, итерация каждой строки в котором записан абсолютный путь к файлу.
