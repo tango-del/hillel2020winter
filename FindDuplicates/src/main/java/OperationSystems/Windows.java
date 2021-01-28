@@ -28,7 +28,7 @@ public class Windows implements SystemRules {
 
     public void writePropValuesToStrings() throws IOException {
         Properties prop = new Properties();
-        String propFile = "DirNames.properties";
+        String propFile = "WinSysDirs.properties";
         InputStream inputStream = Windows.class.getClassLoader().getResourceAsStream(propFile);
 
         if (inputStream != null) {
@@ -43,7 +43,7 @@ public class Windows implements SystemRules {
     }
 
     public static void testBundle() throws IOException {
-//        ResourceBundle resourceBundle = ResourceBundle.getBundle("src/main/resources/DirNames.properties");
+//        ResourceBundle resourceBundle = ResourceBundle.getBundle("src/main/resources/WinSysDirs.properties");
 //        System.out.println(resourceBundle.getString("program_files64"));
     }
 }

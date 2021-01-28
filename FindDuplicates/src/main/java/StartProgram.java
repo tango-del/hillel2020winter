@@ -73,6 +73,7 @@ public class StartProgram {
         pathsFileNameAndSizeDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
 
         pathsFileNameAndSizeDuplicates.forEach(System.out::println);
+        System.out.println(pathsFileNameAndSizeDuplicates.size());
 //        List<String> pathsFileCheckSumDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
 
 //        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));

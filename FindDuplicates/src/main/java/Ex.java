@@ -7,5 +7,5 @@ public enum Ex {
     Ex(String win) {
 
     }
-    //ResourceBundle resourceBundle = java.util.ResourceBundle.getBundle("src/main/resources/DirNames.properties");
+    //ResourceBundle resourceBundle = java.util.ResourceBundle.getBundle("src/main/resources/WinSysDirs.properties");
 }

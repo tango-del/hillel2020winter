@@ -22,7 +22,10 @@ public class FilesFinder implements SearchFiles {
                 systemRules = new Windows();
                 systemRules.writePropValuesToStrings();
             }
-            case "Linux" -> systemRules = new Linux();
+            case "Linux" -> {
+                systemRules = new Linux();
+                systemRules.writePropValuesToStrings();
+            }
             case "Mac" -> systemRules = new Mac();
             default -> throw new RuntimeException("OS not support");
         }
@@ -46,8 +49,9 @@ public class FilesFinder implements SearchFiles {
     @Override
     public void fillHashMap(Map<String, List<String>> filesList, File directory) throws FileNotFoundException {
 
-        Arrays.stream(Objects.requireNonNull(directory.listFiles()))
+        Arrays.stream(directory.listFiles())
                 .filter(file -> Files.isReadable(file.toPath()))
+//                .filter(file -> file.canRead() && !file.isHidden())
                 .filter(file -> !file.isHidden())
                 .filter(file -> {
                     try {
@@ -173,7 +177,7 @@ public class FilesFinder implements SearchFiles {
 
 
         for (String str : newList) {
-            System.out.println(str);
+//            System.out.println(str);
             FileInputStream fileInput = new FileInputStream(str);
             byte[] fileData = new byte[(int) new File(str).length()];
             fileInput.read(fileData);
