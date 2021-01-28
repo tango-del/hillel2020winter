@@ -1,9 +1,10 @@
 import Interfaces.SearchFiles;
+import Interfaces.SystemRules;
+import OperationSystems.Linux;
+import OperationSystems.Mac;
+import OperationSystems.Windows;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,16 +14,30 @@ import java.util.*;
 
 public class FilesFinder implements SearchFiles {
 
+    private static SystemRules systemRules;
+
+    public static void chooseOperationSystem(String OS) throws IOException {
+        switch (OS) {
+            case "Windows" -> {
+                systemRules = new Windows();
+                systemRules.writePropValuesToStrings();
+            }
+            case "Linux" -> systemRules = new Linux();
+            case "Mac" -> systemRules = new Mac();
+            default -> throw new RuntimeException("OS not support");
+        }
+    }
+
     /**
      * Метод проходит по массиву @directory.listFiles
      * Первая проверка является ли файл скрытым и его можно прочитать.
      * Дальше у каждого файла в массиве происходит проверка что этот файл является директорией а не файлом, если ответ @true тогда вызывается @recursive этого же метода
      * в который передаётся этот же файл (директория).
-     *
+     * <p>
      * Если ответ @false - тогда создаётся List<String> @identicalList который запрашивает ссылку на List у @filesList по указаному ключу.
-     *
+     * <p>
      * Если HashMap возвращает null -> тогда такого ключа нету, @identicalList инициализируется и в него добавляется абсолютьный путь к фалу.
-     *
+     * <p>
      * После в @filesList добавляется новый key и value
      *
      * @param filesList - HashMap: key -> имя файла, value -> List<String> абсолютный путь к файлу
@@ -31,30 +46,38 @@ public class FilesFinder implements SearchFiles {
     @Override
     public void fillHashMap(Map<String, List<String>> filesList, File directory) throws FileNotFoundException {
 
-            Arrays.stream(directory.listFiles())
-                    .filter(file -> Files.isReadable(file.toPath()))
-                    .filter(file -> !file.isHidden())
-                    .forEach(file -> {
-                        if (file.isDirectory()) {
+        Arrays.stream(Objects.requireNonNull(directory.listFiles()))
+                .filter(file -> Files.isReadable(file.toPath()))
+                .filter(file -> !file.isHidden())
+                .filter(file -> {
+                    try {
+                        return systemRules.systemExclusionRules(file.getName());
+                    } catch (IOException e) {
+                        throw new RuntimeException();
+                    }
+                })
+//                .filter(file -> !file.getName().contains(windowsSystemDirName) && !file.getName().contains(programFilesSystemDirName))
+                //.filter(file -> systemRules.systemExclusionRules(file.getName()))
+                .forEach(file ->
+                {
+                    if (file.isDirectory()) {
 //                        System.out.println("dir -> " + file);
-                            try {
-                                fillHashMap(filesList, file);
-                            } catch (FileNotFoundException e) {
-                                System.out.println("svsdvsdv");
-                            }
-                        } else {
-//                        System.out.println("file -> " + file);
-                            String fileName = file.getName();
-                            List<String> identicalList = filesList.get(fileName);
-                            if (identicalList == null) {
-                                identicalList = new ArrayList<>();
-                            }
-                            identicalList.add(file.getPath());
-                            filesList.put(fileName, identicalList);
+                        try {
+                            fillHashMap(filesList, file);
+                        } catch (FileNotFoundException e) {
+                            System.out.println("invalid file");
                         }
-                    });
-
-
+                    } else {
+//                        System.out.println("file -> " + file);
+                        String fileName = file.getName();
+                        List<String> identicalList = filesList.get(fileName);
+                        if (identicalList == null) {
+                            identicalList = new ArrayList<>();
+                        }
+                        identicalList.add(file.getPath());
+                        filesList.put(fileName, identicalList);
+                    }
+                });
     }
 
 //        for (File file : directory.listFiles()) {
@@ -79,7 +102,7 @@ public class FilesFinder implements SearchFiles {
 
     /**
      * Метод ищет файлы с одинаковыми размерами и записывает их абсолютные пути в List<String> @fileDuplicates.
-     *
+     * <p>
      * Создаётся HashMap @newMap в котором key - размер файла, value - список с путями к файлам
      * foreach проходит по всем @values у @filesList
      * внутренний foreach проходит по каждому списку, итерация каждой строки в котором записан абсолютный путь к файлу.
@@ -147,7 +170,6 @@ public class FilesFinder implements SearchFiles {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
         Map<String, List<String>> newMap = new HashMap<>();
-
 
 
         for (String str : newList) {

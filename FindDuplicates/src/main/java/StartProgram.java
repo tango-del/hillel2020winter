@@ -1,10 +1,9 @@
+import OperationSystems.OsDetector;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.attribute.DosFileAttributes;
+import java.nio.file.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -38,17 +37,23 @@ public class StartProgram {
      * Создаётся список @pathsFileNameAndSizeDuplicates
      * deleteFilesWithDifferentSize возвращает ссылку на список в котором записаны пути к файлам с одинаковым размеров и именами.
      * filterHashSum - возвращает ссылку на список в котором записаны пути к файлам с одинаковой контрольной суммой @MD5
-     * @strBuilder - прикрепит в себя каждую строку List @pathsFileNameAndSizeDuplicates
-     * writeToFile создаст тектсовый файл result.txt в который запишет содержимое @strBuilder
      *
      * @param pathWhereNeedToScan - в качестве строки хранит директорию где будет производиться поиск
      * @throws IOException
      * @throws NoSuchAlgorithmException
+     * @strBuilder - прикрепит в себя каждую строку List @pathsFileNameAndSizeDuplicates
+     * writeToFile создаст тектсовый файл result.txt в который запишет содержимое @strBuilder
      */
-    public static void init(String pathWhereNeedToScan) throws IOException, NoSuchAlgorithmException {
+    private static void init(String pathWhereNeedToScan) throws IOException, NoSuchAlgorithmException {
         FilesFinder filesFinder = new FilesFinder();
         FileWork fileWork = new FileWork();
         StringBuilder strBuilder = new StringBuilder();
+
+        String OS = OsDetector.detectSystem();
+
+        FilesFinder.chooseOperationSystem(OS);
+
+//        FilesFinder.writeValueToStaticStrings();
 
         File directory = new File(pathWhereNeedToScan);
 
