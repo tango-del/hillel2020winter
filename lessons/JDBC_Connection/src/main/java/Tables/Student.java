@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.SQLException;
+
 /**
  * Записывает в себя сущности таблицы Students базы данных University.
  * Конструктор принимает объект Builder
@@ -51,9 +53,9 @@ public class Student {
             return this;
         }
 
-        public Builder setGroup(int group) {
+        public Builder setGroup(int group) throws SQLException {
             if (group < 1 || group > 12) {
-                group = 1;
+                throw new SQLException("incorrect group id");
             }
             this.group = group;
             return this;
