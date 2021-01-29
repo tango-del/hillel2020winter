@@ -17,11 +17,11 @@ public class StartProgram {
 
         Student student = new Student.Builder().setFullName("TestName").setGroup(6).setYearJoin(2019).build();
 
-        connect.addNewRowStudent(new Student.Builder().setFullName("Test Name").setYearJoin(2011).build());
+//        connect.addNewRowStudent(new Student.Builder().setFullName("Sobik").setYearJoin(2019).build());
 
-        connect.addNewRowStudent(student);
+//        connect.addNewRowStudent(student);
 
-        connect.deleteRawStudentByID(20);
+//        connect.deleteRawStudentByID(23);
 
         connect.outputAllStudentsIdAndName();
 
