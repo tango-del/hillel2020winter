@@ -11,40 +11,40 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/myfirstdb?useSSL=false&user=root&password=Sobik2010&serverTimezone=UTC");
-
 //        Connection connection = DriverManager
-//                .getConnection(URL, USER, PASS);
+//                .getConnection("jdbc:mysql://localhost:3306/myfirstdb?useSSL=false&user=root&password=Sobik2010&serverTimezone=UTC");
+
+        Connection connection = DriverManager
+                .getConnection(URL, USER, PASS);
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from user where active = 1 and age > 18 and age <= 28 order by age, last_name");
-//
-//        System.out.println(resultSet.getMetaData().getTableName(1));
-//
-//        System.out.println("-------------------------");
-//
-//        int columnCount = resultSet.getMetaData().getColumnCount();
-//
-//        for (int i = 1; i <= columnCount; i++) {
-//            System.out.print("column name : " + resultSet.getMetaData().getColumnName(i) + ", ");
-//            System.out.print("column size : " + resultSet.getMetaData().getColumnDisplaySize(i) + ", ");
-//            System.out.println("column type : " + resultSet.getMetaData().getColumnTypeName(i));
-//        }
-//
-//        List<User> students = new ArrayList<>();
-//
+
+        System.out.println(resultSet.getMetaData().getTableName(1));
+
+        System.out.println("-------------------------");
+
+        int columnCount = resultSet.getMetaData().getColumnCount();
+
+        for (int i = 1; i <= columnCount; i++) {
+            System.out.print("column name : " + resultSet.getMetaData().getColumnName(i) + ", ");
+            System.out.print("column size : " + resultSet.getMetaData().getColumnDisplaySize(i) + ", ");
+            System.out.println("column type : " + resultSet.getMetaData().getColumnTypeName(i));
+        }
+
+        List<User> students = new ArrayList<>();
+
 //        List<Map<String, String>> userMap = new ArrayList<>();
-//
-//        while (resultSet.next()) {
-//           int id = resultSet.getInt("id");
-////           String idS = resultSet.getString("id");
-//           String last_name = resultSet.getString("last_name");
-//           String first_name = resultSet.getString("first_name");
-//           int age = resultSet.getInt("age");
-//           String phone = resultSet.getString("phone");
-//           String email = resultSet.getString("email");
-//
+
+        while (resultSet.next()) {
+           int id = resultSet.getInt("id");
+           String idS = resultSet.getString("id");
+           String last_name = resultSet.getString("last_name");
+           String first_name = resultSet.getString("first_name");
+           int age = resultSet.getInt("age");
+           String phone = resultSet.getString("phone");
+           String email = resultSet.getString("email");
+
 //           Map<String, String> uMap = new HashMap<>();
 //
 //            for (int i = 1; i <= columnCount; i++) {
@@ -52,9 +52,9 @@ public class Main {
 //
 //            }
 //            userMap.add(uMap);
-//
-//           students.add(new User(id, last_name, first_name, age, phone, email));
-//        }
+
+           students.add(new User(id, last_name, first_name, age, phone, email));
+        }
 //
 //        for (User st : students) {
 //            System.out.println(st);
