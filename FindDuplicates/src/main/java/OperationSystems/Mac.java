@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Mac implements SystemRules {
     @Override
     public boolean systemExclusionRules(String OS) throws IOException {
-        return false;
+        return true;
     }
 
     @Override
