@@ -15,13 +15,13 @@ public class StartProgram {
 
         connect.createConnection();
 
-        Student student = new Student.Builder().setFullName("TestName").setGroup(6).setYearJoin(2019).build();
+//        Student student = new Student.Builder().setFullName("Josh Bloch2").setGroup(12).setYearJoin(2021).build();
 
 //        connect.addNewRowStudent(new Student.Builder().setFullName("Sobik").setYearJoin(2019).build());
 
 //        connect.addNewRowStudent(student);
 
-//        connect.deleteRawStudentByID(23);
+//        connect.deleteRawStudentByID(25);
 
         connect.outputAllStudentsIdAndName();
 

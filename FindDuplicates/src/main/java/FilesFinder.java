@@ -18,16 +18,19 @@ public class FilesFinder implements SearchFiles {
 
     public static void chooseOperationSystem(String OS) throws IOException {
         switch (OS) {
-            case "Windows" -> {
+            case "Windows" :
                 systemRules = new Windows();
                 systemRules.writePropValuesToStrings();
-            }
-            case "Linux" -> {
+            break;
+            case "Linux" :
                 systemRules = new Linux();
                 systemRules.writePropValuesToStrings();
-            }
-            case "Mac" -> systemRules = new Mac();
-            default -> throw new RuntimeException("OS not support");
+            break;
+            case "Mac" :
+                systemRules = new Mac();
+                break;
+            default :
+                throw new RuntimeException("OS not support");
         }
     }
 
@@ -51,7 +54,6 @@ public class FilesFinder implements SearchFiles {
 
         Arrays.stream(directory.listFiles())
                 .filter(file -> Files.isReadable(file.toPath()))
-//                .filter(file -> file.canRead() && !file.isHidden())
                 .filter(file -> !file.isHidden())
                 .filter(file -> {
                     try {
@@ -60,8 +62,6 @@ public class FilesFinder implements SearchFiles {
                         throw new RuntimeException();
                     }
                 })
-//                .filter(file -> !file.getName().contains(windowsSystemDirName) && !file.getName().contains(programFilesSystemDirName))
-                //.filter(file -> systemRules.systemExclusionRules(file.getName()))
                 .forEach(file ->
                 {
                     if (file.isDirectory()) {
@@ -177,7 +177,6 @@ public class FilesFinder implements SearchFiles {
 
 
         for (String str : newList) {
-//            System.out.println(str);
             FileInputStream fileInput = new FileInputStream(str);
             byte[] fileData = new byte[(int) new File(str).length()];
             fileInput.read(fileData);

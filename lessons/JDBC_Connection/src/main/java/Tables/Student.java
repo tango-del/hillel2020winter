@@ -40,8 +40,8 @@ public class Student {
     public static class Builder {
         private int students_id;
         private String fullName;
-        private int group = 1;
-        private int yearJoin = 1;
+        private int group;
+        private int yearJoin;
 
         public Builder setStudentsId(int id) {
             this.students_id = id;
@@ -66,7 +66,10 @@ public class Student {
             return this;
         }
 
-        public Student build() {
+        public Student build() throws SQLException {
+            if (group == 0 || yearJoin == 0 || fullName == null) {
+                throw new SQLException("incorrect group id");
+            }
             return new Student(this);
         }
     }

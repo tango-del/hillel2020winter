@@ -92,12 +92,14 @@ public class Connect implements SqlWork {
     @Override
     public void outputAllStudentsIdAndName() throws SQLException {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select s.students_id, s.full_name from students s");
+        resultSet = statement.executeQuery("select * from students");
         List<Student> students = new ArrayList<>();
         while (resultSet.next()) {
             int id = resultSet.getInt("students_id");
             String fullName = resultSet.getString("full_name");
-            students.add(new Student.Builder().setStudentsId(id).setFullName(fullName).build());
+            int group = resultSet.getInt("group");
+            int yearJoin = resultSet.getInt("year_join");
+            students.add(new Student.Builder().setStudentsId(id).setGroup(group).setYearJoin(yearJoin).setFullName(fullName).build());
         }
         students.forEach(System.out::println);
     }
