@@ -13,7 +13,7 @@ public class Linux implements SystemRules {
     private static List<String> systemDirs;
 
     @Override
-    public boolean systemExclusionRules(String fileName) {
+    public boolean systemExclusionRules(String fileName) throws IOException {
         for (String i : systemDirs) {
             if (fileName.contains(i)) {
                 return false;

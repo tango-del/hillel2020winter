@@ -55,6 +55,7 @@ public class StartProgram {
 
         File directory = new File(pathWhereNeedToScan);
 
+
         Map<String, List<String>> lists = new HashMap<>();
 
         try {
@@ -70,12 +71,12 @@ public class StartProgram {
 
         pathsFileNameAndSizeDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
 
-//        pathsFileNameAndSizeDuplicates.forEach(System.out::println);
-//        System.out.println(pathsFileNameAndSizeDuplicates.size());
+        pathsFileNameAndSizeDuplicates.forEach(System.out::println);
+        System.out.println(pathsFileNameAndSizeDuplicates.size());
 //        List<String> pathsFileCheckSumDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
 
-        strBuilder.append("Total duplicated Files : ").append(pathsFileNameAndSizeDuplicates.size()).append(System.lineSeparator());
-        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));
-        fileWork.writeToFile(directory, strBuilder);
+//        strBuilder.append("Total duplicated Files : ").append(pathsFileNameAndSizeDuplicates.size()).append(System.lineSeparator());
+//        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));
+//        fileWork.writeToFile(directory, strBuilder);
     }
 }
