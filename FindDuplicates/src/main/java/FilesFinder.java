@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class FilesFinder implements SearchFiles {
 
