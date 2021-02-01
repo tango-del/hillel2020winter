@@ -19,18 +19,19 @@ public class FilesFinder implements SearchFiles {
 
     public static void chooseOperationSystem(String OS) throws IOException {
         switch (OS) {
-            case "Windows" :
+            case "Windows":
                 systemRules = new Windows();
                 systemRules.writePropValuesToStrings();
-            break;
-            case "Linux" :
+                break;
+            case "Linux":
                 systemRules = new Linux();
                 systemRules.writePropValuesToStrings();
-            break;
-            case "Mac" :
-                systemRules = new Mac();
                 break;
-            default :
+            case "Mac":
+                systemRules = new Mac();
+                systemRules.writePropValuesToStrings();
+                break;
+            default:
                 throw new RuntimeException("OS not support");
         }
     }

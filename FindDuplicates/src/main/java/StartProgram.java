@@ -55,7 +55,6 @@ public class StartProgram {
 
         File directory = new File(pathWhereNeedToScan);
 
-
         Map<String, List<String>> lists = new HashMap<>();
 
         try {
