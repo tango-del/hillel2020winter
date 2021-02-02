@@ -1,31 +1,22 @@
-/*
-  Написать консольную игру камень ножницы бумага
-  - пользователь должен выбирать количество игр и ввести свое имя +
-  - пользователь должен иметь возможность прервать игру +
-  - после прекращения игры пользователь должен увидеть результат +
-  - результат надо сохранить в файл - https://www.baeldung.com/java-write-to-file +
-  (если файла нет его надо создать, если файл есть то дописать результат в файл) - формат записи выбрать самому
-
-  - переделать путь создания каталога (будет в корне проэкта) +
-  - раскинуть реализацию создания каталога с файлами и фукнционал  +
-  - Подумай как оптимизировать вычислене результата
- */
-
 import Players.Computer;
 import Players.User;
+import loggers.CustomLogger;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// Console game rock paper scissors with computer
 public class StartGame {
     private static FileCreator fileCreator = new FileCreator();
     private static GameFunctions gameFunctions = new GameFunctions();
     private static Scanner scanner = new Scanner(System.in);
     static StringBuilder str = new StringBuilder();
-    //append(System.lineSeparator()) - добавляет новую строку
 
     public static void main(String[] args) throws IOException {
+        CustomLogger.logDebug("Program Start");
         start();
+        CustomLogger.logDebug("Program end");
     }
 
     private static void start() throws IOException {
@@ -40,21 +31,26 @@ public class StartGame {
         String playerChooseContinue; // keeps symbol that user input to continue game
 
         System.out.println("Choose User Name:");
-        str.append("Choose User Name:")
-                .append(System.lineSeparator());
+        fillStrBuilder("Choose User Name:");
+//        str.append("Choose User Name:")
+//                .append(System.lineSeparator());
 
         user.setName(scanner.next()); // sets user name
-        str.append(user.getName())
-                .append(System.lineSeparator());
+        fillStrBuilder(user.getName());
+        CustomLogger.logDebug("User choose Name: " + user.getName());
+//        str.append(user.getName())
+//                .append(System.lineSeparator());
 
         System.out.println("Choose count games");
-        str.append("Choose count games")
-                .append(System.lineSeparator());
-
+        fillStrBuilder("Choose count games");
+//        str.append("Choose count games")
+//                .append(System.lineSeparator());
         Integer countGames = scanner.nextInt(); // sets count games
 
-        str.append(countGames)
-                .append(System.lineSeparator());
+        fillStrBuilder(String.valueOf(countGames));
+        CustomLogger.logDebug("User choos count games: " + countGames);
+//        str.append(countGames)
+//                .append(System.lineSeparator());
 
         do {
             ++count;
@@ -89,7 +85,9 @@ public class StartGame {
             chooseComp = (int) (Math.random() * 3) + 1; //comp choose sign
 
             user.setSigns(gameFunctions.choose(chooseUser));
+            CustomLogger.logDebug("User choose Sign : " + user.getSigns());
             computer.setSigns(gameFunctions.choose(chooseComp));
+            CustomLogger.logDebug("Computer choose Sign : " + computer.getSigns());
 
             gameFunctions.winnerInRound(user, computer);
 
@@ -97,8 +95,9 @@ public class StartGame {
 
             System.out.println("Want to continue? Y-y or N-n");
 
-            str.append("Want to continue? Y-y or N-n")
-                    .append(System.lineSeparator());
+            fillStrBuilder("Want to continue? Y-y or N-n");
+//            str.append("Want to continue? Y-y or N-n")
+//                    .append(System.lineSeparator());
 
             playerChooseContinue = scanner.next();
             str.append(playerChooseContinue)
@@ -106,12 +105,15 @@ public class StartGame {
 
             while (!playerChooseContinue.equalsIgnoreCase("y") && !playerChooseContinue.equalsIgnoreCase("n")) {
                 System.out.println("Wrong symbol. Try again: Y-y or N-n");
+                CustomLogger.logWarn("User choose wrong symbol to continue game");
 
-                str.append("Wrong symbol. Try again: Y-y or N-n").append(System.lineSeparator());
+                fillStrBuilder("Wrong symbol. Try again: Y-y or N-n");
+//                str.append("Wrong symbol. Try again: Y-y or N-n").append(System.lineSeparator());
 
                 playerChooseContinue = scanner.next();
 
-                str.append(playerChooseContinue).append(System.lineSeparator());
+                fillStrBuilder(playerChooseContinue);
+//                str.append(playerChooseContinue).append(System.lineSeparator());
             }
         } while (gameFunctions.checkGameContinue(countGames, playerChooseContinue));
 
@@ -119,8 +121,13 @@ public class StartGame {
 
         gameFunctions.finalWinner(user, computer);
 
-//        fileCreator.checkFilesExists();
+        fileCreator.checkFilesExists();
 
-//        fileCreator.writeToFile(str);
+        fileCreator.writeToFile(str);
+    }
+
+    public static void fillStrBuilder(String string) {
+        //System.lineSeparator() - добавляет новую строку
+        str.append(string).append(System.lineSeparator());
     }
 }

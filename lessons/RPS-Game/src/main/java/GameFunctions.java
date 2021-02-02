@@ -3,6 +3,7 @@ import Players.User;
 import enums.Signs;
 import exceptions.UnsupportedSignException;
 import interfaces.GameWork;
+import loggers.CustomLogger;
 
 import java.io.IOException;
 
@@ -50,6 +51,7 @@ public class GameFunctions implements GameWork {
             System.out.println(">---------<");
             System.out.println(">COMP--WON<");
             System.out.println(">---------<");
+            CustomLogger.logDebug("Computer Win");
         } else if (userQuantityWinRounds > computerQuantityWinRounds) {
             StartGame.str.append(">---------<")
                     .append(System.lineSeparator())
@@ -60,6 +62,7 @@ public class GameFunctions implements GameWork {
             System.out.println(">---------<");
             System.out.println(">USER--WON<");
             System.out.println(">---------<");
+            CustomLogger.logDebug("User Win");
         } else if (userQuantityWinRounds == computerQuantityWinRounds) {
             StartGame.str.append(">---------<")
                     .append(System.lineSeparator())
@@ -70,12 +73,17 @@ public class GameFunctions implements GameWork {
             System.out.println(">---------<");
             System.out.println(">NO-WINNER<");
             System.out.println(">---------<");
+            CustomLogger.logDebug("No Winner");
         }
         //final results
-        StartGame.str.append(user)
-                .append(System.lineSeparator());
-        StartGame.str.append(computer)
-                .append(System.lineSeparator());
+        StartGame.fillStrBuilder(user.toString());
+        StartGame.fillStrBuilder(computer.toString());
+        CustomLogger.logDebug(user.toString());
+        CustomLogger.logDebug(computer.toString());
+//        StartGame.str.append(user)
+//                .append(System.lineSeparator());
+//        StartGame.str.append(computer)
+//                .append(System.lineSeparator());
         System.out.println(user);
         System.out.println(computer);
     }
@@ -108,22 +116,28 @@ public class GameFunctions implements GameWork {
             case ROCK: {
                 switch (computer.getSigns()) {
                     case ROCK: {
-                        StartGame.str.append("user - rock, comp - rock --> NO WINNER")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - rock, comp - rock --> NO WINNER");
+//                        StartGame.str.append("user - rock, comp - rock --> NO WINNER")
+//                                .append(System.lineSeparator());
                         System.out.println("user - rock, comp - rock --> NO WINNER");
+                        CustomLogger.logDebug("user - rock, comp - rock --> NO WINNER");
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.str.append("user - rock, comp - scissors --> USER WIN")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - rock, comp - scissors --> USER WIN");
+//                        StartGame.str.append("user - rock, comp - scissors --> USER WIN")
+//                                .append(System.lineSeparator());
                         System.out.println("user - rock, comp - scissors --> USER WIN");
+                        CustomLogger.logDebug("user - rock, comp - scissors --> USER WIN");
                         ++userQuantityWinRounds;
                         break;
                     }
                     case PAPER: {
-                        StartGame.str.append("user - rock, comp - paper --> COMP WIN")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - rock, comp - paper --> COMP WIN");
+//                        StartGame.str.append("user - rock, comp - paper --> COMP WIN")
+//                                .append(System.lineSeparator());
                         System.out.println("user - rock, comp - paper --> COMP WIN");
+                        CustomLogger.logDebug("user - rock, comp - paper --> COMP WIN");
                         ++computerQuantityWinRounds;
                         break;
                     }
@@ -133,22 +147,28 @@ public class GameFunctions implements GameWork {
             case SCISSORS: {
                 switch (computer.getSigns()) {
                     case ROCK: {
-                        StartGame.str.append("user - scissors, comp - rock -> COMP WIN")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - scissors, comp - rock -> COMP WIN");
+//                        StartGame.str.append("user - scissors, comp - rock -> COMP WIN")
+//                                .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - rock -> COMP WIN");
+                        CustomLogger.logDebug("user - scissors, comp - rock -> COMP WIN");
                         ++computerQuantityWinRounds;
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.str.append("user - scissors, comp - scissors --> НИЧЬЯ")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - scissors, comp - scissors --> НИЧЬЯ");
+//                        StartGame.str.append("user - scissors, comp - scissors --> НИЧЬЯ")
+//                                .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - scissors --> НИЧЬЯ");
+                        CustomLogger.logDebug("user - scissors, comp - scissors --> НИЧЬЯ");
                         break;
                     }
                     case PAPER: {
-                        StartGame.str.append("user - scissors, comp - paper --> USER WIN")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - scissors, comp - paper --> USER WIN");
+//                        StartGame.str.append("user - scissors, comp - paper --> USER WIN")
+//                                .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - paper --> USER WIN");
+                        CustomLogger.logDebug("user - scissors, comp - paper --> USER WIN");
                         ++userQuantityWinRounds;
                         break;
                     }
@@ -158,34 +178,43 @@ public class GameFunctions implements GameWork {
             case PAPER: {
                 switch (computer.getSigns()) {
                     case ROCK: {
-                        StartGame.str.append("user - paper, comp - rock --> USER WIN")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - paper, comp - rock --> USER WIN");
+//                        StartGame.str.append("user - paper, comp - rock --> USER WIN")
+//                                .append(System.lineSeparator());
                         System.out.println("user - paper, comp - rock --> USER WIN");
+                        CustomLogger.logDebug("user - paper, comp - rock --> USER WIN");
                         ++userQuantityWinRounds;
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.str.append("user - paper, comp - scissors --> COMP WIN")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - paper, comp - scissors --> COMP WIN");
+//                        StartGame.str.append("user - paper, comp - scissors --> COMP WIN")
+//                                .append(System.lineSeparator());
                         System.out.println("user - paper, comp - scissors --> COMP WIN");
+                        CustomLogger.logDebug("user - paper, comp - scissors --> COMP WIN");
                         ++computerQuantityWinRounds;
                         break;
                     }
                     case PAPER: {
-                        StartGame.str.append("user - paper, comp - paper --> НИЧЬЯ")
-                                .append(System.lineSeparator());
+                        StartGame.fillStrBuilder("user - paper, comp - paper --> НИЧЬЯ");
+//                        StartGame.str.append("user - paper, comp - paper --> НИЧЬЯ")
+//                                .append(System.lineSeparator());
                         System.out.println("user - paper, comp - paper --> НИЧЬЯ");
+                        CustomLogger.logDebug("user - paper, comp - paper --> НИЧЬЯ");
                         break;
                     }
                 }
                 break;
             }
             default: {
-                StartGame.str.append(">EXCEPTION<: ")
-                        .append("You choose wrong Sign")
-                        .append(System.lineSeparator());
-//                fileCreator.writeToFile(StartGame.str);
+                StartGame.fillStrBuilder(">EXCEPTION<: You choose wrong Sign");
+//                StartGame.str.append(">EXCEPTION<: ")
+//                        .append("You choose wrong Sign")
+//                        .append(System.lineSeparator());
+                fileCreator.writeToFile(StartGame.str);
+                CustomLogger.logError("exceptions.UnsupportedSignException: You choose wrong Sign");
                 throw new UnsupportedSignException("You choose wrong Sign");
+
             }
         }
     }
@@ -211,12 +240,16 @@ public class GameFunctions implements GameWork {
                 return Signs.SCISSORS;
             case 3:
                 return Signs.PAPER;
-            default:
-                StartGame.str.append(">EXCEPTION< :")
-                        .append("You choose wrong Sign")
-                        .append(System.lineSeparator());
-//                fileCreator.writeToFile(StartGame.str);
+            default: {
+                StartGame.fillStrBuilder(">EXCEPTION< : You choose wrong Sign");
+//                StartGame.str.append(">EXCEPTION< :")
+//                        .append("You choose wrong Sign")
+//                        .append(System.lineSeparator());
+                fileCreator.writeToFile(StartGame.str);
+
+                CustomLogger.logError("exceptions.UnsupportedSignException: You choose wrong Sign");
                 throw new UnsupportedSignException("You choose wrong Sign");
+            }
         }
     }
 }
