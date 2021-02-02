@@ -184,7 +184,7 @@ public class GameFunctions implements GameWork {
                 StartGame.str.append(">EXCEPTION<: ")
                         .append("You choose wrong Sign")
                         .append(System.lineSeparator());
-                fileCreator.writeToFile(StartGame.str);
+//                fileCreator.writeToFile(StartGame.str);
                 throw new UnsupportedSignException("You choose wrong Sign");
             }
         }
@@ -215,7 +215,7 @@ public class GameFunctions implements GameWork {
                 StartGame.str.append(">EXCEPTION< :")
                         .append("You choose wrong Sign")
                         .append(System.lineSeparator());
-                fileCreator.writeToFile(StartGame.str);
+//                fileCreator.writeToFile(StartGame.str);
                 throw new UnsupportedSignException("You choose wrong Sign");
         }
     }
