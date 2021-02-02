@@ -3,7 +3,6 @@ import Players.User;
 import loggers.CustomLogger;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Console game rock paper scissors with computer
@@ -20,6 +19,7 @@ public class StartGame {
     }
 
     private static void start() throws IOException {
+        fileCreator.checkFilesExists();
 
         User user = new User(); // user player
         Computer computer = new Computer(); // computer player
@@ -32,25 +32,18 @@ public class StartGame {
 
         System.out.println("Choose User Name:");
         fillStrBuilder("Choose User Name:");
-//        str.append("Choose User Name:")
-//                .append(System.lineSeparator());
 
         user.setName(scanner.next()); // sets user name
         fillStrBuilder(user.getName());
-        CustomLogger.logDebug("User choose Name: " + user.getName());
-//        str.append(user.getName())
-//                .append(System.lineSeparator());
+        CustomLogger.logDebug("User chose Name: " + user.getName());
 
         System.out.println("Choose count games");
         fillStrBuilder("Choose count games");
-//        str.append("Choose count games")
-//                .append(System.lineSeparator());
+
         Integer countGames = scanner.nextInt(); // sets count games
 
         fillStrBuilder(String.valueOf(countGames));
-        CustomLogger.logDebug("User choos count games: " + countGames);
-//        str.append(countGames)
-//                .append(System.lineSeparator());
+        CustomLogger.logDebug("User chose count games: " + countGames);
 
         do {
             ++count;
@@ -96,8 +89,6 @@ public class StartGame {
             System.out.println("Want to continue? Y-y or N-n");
 
             fillStrBuilder("Want to continue? Y-y or N-n");
-//            str.append("Want to continue? Y-y or N-n")
-//                    .append(System.lineSeparator());
 
             playerChooseContinue = scanner.next();
             str.append(playerChooseContinue)
@@ -108,16 +99,21 @@ public class StartGame {
                 CustomLogger.logWarn("User choose wrong symbol to continue game");
 
                 fillStrBuilder("Wrong symbol. Try again: Y-y or N-n");
-//                str.append("Wrong symbol. Try again: Y-y or N-n").append(System.lineSeparator());
 
                 playerChooseContinue = scanner.next();
 
                 fillStrBuilder(playerChooseContinue);
-//                str.append(playerChooseContinue).append(System.lineSeparator());
             }
         } while (gameFunctions.checkGameContinue(countGames, playerChooseContinue));
 
+        if (countGames > 1) {
+            CustomLogger.logDebug("User decide to terminate game. Remaining count games amount : " + countGames);
+        } else {
+            CustomLogger.logDebug("User played all games");
+        }
+
         scanner.close();
+        CustomLogger.logWarn("Scanner closing");
 
         gameFunctions.finalWinner(user, computer);
 

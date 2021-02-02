@@ -1,4 +1,5 @@
 import interfaces.FilesGenerator;
+import loggers.CustomLogger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -56,6 +57,7 @@ public class FileCreator implements FilesGenerator {
         try {
             writer = new BufferedWriter(new FileWriter(fileResults));
         } catch (IOException e) {
+            CustomLogger.logDebug("Program ended with error");
             e.printStackTrace();
         }
         writer.write(str.toString());
