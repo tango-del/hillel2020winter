@@ -108,6 +108,7 @@ public class StartGame {
 
         if (countGames > 1) {
             CustomLogger.logDebug("User decide to terminate game. Remaining count games amount : " + countGames);
+            CustomLogger.logWarn("User decide to terminate game. Remaining count games amount : " + countGames);
         } else {
             CustomLogger.logDebug("User played all games");
         }

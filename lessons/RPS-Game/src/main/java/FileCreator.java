@@ -58,6 +58,7 @@ public class FileCreator implements FilesGenerator {
             writer = new BufferedWriter(new FileWriter(fileResults));
         } catch (IOException e) {
             CustomLogger.logDebug("Program ended with error");
+            CustomLogger.logError(e.getMessage());
             e.printStackTrace();
         }
         writer.write(str.toString());
