@@ -98,7 +98,7 @@ public class GameFunctions implements GameWork {
      *
      * @param user     - объект игрока пользователь
      * @param computer - объект игрока компьютер
-     * @throws UnsupportedSignException
+     * @throws UnsupportedSignException - если будет выбран не верный знак
      * @throws IOException
      * @UnsupportedSignException ----------------------------------------------------------
      * ROCK > SCISSORS |  SCISSORS > PAPER    |  PAPER > ROCK
@@ -204,7 +204,7 @@ public class GameFunctions implements GameWork {
      *
      * @param number - число которое выбрал один из игроков для выбора Sign
      * @return - Sign rock/paper/scissort
-     * @throws UnsupportedSignException
+     * @throws UnsupportedSignException - если будет выбран не верный знак
      * @throws IOException
      */
     @Override
