@@ -95,10 +95,7 @@ public class StartGame {
                     .append(System.lineSeparator());
 
             while (!playerChooseContinue.equalsIgnoreCase("y") && !playerChooseContinue.equalsIgnoreCase("n")) {
-                System.out.println("Wrong symbol. Try again: Y-y or N-n");
                 CustomLogger.logWarn("User choose wrong symbol to continue game");
-
-                fillStrBuilder("Wrong symbol. Try again: Y-y or N-n");
 
                 playerChooseContinue = scanner.next();
 
