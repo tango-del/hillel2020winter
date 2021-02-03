@@ -30,20 +30,18 @@ public class StartGame {
         int count = 0; // passed games counter
         String playerChooseContinue; // keeps symbol that user input to continue game
 
-        System.out.println("Choose User Name:");
+        CustomLogger.logDebug("Choose User Name:");
         fillStrBuilder("Choose User Name:");
 
         user.setName(scanner.next()); // sets user name
         fillStrBuilder(user.getName());
-        CustomLogger.logDebug("User chose Name: " + user.getName());
 
-        System.out.println("Choose count games");
+        CustomLogger.logDebug("Choose count games");
         fillStrBuilder("Choose count games");
 
         Integer countGames = scanner.nextInt(); // sets count games
 
         fillStrBuilder(String.valueOf(countGames));
-        CustomLogger.logDebug("User chose count games: " + countGames);
 
         do {
             ++count;
@@ -51,22 +49,14 @@ public class StartGame {
                     .append(System.lineSeparator())
                     .append("GAME: ")
                     .append(count)
-                    .append(System.lineSeparator())
-                    .append("Choose sign:")
-                    .append(System.lineSeparator())
-                    .append("1: rock")
-                    .append(System.lineSeparator())
-                    .append("2: scissors")
-                    .append(System.lineSeparator())
-                    .append("3: paper")
                     .append(System.lineSeparator());
 
-            System.out.println(">-------------<");
-            System.out.println("GAME: " + count);
-            System.out.println("Choose sign:");
-            System.out.println("1: rock"); //камень
-            System.out.println("2: scissors"); // ножницы
-            System.out.println("3: paper"); // бумага
+            CustomLogger.logDebug(">-------------<");
+            CustomLogger.logDebug("GAME: " + count);
+            CustomLogger.logDebug("Choose sign:");
+            CustomLogger.logDebug("1: rock"); //камень
+            CustomLogger.logDebug("2: scissors"); // ножницы
+            CustomLogger.logDebug("3: paper"); // бумага
 
             chooseUser = scanner.nextInt(); //user choose sign
             /*
@@ -79,6 +69,7 @@ public class StartGame {
 
             user.setSigns(gameFunctions.choose(chooseUser));
             CustomLogger.logDebug("User choose Sign : " + user.getSigns());
+
             computer.setSigns(gameFunctions.choose(chooseComp));
             CustomLogger.logDebug("Computer choose Sign : " + computer.getSigns());
 
@@ -86,13 +77,12 @@ public class StartGame {
 
             --countGames; //decrease count games
 
-            System.out.println("Want to continue? Y-y or N-n");
+            CustomLogger.logDebug("Want to continue? Y-y or N-n");
 
             fillStrBuilder("Want to continue? Y-y or N-n");
 
             playerChooseContinue = scanner.next();
-            str.append(playerChooseContinue)
-                    .append(System.lineSeparator());
+            fillStrBuilder(playerChooseContinue);
 
             while (!playerChooseContinue.equalsIgnoreCase("y") && !playerChooseContinue.equalsIgnoreCase("n")) {
                 CustomLogger.logWarn("User choose wrong symbol to continue game");

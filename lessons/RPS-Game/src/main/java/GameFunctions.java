@@ -38,33 +38,27 @@ public class GameFunctions implements GameWork {
      */
     @Override
     public void finalWinner(User user, Computer computer) {
+
         user.setNumberOfRoundsWon(userQuantityWinRounds);
         computer.setNumberOfRoundsWon(computerQuantityWinRounds);
-        CustomLogger.logDebug("Starting calculate final winner");
+
         if (userQuantityWinRounds < computerQuantityWinRounds) {
-            StartGame.str.append(">---------<")
-                    .append(System.lineSeparator())
-                    .append(">COMP--WON<")
-                    .append(System.lineSeparator())
-                    .append(">---------<")
-                    .append(System.lineSeparator());
-            CustomLogger.logDebug("Computer Win");
+            StartGame.fillStrBuilder(">---------<");
+            StartGame.fillStrBuilder(">COMP--WON<");
+            StartGame.fillStrBuilder(">---------<");
+            CustomLogger.logDebug(">>>Computer Win<<<");
+
         } else if (userQuantityWinRounds > computerQuantityWinRounds) {
-            StartGame.str.append(">---------<")
-                    .append(System.lineSeparator())
-                    .append(">USER--WON<")
-                    .append(System.lineSeparator())
-                    .append(">---------<")
-                    .append(System.lineSeparator());
-            CustomLogger.logDebug("User Win");
+            StartGame.fillStrBuilder(">---------<");
+            StartGame.fillStrBuilder(">USER--WON<");
+            StartGame.fillStrBuilder(">---------<");
+            CustomLogger.logDebug(">>>User Win<<<");
+
         } else if (userQuantityWinRounds == computerQuantityWinRounds) {
-            StartGame.str.append(">---------<")
-                    .append(System.lineSeparator())
-                    .append(">NO-WINNER<")
-                    .append(System.lineSeparator())
-                    .append(">---------<")
-                    .append(System.lineSeparator());
-            CustomLogger.logDebug("No Winner");
+            StartGame.fillStrBuilder(">---------<");
+            StartGame.fillStrBuilder(">NO-WINNER<");
+            StartGame.fillStrBuilder(">---------<");
+            CustomLogger.logDebug(">>>No Winner<<<");
         }
         //final results
         StartGame.fillStrBuilder(user.toString());
@@ -97,7 +91,6 @@ public class GameFunctions implements GameWork {
      */
     @Override
     public void winnerInRound(User user, Computer computer) throws UnsupportedSignException, IOException {
-        CustomLogger.logDebug("Start calculate winner in round");
         switch (user.getSigns()) {
             case ROCK: {
                 switch (computer.getSigns()) {
@@ -130,8 +123,8 @@ public class GameFunctions implements GameWork {
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.fillStrBuilder("user - scissors, comp - scissors --> НИЧЬЯ");
-                        CustomLogger.logDebug("user - scissors, comp - scissors --> НИЧЬЯ");
+                        StartGame.fillStrBuilder("user - scissors, comp - scissors --> NO WINNER");
+                        CustomLogger.logDebug("user - scissors, comp - scissors --> NO WINNER");
                         break;
                     }
                     case PAPER: {
@@ -158,8 +151,8 @@ public class GameFunctions implements GameWork {
                         break;
                     }
                     case PAPER: {
-                        StartGame.fillStrBuilder("user - paper, comp - paper --> НИЧЬЯ");
-                        CustomLogger.logDebug("user - paper, comp - paper --> НИЧЬЯ");
+                        StartGame.fillStrBuilder("user - paper, comp - paper --> NO WINNER");
+                        CustomLogger.logDebug("user - paper, comp - paper --> NO WINNER");
                         break;
                     }
                 }
