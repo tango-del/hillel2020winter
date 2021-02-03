@@ -70,11 +70,11 @@ public class StartProgram {
 
         pathsFileNameAndSizeDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
 
-//        pathsFileNameAndSizeDuplicates.forEach(System.out::println);
-//        System.out.println(pathsFileNameAndSizeDuplicates.size());
+        pathsFileNameAndSizeDuplicates.forEach(System.out::println);
+        System.out.println(pathsFileNameAndSizeDuplicates.size());
 
-        strBuilder.append("Total duplicated Files : ").append(pathsFileNameAndSizeDuplicates.size()).append(System.lineSeparator());
-        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));
-        fileWork.writeToFile(directory, strBuilder);
+//        strBuilder.append("Total duplicated Files : ").append(pathsFileNameAndSizeDuplicates.size()).append(System.lineSeparator());
+//        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));
+//        fileWork.writeToFile(directory, strBuilder);
     }
 }
