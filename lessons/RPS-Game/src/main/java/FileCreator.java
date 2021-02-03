@@ -31,12 +31,10 @@ public class FileCreator implements FilesGenerator {
      */
     @Override
     public void checkFilesExists() throws IOException {
-        // проверка существует ли директория, если нет то создаёт
         if (!makeDirectoryToSaveResults.exists()) {
             makeDirectoryToSaveResults.mkdir();
         }
 
-        // проверка существует ли файл с заданным именем, если нет то создаёт
         if (!fileResults.exists()) {
             fileResults.createNewFile();
         }
