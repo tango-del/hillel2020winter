@@ -10,6 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @statement - используется для выполнения запросов SQL
+ * @resultSet - получает результат заданного запроса в базу данных
+ * @preparedStatement - отправляет запрос в базу данных для её изменений
+ */
 public class DatabaseRequests implements SqlRequests {
     private Statement statement;
     private ResultSet resultSet;

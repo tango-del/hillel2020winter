@@ -4,13 +4,6 @@ import Interfaces.Connection;
 
 import java.sql.*;
 
-/**
- * Класс создаёт соединение с базой данных с помощью jdbc драйвера.
- * @statement - используется для выполнения запросов SQL
- * @connection - соединение с базой данных
- * @resultSet - получает результат заданного запроса в базу данных
- * @preparedStatement - отправляет запрос в базу данных для её изменений
- */
 public class Connect implements Connection {
     private final String URL;
     private final String USER;
