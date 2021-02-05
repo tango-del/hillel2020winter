@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class User {
+public class UserShort {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -24,22 +24,4 @@ public class User {
 
     @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "age")
-    private Integer age;
-
-    @Column(name = "pasport_number", unique = true, length = 8)
-    private String passport;
-
-    @Column(name = "phone", unique = true, length = 12)
-    private String phone;
-
-    private Sex sex;
-
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Address address;
-
-    @Transient
-    private String fullName;
 }

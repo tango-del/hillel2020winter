@@ -16,9 +16,9 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="connection.autocommit">true</property>
-        <property name="hbm2ddl.auto">create</property>
-        <!--        <property name="hbm2ddl.auto">update</property>-->
-        <!--		<property name="hbm2ddl.auto">validate</property>-->
+                        <property name="hbm2ddl.auto">create</property>
+<!--                <property name="hbm2ddl.auto">update</property>-->
+<!--        <property name="hbm2ddl.auto">validate</property>-->
         <!--		<property name="hbm2ddl.auto">create-drop</property>-->
 
         <!--		create :- create the schema, the data previously present (if there) in the schema is lost-->
@@ -32,6 +32,7 @@
 
         <mapping class="entity.User"/>
         <mapping class="entity.Address"/>
+        <mapping class="entity.UserShort"/>
 
     </session-factory>
 </hibernate-configuration>

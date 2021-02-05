@@ -17,10 +17,10 @@ import javax.persistence.Table;
 public class Address {
 
     @Id
-    @Column(name = "zip_code")
-    private Long zipCode;
+    @Column(name = "zip_code", nullable = true, length = 5)
+    private int zipCode;
 
-    @Column(name = "country")
+    @Column(name = "country", nullable = false)
     private String country;
 
     @Column(name = "city")
