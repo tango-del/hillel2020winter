@@ -1,4 +1,5 @@
 import DB_University.Connect;
+import DB_University.DatabaseRequests;
 import Tables.Student;
 
 import java.sql.*;
@@ -12,18 +13,19 @@ public class StartProgram {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         Connect connect = new Connect("jdbc:mysql://localhost:3306/university", "root", "Sobik2010");
+        DatabaseRequests requests = new DatabaseRequests();
 
         connect.createConnection();
 
         Student student = new Student.Builder().setFullName("Josh Bloch2").setGroup(12).setYearJoin(2021).build();
 
-//        connect.addNewRowStudent(new Student.Builder().setFullName("Sobik").setYearJoin(2019).setGroup(8).build());
+//        requests.addNewRowStudent(new Student.Builder().setFullName("Sobik").setYearJoin(2019).setGroup(8).build());
 
-//        connect.addNewRowStudent(student);
+//        requests.addNewRowStudent(student);
 
-//        connect.deleteRawStudentByID(29);
+//        requests.deleteRawStudentByID(29);
 
-        connect.outputAllStudentsIdAndName();
+        requests.outputAllStudentsIdAndName();
 
         connect.closeConnection();
     }
