@@ -36,9 +36,9 @@ public class User {
 
     private Sex sex;
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Address address;
+//    @OneToOne
+//    @JoinColumn(name = "id")
+//    private Address address;
 
     @Transient
     private String fullName;

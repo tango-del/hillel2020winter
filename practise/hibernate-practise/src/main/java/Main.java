@@ -22,11 +22,11 @@ public class Main {
 
 //        session.getTransaction().commit();
 
-        Address ad = new Address();
-        ad.setCity("wdw");
-        ad.setCountry("country");
-        ad.setFlat("13");
-        ad.setStreet("street");
+//        Address ad = new Address();
+//        ad.setCity("wdw");
+//        ad.setCountry("country");
+//        ad.setFlat("13");
+//        ad.setStreet("street");
 
         User user = new User()
                 .setLastName("Stepurko")
@@ -34,19 +34,21 @@ public class Main {
                 .setAge(37)
                 .setSex(Sex.M)
                 .setPassport("XX234512")
-                .setPhone("380675644218")
-                .setAddress(ad);
+                .setPhone("380675644218");
+                //.setAddress(ad);
 
-        session.save(user);
-        session.getTransaction().commit();
+//        session.save(user);
+//        session.getTransaction().commit();
 
         Query q = session.createQuery("From User");
 
-        List<User> list = q.list();
-        System.out.println(list.size());
-        for (User u : list) {
-            System.out.println(u);
-        }
+//        List<User> list = q.list();
+//        System.out.println(list.size());
+//        for (User u : list) {
+//            System.out.println(u);
+//        }
+
+        session.createQuery("select lastName from User").list().forEach(System.out::println);
 
 //        q = session.createQuery("From UserShort");
 //
