@@ -63,17 +63,14 @@ public class FilesFinder implements SearchFiles {
                         throw new RuntimeException();
                     }
                 })
-                .forEach(file ->
-                {
+                .forEach(file -> {
                     if (file.isDirectory()) {
-//                        System.out.println("dir -> " + file);
                         try {
                             fillHashMap(filesList, file);
                         } catch (FileNotFoundException e) {
                             System.out.println("invalid file");
                         }
                     } else {
-//                        System.out.println("file -> " + file);
                         String fileName = file.getName();
                         List<String> identicalList = filesList.get(fileName);
                         if (identicalList == null) {
@@ -84,26 +81,6 @@ public class FilesFinder implements SearchFiles {
                     }
                 });
     }
-
-//        for (File file : directory.listFiles()) {
-//
-//
-//            if (file != null | !file.isHidden() | file.canRead()) {
-//
-//                if (file.isDirectory()) {
-//                    fillHashMap(filesList, file);
-//
-//                } else {
-//                    String fileName = file.getName();
-//                    List<String> identicalList = filesList.get(fileName);
-//                    if (identicalList == null) {
-//                        identicalList = new ArrayList<>();
-//                    }
-//                    identicalList.add(file.getPath());
-//                    filesList.put(fileName, identicalList);
-//                }
-//            }
-//        }
 
     /**
      * Метод ищет файлы с одинаковыми размерами и записывает их абсолютные пути в List<String> @fileDuplicates.
@@ -193,9 +170,10 @@ public class FilesFinder implements SearchFiles {
             newMap.put(uniqueFileHash, identicalList);
         }
 
-        List<String> fileDuplicates = filterSingleValuesInHashMap(newMap);
+//        List<String> fileDuplicates = filterSingleValuesInHashMap(newMap);
 
-        return fileDuplicates;
+//        return fileDuplicates;
+        return filterSingleValuesInHashMap(newMap);
     }
 
     /**

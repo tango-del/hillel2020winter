@@ -1,4 +1,5 @@
 import OperationSystems.OsDetector;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,23 +12,29 @@ import java.util.*;
  * Программа ищет дубликаты файлов. Если в аргументах программы не записан путь директории тогда применяется директория где будет хранится .jar файл
  * В этой же директории создаётся result.txt файл в котором будут записаны абсолютные пути к файлам дубликатам
  */
+@Slf4j
 public class StartProgram {
-    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+
+    public static void main(String[] args) {
         String pathWhereNeedToScan;
 
-        System.out.println(">-----PROGRAM START----<");
+        log.info(">-----PROGRAM START----<");
 
         if (args.length == 0) {
-            System.out.println("You didn't choose any directory. So I copied the path where the jar file is located");
+            log.info("You didn't choose any directory. So I copied the path where the jar file is located");
             pathWhereNeedToScan = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
         } else {
             pathWhereNeedToScan = args[0];
-            System.out.println("You choose path: " + pathWhereNeedToScan);
+            log.info("You choose path: " + pathWhereNeedToScan);
         }
 
-        init(pathWhereNeedToScan);
+        try {
+            init(pathWhereNeedToScan);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
 
-        System.out.println(">----PROGRAM FINISH----<");
+        log.info(">----PROGRAM FINISH----<");
     }
 
     /**
@@ -44,16 +51,25 @@ public class StartProgram {
      * @strBuilder - прикрепит в себя каждую строку List @pathsFileNameAndSizeDuplicates
      * writeToFile создаст тектсовый файл result.txt в который запишет содержимое @strBuilder
      */
-    private static void init(String pathWhereNeedToScan) throws IOException, NoSuchAlgorithmException {
+    private static void init(String pathWhereNeedToScan) throws IOException, NoSuchAlgorithmException, InterruptedException {
         FilesFinder filesFinder = new FilesFinder();
         FileWork fileWork = new FileWork();
         StringBuilder strBuilder = new StringBuilder();
+        File directory = new File(pathWhereNeedToScan);
+        List<String> pathsFileNameAndSizeDuplicates;
+
+        log.info("Detecting your Operation System");
+        Thread.sleep(2500);
 
         String OS = OsDetector.detectSystem();
 
+        log.info("Your system is " + OS);
+
         FilesFinder.chooseOperationSystem(OS);
 
-        File directory = new File(pathWhereNeedToScan);
+        Thread.sleep(2500);
+
+        log.info("Start fill HashMap (filename, file path) with all files");
 
         Map<String, List<String>> lists = new HashMap<>();
 
@@ -61,20 +77,47 @@ public class StartProgram {
             filesFinder.fillHashMap(lists, directory);
 
         } catch (FileNotFoundException e) {
-            System.out.println("invalid file");
+            e.printStackTrace();
         }
+
+        log.info(">Done<");
+
+        Thread.sleep(2500);
+
+        log.info("Start removing all single values in HashMap");
 
         filesFinder.removeAlone(lists);
 
-        List<String> pathsFileNameAndSizeDuplicates = filesFinder.deleteFilesWithDifferentSize(lists);
+        Thread.sleep(2500);
+
+        log.info(">Done<");
+
+        log.info("Start searching Files with same Name and Size");
+
+        pathsFileNameAndSizeDuplicates = filesFinder.deleteFilesWithDifferentSize(lists);
+
+        log.info(">Done<");
+
+        Thread.sleep(2500);
+
+        log.info("Start search Files with same Checksum MD5");
 
         pathsFileNameAndSizeDuplicates = filesFinder.filterHashSum(pathsFileNameAndSizeDuplicates);
 
-        pathsFileNameAndSizeDuplicates.forEach(System.out::println);
-        System.out.println(pathsFileNameAndSizeDuplicates.size());
+        log.info(">Done<");
 
-//        strBuilder.append("Total duplicated Files : ").append(pathsFileNameAndSizeDuplicates.size()).append(System.lineSeparator());
-//        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));
-//        fileWork.writeToFile(directory, strBuilder);
+        Thread.sleep(2500);
+
+        log.info("Start writing file list in result.txt");
+
+//        pathsFileNameAndSizeDuplicates.forEach(System.out::println);
+
+        strBuilder.append("Total duplicated Files : ").append(pathsFileNameAndSizeDuplicates.size()).append(System.lineSeparator());
+        pathsFileNameAndSizeDuplicates.forEach(u -> strBuilder.append(u).append(System.lineSeparator()));
+        fileWork.writeToFile(directory, strBuilder);
+
+        log.info(">Done<");
+
+        log.info("Total File Duplicates : " + pathsFileNameAndSizeDuplicates.size());
     }
 }
