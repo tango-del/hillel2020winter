@@ -15,7 +15,7 @@ public class Main {
 
 //        requests.deleteEntityStudentByID(session, 22);
 
-        requests.outputAllStudentsIdAndName(session);
+        requests.outputAllStudentsIdAndName();
 
 
         Connect.closeSession();

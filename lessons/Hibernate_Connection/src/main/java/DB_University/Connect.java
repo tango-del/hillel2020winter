@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class Connect {
-    private static Session session;
+    static Session session;
 
     public static Session getSession() {
         if (session == null) {
