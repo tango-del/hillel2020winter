@@ -55,7 +55,7 @@ public class FileCreator implements FilesGenerator {
         try {
             writer = new BufferedWriter(new FileWriter(fileResults));
         } catch (IOException e) {
-            CustomLogger.logDebug("Program ended with error");
+            CustomLogger.logDebug(StartGame.resourceBundle.getString("program_end_error"));
             CustomLogger.logError(e.getMessage());
             e.printStackTrace();
         }

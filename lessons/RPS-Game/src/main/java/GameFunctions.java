@@ -6,6 +6,7 @@ import interfaces.GameWork;
 import loggers.CustomLogger;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class GameFunctions implements GameWork {
     private static FileCreator fileCreator = new FileCreator();
@@ -44,27 +45,40 @@ public class GameFunctions implements GameWork {
 
         if (userQuantityWinRounds < computerQuantityWinRounds) {
             StartGame.fillStrBuilder(">---------<");
-            StartGame.fillStrBuilder(">COMP--WON<");
+            StartGame.fillStrBuilder(StartGame.resourceBundle.getString("comp_win1"));
             StartGame.fillStrBuilder(">---------<");
-            CustomLogger.logDebug(">>>Computer Win<<<");
+            CustomLogger.logDebug(StartGame.resourceBundle.getString("comp_win2"));
 
         } else if (userQuantityWinRounds > computerQuantityWinRounds) {
             StartGame.fillStrBuilder(">---------<");
-            StartGame.fillStrBuilder(">USER--WON<");
+            StartGame.fillStrBuilder(StartGame.resourceBundle.getString("user_win1"));
             StartGame.fillStrBuilder(">---------<");
-            CustomLogger.logDebug(">>>User Win<<<");
+            CustomLogger.logDebug(StartGame.resourceBundle.getString("user_win2"));
 
         } else if (userQuantityWinRounds == computerQuantityWinRounds) {
             StartGame.fillStrBuilder(">---------<");
-            StartGame.fillStrBuilder(">NO-WINNER<");
+            StartGame.fillStrBuilder(StartGame.resourceBundle.getString("no_win1"));
             StartGame.fillStrBuilder(">---------<");
-            CustomLogger.logDebug(">>>No Winner<<<");
+            CustomLogger.logDebug(StartGame.resourceBundle.getString("no_win2"));
         }
         //final results
-        StartGame.fillStrBuilder(user.toString());
-        StartGame.fillStrBuilder(computer.toString());
-        CustomLogger.logDebug(user.toString());
-        CustomLogger.logDebug(computer.toString());
+        String userResult =
+                StartGame.resourceBundle.getString("player") +
+                user.getName() + " " +
+                StartGame.resourceBundle.getString("won") +
+                userQuantityWinRounds + " " +
+                StartGame.resourceBundle.getString("times");
+
+        String compResult =
+                StartGame.resourceBundle.getString("computer") + " " +
+                        StartGame.resourceBundle.getString("won") +
+                        computerQuantityWinRounds + " " +
+                        StartGame.resourceBundle.getString("times");
+
+        StartGame.fillStrBuilder(userResult);
+        CustomLogger.logDebug(userResult);
+        StartGame.fillStrBuilder(compResult);
+        CustomLogger.logDebug(compResult);
     }
 
     /**
@@ -95,19 +109,19 @@ public class GameFunctions implements GameWork {
             case ROCK: {
                 switch (computer.getSigns()) {
                     case ROCK: {
-                        StartGame.fillStrBuilder("user - rock, comp - rock --> NO WINNER");
-                        CustomLogger.logDebug("user - rock, comp - rock --> NO WINNER");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userRock_compRock_NoWin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userRock_compRock_NoWin"));
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.fillStrBuilder("user - rock, comp - scissors --> USER WIN");
-                        CustomLogger.logDebug("user - rock, comp - scissors --> USER WIN");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userRock_compSciss_Uwin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userRock_compSciss_Uwin"));
                         ++userQuantityWinRounds;
                         break;
                     }
                     case PAPER: {
-                        StartGame.fillStrBuilder("user - rock, comp - paper --> COMP WIN");
-                        CustomLogger.logDebug("user - rock, comp - paper --> COMP WIN");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userRock_compPaper_CompWin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userRock_compPaper_CompWin"));
                         ++computerQuantityWinRounds;
                         break;
                     }
@@ -117,19 +131,19 @@ public class GameFunctions implements GameWork {
             case SCISSORS: {
                 switch (computer.getSigns()) {
                     case ROCK: {
-                        StartGame.fillStrBuilder("user - scissors, comp - rock -> COMP WIN");
-                        CustomLogger.logDebug("user - scissors, comp - rock -> COMP WIN");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userSciss_compRock_CompWin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userSciss_compRock_CompWin"));
                         ++computerQuantityWinRounds;
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.fillStrBuilder("user - scissors, comp - scissors --> NO WINNER");
-                        CustomLogger.logDebug("user - scissors, comp - scissors --> NO WINNER");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userSciss_compSciss_NoWin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userSciss_compSciss_NoWin"));
                         break;
                     }
                     case PAPER: {
-                        StartGame.fillStrBuilder("user - scissors, comp - paper --> USER WIN");
-                        CustomLogger.logDebug("user - scissors, comp - paper --> USER WIN");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userSciss_compPaper_Uwin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userSciss_compPaper_Uwin"));
                         ++userQuantityWinRounds;
                         break;
                     }
@@ -139,31 +153,31 @@ public class GameFunctions implements GameWork {
             case PAPER: {
                 switch (computer.getSigns()) {
                     case ROCK: {
-                        StartGame.fillStrBuilder("user - paper, comp - rock --> USER WIN");
-                        CustomLogger.logDebug("user - paper, comp - rock --> USER WIN");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userPaper_compRock_Uwin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userPaper_compRock_Uwin"));
                         ++userQuantityWinRounds;
                         break;
                     }
                     case SCISSORS: {
-                        StartGame.fillStrBuilder("user - paper, comp - scissors --> COMP WIN");
-                        CustomLogger.logDebug("user - paper, comp - scissors --> COMP WIN");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userPaper_compSciss_CompWin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userPaper_compSciss_CompWin"));
                         ++computerQuantityWinRounds;
                         break;
                     }
                     case PAPER: {
-                        StartGame.fillStrBuilder("user - paper, comp - paper --> NO WINNER");
-                        CustomLogger.logDebug("user - paper, comp - paper --> NO WINNER");
+                        StartGame.fillStrBuilder(StartGame.resourceBundle.getString("userPaper_compPaper_NoWin"));
+                        CustomLogger.logDebug(StartGame.resourceBundle.getString("userPaper_compPaper_NoWin"));
                         break;
                     }
                 }
                 break;
             }
             default: {
-                StartGame.fillStrBuilder(">EXCEPTION<: Player choose wrong Sign");
+                StartGame.fillStrBuilder(">EXCEPTION<: " + StartGame.resourceBundle.getString("player_choose_wrong_sign"));
                 fileCreator.writeToFile(StartGame.str);
-                CustomLogger.logError("exceptions.UnsupportedSignException: Player choose wrong Sign");
-                CustomLogger.logDebug("Program ended with error");
-                throw new UnsupportedSignException("User choose wrong Sign");
+                CustomLogger.logError("exceptions.UnsupportedSignException: " + StartGame.resourceBundle.getString("player_choose_wrong_sign"));
+                CustomLogger.logDebug(StartGame.resourceBundle.getString("program_end_error"));
+                throw new UnsupportedSignException(StartGame.resourceBundle.getString("player_choose_wrong_sign"));
             }
         }
     }
@@ -190,12 +204,12 @@ public class GameFunctions implements GameWork {
             case 3:
                 return Signs.PAPER;
             default: {
-                StartGame.fillStrBuilder(">EXCEPTION< : Player choose wrong Sign");
+                StartGame.fillStrBuilder(">EXCEPTION< : " + StartGame.resourceBundle.getString("player_choose_wrong_sign"));
                 fileCreator.writeToFile(StartGame.str);
 
-                CustomLogger.logError("exceptions.UnsupportedSignException: User choose wrong Sign");
-                CustomLogger.logDebug("Program ended with error");
-                throw new UnsupportedSignException("User choose wrong Sign");
+                CustomLogger.logError("exceptions.UnsupportedSignException: " + StartGame.resourceBundle.getString("player_choose_wrong_sign"));
+                CustomLogger.logDebug(StartGame.resourceBundle.getString("program_end_error"));
+                throw new UnsupportedSignException(StartGame.resourceBundle.getString("player_choose_wrong_sign"));
             }
         }
     }

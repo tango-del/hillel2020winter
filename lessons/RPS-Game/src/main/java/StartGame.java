@@ -3,6 +3,8 @@ import Players.User;
 import loggers.CustomLogger;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 // Console game rock paper scissors with computer
@@ -11,11 +13,24 @@ public class StartGame {
     private static GameFunctions gameFunctions = new GameFunctions();
     private static Scanner scanner = new Scanner(System.in);
     static StringBuilder str = new StringBuilder();
+    public static ResourceBundle resourceBundle;
 
     public static void main(String[] args) throws IOException {
-        CustomLogger.logDebug("Program Start");
+        Locale locale;
+
+        if (args.length == 0) {
+            locale = Locale.US;
+        } else {
+            locale = new Locale(args[0]); // ru, en, de
+        }
+
+        resourceBundle = ResourceBundle.getBundle("lang", locale);
+
+        CustomLogger.logDebug(resourceBundle.getString("start"));
+
         start();
-        CustomLogger.logDebug("Program end");
+
+        CustomLogger.logDebug(resourceBundle.getString("end"));
     }
 
     private static void start() throws IOException {
@@ -30,14 +45,14 @@ public class StartGame {
         int count = 0; // passed games counter
         String playerChooseContinue; // keeps symbol that user input to continue game
 
-        CustomLogger.logDebug("Choose User Name:");
-        fillStrBuilder("Choose User Name:");
+        CustomLogger.logDebug(resourceBundle.getString("choose_user_name"));
+        fillStrBuilder(resourceBundle.getString("choose_user_name"));
 
-        user.setName(scanner.next()); // sets user name
+        user.setName(scanner.nextLine()); // sets user name
         fillStrBuilder(user.getName());
 
-        CustomLogger.logDebug("Choose count games");
-        fillStrBuilder("Choose count games");
+        CustomLogger.logDebug(resourceBundle.getString("choose_count_games"));
+        fillStrBuilder(resourceBundle.getString("choose_count_games"));
 
         Integer countGames = scanner.nextInt(); // sets count games
 
@@ -47,16 +62,16 @@ public class StartGame {
             ++count;
             str.append(">-------------<")
                     .append(System.lineSeparator())
-                    .append("GAME: ")
+                    .append(resourceBundle.getString("game"))
                     .append(count)
                     .append(System.lineSeparator());
 
             CustomLogger.logDebug(">-------------<");
-            CustomLogger.logDebug("GAME: " + count);
-            CustomLogger.logDebug("Choose sign:");
-            CustomLogger.logDebug("1: rock"); //камень
-            CustomLogger.logDebug("2: scissors"); // ножницы
-            CustomLogger.logDebug("3: paper"); // бумага
+            CustomLogger.logDebug(resourceBundle.getString("game") + count);
+            CustomLogger.logDebug(resourceBundle.getString("choose_sign"));
+            CustomLogger.logDebug("1: " + resourceBundle.getString("rock")); //камень
+            CustomLogger.logDebug("2: " + resourceBundle.getString("scissors")); // ножницы
+            CustomLogger.logDebug("3: " + resourceBundle.getString("paper")); // бумага
 
             chooseUser = scanner.nextInt(); //user choose sign
             /*
@@ -68,24 +83,22 @@ public class StartGame {
             chooseComp = (int) (Math.random() * 3) + 1; //comp choose sign
 
             user.setSigns(gameFunctions.choose(chooseUser));
-            CustomLogger.logDebug("User choose Sign : " + user.getSigns());
 
             computer.setSigns(gameFunctions.choose(chooseComp));
-            CustomLogger.logDebug("Computer choose Sign : " + computer.getSigns());
 
             gameFunctions.winnerInRound(user, computer);
 
             --countGames; //decrease count games
 
-            CustomLogger.logDebug("Want to continue? Y-y or N-n");
+            CustomLogger.logDebug(resourceBundle.getString("want_continue"));
 
-            fillStrBuilder("Want to continue? Y-y or N-n");
+            fillStrBuilder(resourceBundle.getString("want_continue"));
 
             playerChooseContinue = scanner.next();
             fillStrBuilder(playerChooseContinue);
 
             while (!playerChooseContinue.equalsIgnoreCase("y") && !playerChooseContinue.equalsIgnoreCase("n")) {
-                CustomLogger.logWarn("User choose wrong symbol to continue game");
+                CustomLogger.logWarn(resourceBundle.getString("wrong_symbol_to_continue"));
 
                 playerChooseContinue = scanner.next();
 
@@ -94,18 +107,16 @@ public class StartGame {
         } while (gameFunctions.checkGameContinue(countGames, playerChooseContinue));
 
         if (countGames > 1) {
-            CustomLogger.logDebug("User decide to terminate game. Remaining count games amount : " + countGames);
-            CustomLogger.logWarn("User decide to terminate game. Remaining count games amount : " + countGames);
+            CustomLogger.logDebug(resourceBundle.getString("user_terminate_game") + countGames);
+            CustomLogger.logWarn(resourceBundle.getString("user_terminate_game") + countGames);
         } else {
-            CustomLogger.logDebug("User played all games");
+            CustomLogger.logDebug(resourceBundle.getString("played_all_games"));
         }
 
         scanner.close();
-        CustomLogger.logWarn("Scanner closing");
+        CustomLogger.logWarn(resourceBundle.getString("scan_close"));
 
         gameFunctions.finalWinner(user, computer);
-
-        fileCreator.checkFilesExists();
 
         fileCreator.writeToFile(str);
     }
