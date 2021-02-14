@@ -75,6 +75,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
+            <charset>UTF-8</charset>
             <pattern>%msg%n</pattern>
         </encoder>
     </appender>
