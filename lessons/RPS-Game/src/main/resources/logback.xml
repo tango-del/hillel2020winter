@@ -74,10 +74,15 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <encoder>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
             <pattern>%msg%n</pattern>
         </encoder>
+<!--        <encoder>-->
+<!--            <charset>UTF-8</charset>-->
+<!--            <pattern>%msg%n</pattern>-->
+<!--        </encoder>-->
     </appender>
 
     <logger name="logger.debug" level="DEBUG">
