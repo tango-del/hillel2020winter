@@ -7,11 +7,14 @@
 
     <bean id="test"
           class="Test"
-          scope="singleton"
-          init-method="init"></bean>
+          scope="singleton"></bean>
+<!--          init-method="init">-->
+
 <!--    <bean id="test"-->
 <!--          class="Test"-->
 <!--          scope="prototype"-->
 <!--          init-method="init"></bean>-->
+
+    <bean id="say" class="Say" init-method="init" scope="prototype" destroy-method="destroy"></bean>
 
 </beans>
