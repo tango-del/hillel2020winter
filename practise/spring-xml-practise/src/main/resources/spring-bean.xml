@@ -15,6 +15,31 @@
 <!--          scope="prototype"-->
 <!--          init-method="init"></bean>-->
 
-    <bean id="say" class="Say" init-method="init" scope="prototype" destroy-method="destroy"></bean>
+    <bean id="say"
+          class="Say"
+          init-method="init"
+          scope="prototype"
+          destroy-method="destroy"/>
+
+    <bean id="springHelloWorld" class="SpringHelloWorld" init-method="init"
+          destroy-method="getHelloMessage" scope="prototype"
+          name="helloWorld">
+        <property name="helloMessage" value="Hello World!"/>
+        <property name="user" ref="teacher"/>
+        <property name="student" ref="student"/>
+    </bean>
+
+    <bean id="student" class="Student" scope="singleton">
+        <property name="lastName" value="Ivan"/>
+        <property name="firstName" value="Ivanov"/>
+        <property name="date" value="20200222"/>
+        <property name="email" value="mail@mail.com"/>
+    </bean>
+
+    <bean id="teacher" class="Teacher" scope="singleton">
+        <property name="lastName" value="Sidr"/>
+        <property name="firstName" value="Sidorov"/>
+        <property name="phone" value="0505055050"/>
+    </bean>
 
 </beans>
