@@ -11,6 +11,8 @@ public class StartProgram {
 
         selectLifeCycle();
 
+        init();
+
         CustomLogger.logDebug("Program end");
 
     }
@@ -31,7 +33,7 @@ public class StartProgram {
                 cacheLifeCycle = Integer.valueOf(str);
 
                 if (cacheLifeCycle <= 0 || cacheLifeCycle > 100) {
-                    System.out.println("Selected number less then '0' or more then '100'");
+                    CustomLogger.logInfo("Selected number less then '0' or more then '100'");
                     result = true;
 
                 } else {
@@ -39,7 +41,7 @@ public class StartProgram {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Incorrect number");
+                CustomLogger.logInfo("Incorrect number");
                 result = true;
             }
 
@@ -63,7 +65,6 @@ public class StartProgram {
 
 
         // second cache
-
         CustomLogger.logInfo("Select cache name");
         String cacheName2 = StartProgram.scanner.next();
 
