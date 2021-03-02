@@ -48,16 +48,16 @@
         </encoder>
     </appender>
 
-    <appender name="warn_log"
+    <appender name="info_log"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_FOLDER}/warn/warn.log</file>
+        <file>${LOG_FOLDER}/info/info.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>WARN</level>
+            <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_FOLDER}/warn/archive/warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_FOLDER}/info/archive/info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
-                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>1MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
             <maxHistory>1</maxHistory>
@@ -70,7 +70,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>DEBUG</level>
+            <level>INFO</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
@@ -81,19 +81,21 @@
         </encoder>
     </appender>
 
+
     <logger name="logger.debug" level="DEBUG">
         <appender-ref ref="debug_log"/>
     </logger>
 
-    <logger name="logger.warn" level="WARN">
-        <appender-ref ref="warn_log"/>
-    </logger>
 
     <logger name="logger.error" level="ERROR">
         <appender-ref ref="error_log"/>
     </logger>
 
-    <root level="DEBUG">
+    <logger name="logger.info" level="INFO">
+        <appender-ref ref="info_log"/>
+    </logger>
+
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 

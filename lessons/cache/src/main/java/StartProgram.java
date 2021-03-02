@@ -1,14 +1,29 @@
+import loggers.CustomLogger;
+
 import java.util.Scanner;
 
 public class StartProgram {
     static Scanner scanner;
 
-    public static void main(String[] args) throws InterruptedException {
-        scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        CustomLogger.logDebug("Program start");
 
-        System.out.println("Select cache lifecycle in minutes");
+        init();
+
+        CustomLogger.logDebug("Program end");
+
+    }
+
+    public static void init() {
+
+        scanner = new Scanner(System.in);
+        CustomLogger.logDebug("init scanner with console output stream");
+
+
+        CustomLogger.logInfo("Select cache lifecycle in minutes");
         // TODO think about check InputMisMatchException
         Integer cacheLifeCycle = scanner.nextInt();
+
 //        String test;
 //
 //        boolean result = true;
@@ -28,8 +43,7 @@ public class StartProgram {
         CustomCache customCache = new CustomCache(cacheLifeCycle);
 
         // first cache
-
-        System.out.println("Select cache name");
+        CustomLogger.logInfo("Select cache name");
         String cacheName1 = StartProgram.scanner.next();
 
         customCache.createCache(cacheName1);
@@ -37,16 +51,13 @@ public class StartProgram {
         customCache.put(cacheName1, "city", "Odessa");
         customCache.put(cacheName1, "country", "Ukraine");
 
-        System.out.println(customCache.get(cacheName1, "city"));
-        System.out.println(customCache.get(cacheName1, "country"));
-
-
-
+        CustomLogger.logInfo((String) customCache.get(cacheName1, "city"));
+        CustomLogger.logInfo((String) customCache.get(cacheName1, "country"));
 
 
         // second cache
 
-        System.out.println("Select cache name");
+        CustomLogger.logInfo("Select cache name");
         String cacheName2 = StartProgram.scanner.next();
 
         customCache.createCache(cacheName2);
@@ -54,19 +65,16 @@ public class StartProgram {
         customCache.put(cacheName2, "imper", "Telegram");
         customCache.put(cacheName2, "orem", "Skype");
 
-        System.out.println(customCache.get(cacheName2, "imper"));
-        System.out.println(customCache.get(cacheName2, "orem"));
+        CustomLogger.logInfo((String) customCache.get(cacheName2, "imper"));
+        CustomLogger.logInfo((String) customCache.get(cacheName2, "orem"));
 
 
-        System.out.println(CustomCache.mainCache);
-
-
-//        customCache.clearSomeCache(cacheName1);
+        customCache.clearSomeCache(cacheName1);
 
         customCache.clearAllCache();
 
-        System.out.println(CustomCache.mainCache);
 
+        CustomLogger.logDebug("scanner close");
         scanner.close();
     }
 }

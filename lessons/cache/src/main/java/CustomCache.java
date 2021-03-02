@@ -1,18 +1,16 @@
 import interfaces.CacheInterface;
+import loggers.CustomLogger;
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
-import org.ehcache.config.units.MemoryUnit;
 import org.ehcache.expiry.Duration;
 import org.ehcache.expiry.Expirations;
-import org.ehcache.spi.serialization.Serializer;
 
-import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-public class CustomCache implements CacheInterface, Serializable {
+public class CustomCache implements CacheInterface {
     private static CacheManager cacheManager;
     static Cache<String, Cache> mainCache;
     private static Integer cacheLifeCycle;
@@ -22,7 +20,6 @@ public class CustomCache implements CacheInterface, Serializable {
         this.cacheLifeCycle = cacheLifeCycle;
         buildCacheManager();
         buildAndConfigureMainCache();
-
     }
 
     @Override
@@ -30,6 +27,7 @@ public class CustomCache implements CacheInterface, Serializable {
         // TODO check cache name already exists
 
         if (mainCache.containsKey(cache)) {
+            CustomLogger.logError(String.format("Cache with name '%s' already exists", cache));
             throw new IllegalArgumentException(String.format("Cache with name '%s' already exists%n", cache));
         }
 
@@ -39,22 +37,26 @@ public class CustomCache implements CacheInterface, Serializable {
                                 .newCacheConfigurationBuilder(String.class, Object.class,
                                         ResourcePoolsBuilder.heap(10))
                                 .withExpiry(Expirations.timeToLiveExpiration(Duration.of(cacheLifeCycle, TimeUnit.MINUTES))));
-
         mainCache.put(cache, innerCache);
+
+        CustomLogger.logDebug(String.format("Create Cache with name '%s' and put in '%s'", cache, NAME_MAIN_CACHE));
     }
 
     @Override
     public boolean put(String cache, String key, Object value) {
         if (cache == null || key == null || value == null) {
+            CustomLogger.logError("One of arguments in method 'put' is null");
             throw new IllegalArgumentException("One of arguments in method 'put' is null");
         }
 
         Cache tempCache = getCache(cache);
 
         if (tempCache == null) {
+            CustomLogger.logError(String.format("Cache with name '%s' not found", cache));
             throw new NullPointerException(String.format("Cache with name '%s' not found%n", cache));
         }
 
+        CustomLogger.logDebug(String.format("Put key: '%s' with value: '%s' in inner Cache with name: '%s'", key, value, cache));
         tempCache.put(key, value);
 
         return tempCache.containsKey(key);
@@ -63,27 +65,33 @@ public class CustomCache implements CacheInterface, Serializable {
     @Override
     public Object get(String cache, String key) {
         if (!mainCache.containsKey(cache)) {
+            CustomLogger.logError(String.format("Cache not found with name : '%s'", cache));
             throw new NullPointerException(String.format("Cache not found with name : '%s'%n", cache));
         }
         if (!mainCache.get(cache).containsKey(key)) {
+            CustomLogger.logError(String.format("Cache with name '%s' don't have key : '%s'", cache, key));
             throw new NullPointerException(String.format("Cache with name '%s' don't have key : '%s'%n", cache, key));
         }
 
+        CustomLogger.logDebug(String.format("Get value from inner Cache with name : '%s'", key));
         return mainCache.get(cache).get(key);
     }
 
     @Override
     public void clearAllCache() {
         cacheManager.removeCache(NAME_MAIN_CACHE);
+        CustomLogger.logDebug(String.format("Remove '%s'", NAME_MAIN_CACHE));
         buildAndConfigureMainCache();
     }
 
     @Override
     public void clearSomeCache(String cache) {
         if (!mainCache.containsKey(cache)) {
+            CustomLogger.logError(String.format("Cache with name '%s' not exists", cache));
             throw new IllegalArgumentException(String.format("Cache with name '%s' not exists%n", cache));
         }
         mainCache.remove(cache);
+        CustomLogger.logDebug(String.format("Remove Cache with name : %s", cache));
     }
 
     private static Cache<String, Object> getCache(String cache) {
@@ -94,16 +102,14 @@ public class CustomCache implements CacheInterface, Serializable {
         // create cache manager
         cacheManager = CacheManagerBuilder.newCacheManagerBuilder().build();
         cacheManager.init();
+        CustomLogger.logDebug("CacheManager initialized");
     }
 
     private static void buildAndConfigureMainCache() {
         // create main cache <String, Cache>
-//        mainCache = cacheManager.createCache(NAME_MAIN_CACHE, CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Cache.class,
-//                ResourcePoolsBuilder.heap(10).offheap(5, MemoryUnit.MB)).withValueSerializer((Class<? extends Serializer<Cache>>) Serializable.class)
-//                .withExpiry(Expirations.timeToLiveExpiration(Duration.of(cacheLifeCycle, TimeUnit.SECONDS))));
-
         mainCache = cacheManager.createCache(NAME_MAIN_CACHE, CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(String.class, Cache.class, ResourcePoolsBuilder.heap(10))
                 .withExpiry(Expirations.timeToLiveExpiration(Duration.of(cacheLifeCycle, TimeUnit.MINUTES))));
+        CustomLogger.logDebug(String.format("Cache '%s' created in EhcacheManager", NAME_MAIN_CACHE));
     }
 }

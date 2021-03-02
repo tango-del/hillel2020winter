@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface CacheInterface{
+public interface CacheInterface {
     void createCache(String cache);
     boolean put(String cache, String key, Object value);
     Object get(String cache, String key);
