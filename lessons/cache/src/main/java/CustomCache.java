@@ -24,7 +24,6 @@ public class CustomCache implements CacheInterface {
 
     @Override
     public void createCache(String cache) {
-        // TODO check cache name already exists
 
         if (mainCache.containsKey(cache)) {
             CustomLogger.logError(String.format("Cache with name '%s' already exists", cache));
