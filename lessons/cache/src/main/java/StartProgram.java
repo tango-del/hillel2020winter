@@ -17,7 +17,7 @@ public class StartProgram {
 
     }
 
-    public static void selectLifeCycle() {
+    private static void selectLifeCycle() {
 
         scanner = new Scanner(System.in);
         CustomLogger.logDebug("init scanner with console output stream");

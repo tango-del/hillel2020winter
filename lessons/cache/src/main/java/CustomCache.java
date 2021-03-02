@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomCache implements CacheInterface {
     private static CacheManager cacheManager;
-    static Cache<String, Cache> mainCache;
+    private static Cache<String, Cache> mainCache;
     private static Integer cacheLifeCycle;
     private static final String NAME_MAIN_CACHE = "main-cache";
 
