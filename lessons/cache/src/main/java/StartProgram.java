@@ -1,49 +1,72 @@
-import org.ehcache.Cache;
-import org.ehcache.CacheManager;
-
 import java.util.Scanner;
 
-/*
-TODO:
- -Создать кеш:
- -положить в кеш- boolean put(String cache, String key, Object o)
- -достать - Object get (String cache, String key)
- -очистить все кеши - void clear();
- -очистить кеш - void clear(string cache)
- */
 public class StartProgram {
     static Scanner scanner;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         scanner = new Scanner(System.in);
 
         System.out.println("Select cache lifecycle in minutes");
         // TODO think about check InputMisMatchException
         Integer cacheLifeCycle = scanner.nextInt();
+//        String test;
+//
+//        boolean result = true;
+//        Integer test2 = 1;
+//
+//        do {
+//            test = scanner.nextLine();
+//            try {
+//                test2 = Integer.valueOf(test);
+//                result = false;
+//            } catch (NumberFormatException e) {
+//                System.out.println("Incorrect number");
+//                result = true;
+//            }
+//        } while (result && test2 > 0 && test2 <= 10);
 
         CustomCache customCache = new CustomCache(cacheLifeCycle);
 
-        customCache.createCache();
+        // first cache
+
+        System.out.println("Select cache name");
+        String cacheName1 = StartProgram.scanner.next();
+
+        customCache.createCache(cacheName1);
+
+        customCache.put(cacheName1, "city", "Odessa");
+        customCache.put(cacheName1, "country", "Ukraine");
+
+        System.out.println(customCache.get(cacheName1, "city"));
+        System.out.println(customCache.get(cacheName1, "country"));
 
 
-        customCache.put("one", "city", "Odessa");
-        customCache.put("one", "country", "Ukraine");
 
-        System.out.println(customCache.get("one", "city"));
-        System.out.println(customCache.get("one", "country"));
 
-        customCache.createCache();
 
-        customCache.put("two", "imper", "Telegram");
-        customCache.put("two", "orem", "Skype");
+        // second cache
 
-        System.out.println(customCache.get("two", "imper"));
-        System.out.println(customCache.get("two", "orem"));
+        System.out.println("Select cache name");
+        String cacheName2 = StartProgram.scanner.next();
 
-        customCache.clearCache("one");
+        customCache.createCache(cacheName2);
+
+        customCache.put(cacheName2, "imper", "Telegram");
+        customCache.put(cacheName2, "orem", "Skype");
+
+        System.out.println(customCache.get(cacheName2, "imper"));
+        System.out.println(customCache.get(cacheName2, "orem"));
+
+
+        System.out.println(CustomCache.mainCache);
+
+
+//        customCache.clearSomeCache(cacheName1);
 
         customCache.clearAllCache();
 
         System.out.println(CustomCache.mainCache);
+
+        scanner.close();
     }
 }
