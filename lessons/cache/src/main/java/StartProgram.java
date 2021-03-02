@@ -4,42 +4,49 @@ import java.util.Scanner;
 
 public class StartProgram {
     static Scanner scanner;
+    private static Integer cacheLifeCycle;
 
     public static void main(String[] args) {
         CustomLogger.logDebug("Program start");
 
-        init();
+        selectLifeCycle();
 
         CustomLogger.logDebug("Program end");
 
     }
 
-    public static void init() {
+    public static void selectLifeCycle() {
 
         scanner = new Scanner(System.in);
         CustomLogger.logDebug("init scanner with console output stream");
 
 
-        CustomLogger.logInfo("Select cache lifecycle in minutes");
-        // TODO think about check InputMisMatchException
-        Integer cacheLifeCycle = scanner.nextInt();
+        CustomLogger.logInfo("Select all caches lifecycle between 1 - 100 minutes");
 
-//        String test;
-//
-//        boolean result = true;
-//        Integer test2 = 1;
-//
-//        do {
-//            test = scanner.nextLine();
-//            try {
-//                test2 = Integer.valueOf(test);
-//                result = false;
-//            } catch (NumberFormatException e) {
-//                System.out.println("Incorrect number");
-//                result = true;
-//            }
-//        } while (result && test2 > 0 && test2 <= 10);
+        boolean result;
+        do {
+            String str = scanner.next();
 
+            try {
+                cacheLifeCycle = Integer.valueOf(str);
+
+                if (cacheLifeCycle <= 0 || cacheLifeCycle > 100) {
+                    System.out.println("Selected number less then '0' or more then '100'");
+                    result = true;
+
+                } else {
+                    result = false;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Incorrect number");
+                result = true;
+            }
+
+        } while (result);
+    }
+
+    private static void init() {
         CustomCache customCache = new CustomCache(cacheLifeCycle);
 
         // first cache
