@@ -4,12 +4,15 @@ import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
+import org.ehcache.config.units.MemoryUnit;
 import org.ehcache.expiry.Duration;
 import org.ehcache.expiry.Expirations;
+import org.ehcache.spi.serialization.Serializer;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-public class CustomCache implements CacheInterface {
+public class CustomCache implements CacheInterface, Serializable {
     private static CacheManager cacheManager;
     static Cache<String, Cache> mainCache;
     private static Integer cacheLifeCycle;
@@ -23,23 +26,21 @@ public class CustomCache implements CacheInterface {
     }
 
     @Override
-    public void createCache() {
+    public void createCache(String cache) {
         // TODO check cache name already exists
-        System.out.println("Select cache name");
-        String cacheName = StartProgram.scanner.next();
 
-        if (mainCache.containsKey(cacheName)) {
-            throw new IllegalArgumentException(String.format("Cache with name '%s' already exists%n", cacheName));
+        if (mainCache.containsKey(cache)) {
+            throw new IllegalArgumentException(String.format("Cache with name '%s' already exists%n", cache));
         }
 
         Cache<String, Object> innerCache = cacheManager
-                .createCache(cacheName,
+                .createCache(cache,
                         CacheConfigurationBuilder
                                 .newCacheConfigurationBuilder(String.class, Object.class,
                                         ResourcePoolsBuilder.heap(10))
                                 .withExpiry(Expirations.timeToLiveExpiration(Duration.of(cacheLifeCycle, TimeUnit.MINUTES))));
 
-        mainCache.put(cacheName, innerCache);
+        mainCache.put(cache, innerCache);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class CustomCache implements CacheInterface {
         Cache tempCache = getCache(cache);
 
         if (tempCache == null) {
-            throw new IllegalArgumentException(String.format("Cache with name '%s' not found%n", cache));
+            throw new NullPointerException(String.format("Cache with name '%s' not found%n", cache));
         }
 
         tempCache.put(key, value);
@@ -61,10 +62,13 @@ public class CustomCache implements CacheInterface {
 
     @Override
     public Object get(String cache, String key) {
-        if (!mainCache.containsKey(cache))
-            throw new IllegalArgumentException(String.format("Cache not found with name : '%s'%n", cache));
-        if (!mainCache.get(cache).containsKey(key))
+        if (!mainCache.containsKey(cache)) {
+            throw new NullPointerException(String.format("Cache not found with name : '%s'%n", cache));
+        }
+        if (!mainCache.get(cache).containsKey(key)) {
             throw new NullPointerException(String.format("Cache with name '%s' don't have key : '%s'%n", cache, key));
+        }
+
         return mainCache.get(cache).get(key);
     }
 
@@ -75,7 +79,7 @@ public class CustomCache implements CacheInterface {
     }
 
     @Override
-    public void clearCache(String cache) {
+    public void clearSomeCache(String cache) {
         if (!mainCache.containsKey(cache)) {
             throw new IllegalArgumentException(String.format("Cache with name '%s' not exists%n", cache));
         }
@@ -94,6 +98,10 @@ public class CustomCache implements CacheInterface {
 
     private static void buildAndConfigureMainCache() {
         // create main cache <String, Cache>
+//        mainCache = cacheManager.createCache(NAME_MAIN_CACHE, CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Cache.class,
+//                ResourcePoolsBuilder.heap(10).offheap(5, MemoryUnit.MB)).withValueSerializer((Class<? extends Serializer<Cache>>) Serializable.class)
+//                .withExpiry(Expirations.timeToLiveExpiration(Duration.of(cacheLifeCycle, TimeUnit.SECONDS))));
+
         mainCache = cacheManager.createCache(NAME_MAIN_CACHE, CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(String.class, Cache.class, ResourcePoolsBuilder.heap(10))
                 .withExpiry(Expirations.timeToLiveExpiration(Duration.of(cacheLifeCycle, TimeUnit.MINUTES))));
