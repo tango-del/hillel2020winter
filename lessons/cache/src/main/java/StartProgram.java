@@ -2,6 +2,12 @@ import loggers.CustomLogger;
 
 import java.util.Scanner;
 
+/**
+ * This program create outer Cache which can store inside n-size inner Caches.
+ * Outer Cache key is String because it's immutable object.
+ * Inner Caches key - String, value - Object.
+ * User through scanner select one lifecycle which will set to all created Caches
+ */
 public class StartProgram {
     static Scanner scanner;
     private static Integer cacheLifeCycle;
@@ -17,6 +23,21 @@ public class StartProgram {
 
     }
 
+    /**
+     * In this method user selects through scanner number in MINUTES.
+     * Scanner initializing with stream input accept String data.
+     * Trying to wrap a string in integer with catch NumberFormatException.
+     *
+     * If user input scanner not only numbers then will throw exception which will catch
+     * and set @result - true which will cause to repeat cycle 'do' and user will input data again.
+     *
+     * If user input only numbers but his range will be less then 1 and more then 100 then
+     * set @result - true which will cause to repeat cycle 'do' and user will input data again.
+     *
+     * If all conditions done then at end @cacheLifeCycle - will set number in checked range and cycle will end.
+     *
+     * @throws NumberFormatException - cause if Integer will try wrap String to value
+     */
     private static void selectLifeCycle() {
 
         scanner = new Scanner(System.in);
@@ -48,6 +69,12 @@ public class StartProgram {
         } while (result);
     }
 
+    /**
+     * In this method was made tests that program work fine.
+     * Creates two inner Caches, put there some values and try to get them.
+     * Delete Some Cache and delete All Caches.
+     * When program end stop scanner
+     */
     private static void init() {
         CustomCache customCache = new CustomCache(cacheLifeCycle);
 
