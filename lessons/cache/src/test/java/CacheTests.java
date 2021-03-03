@@ -7,8 +7,9 @@ public class CacheTests {
     @BeforeAll
     static void initCache() {
         customCache = new CustomCache(4);
-        customCache.createCache("cache_one");
+        customCache.createCache("cache_one"); // test 4 delete this cache
         customCache.createCache("cache_two");
+        customCache.createCache("cache_three"); // test 8 delete this cache
 
     }
 
@@ -44,16 +45,31 @@ public class CacheTests {
     @Test
     public void checkCacheGetThrowsAfterRemove() {
         customCache.put("cache_one", "test_key", "test_value");
-        //delete test_name cache
+
+        //delete cache_one
         customCache.clearSomeCache("cache_one");
 
         //check not exists in main cache
         Assertions.assertThrows(NullPointerException.class,
                 () -> customCache.get("cache_one", "test_key"));
 
+        customCache.put("cache_three", "city", "Odessa");
+
+        // check inner cache not exists
+        Assertions.assertThrows(NullPointerException.class,
+                () -> customCache.get("cache_three", "country"));
     }
 
     @Order(5)
+    @Test
+    public void checkCacheGetNotThrow() {
+        customCache.put("cache_three", "city", "Kharkiv");
+
+        Assertions.assertDoesNotThrow(() -> customCache.get("cache_three", "city"));
+
+    }
+
+    @Order(6)
     @Test
     public void checkCacheGetThrows() {
 
@@ -62,7 +78,18 @@ public class CacheTests {
 
         Assertions.assertThrows(NullPointerException.class,
                 () -> customCache.get("test_name1", "test_key"));
+    }
 
+    @Order(7)
+    @Test
+    public void checkDeleteNotExistsCacheThrow() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> customCache.clearSomeCache("qwerty"));
+    }
+
+    @Order(8)
+    @Test
+    public void checkDeleteExistingCache() {
+        Assertions.assertDoesNotThrow(() -> customCache.clearSomeCache("cache_three"));
     }
 
     @AfterAll
