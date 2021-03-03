@@ -10,18 +10,41 @@ import org.ehcache.expiry.Expirations;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class make implementation of interface CacheInterface
+ * to interact with Cache in this program
+ */
 public class CustomCache implements CacheInterface {
     private static CacheManager cacheManager;
     private static Cache<String, Cache> mainCache;
     private static Integer cacheLifeCycle;
     private static final String NAME_MAIN_CACHE = "main-cache";
 
+    /**
+     * Default Constructor which set cache lifecycle.
+     * Build and init CacheManager for create all Caches
+     * Create main outer Cache in which will store all Caches
+     *
+     * @param cacheLifeCycle - number of cache lifecycle
+     */
     public CustomCache(Integer cacheLifeCycle) {
         this.cacheLifeCycle = cacheLifeCycle;
         buildCacheManager();
         buildAndConfigureMainCache();
     }
 
+    /**
+     * Method create inner Cache.
+     * At first check that in outer @mainCache already exists key - @cache
+     *
+     * Create cache with parameters: key type - String and value type - Object
+     * Take value @cacheLifeCycle for set lifecycle
+     *
+     * At the end put created cache in outer @mainCache as value, his key - @cache
+     *
+     * @param cache - key of inner Cache which put in outer Cache to get inner Cache
+     * @throws IllegalArgumentException - cause if key with name @cache already exists in outer @mainCache
+     */
     @Override
     public void createCache(String cache) {
 
@@ -41,6 +64,25 @@ public class CustomCache implements CacheInterface {
         CustomLogger.logDebug(String.format("Create Cache with name '%s' and put in '%s'", cache, NAME_MAIN_CACHE));
     }
 
+    /**
+     * Method put in inner cache key with his value.
+     *
+     * First check that all arguments not null.
+     *
+     * Then get link inner cache from outer @mainCache with key @cache
+     * If there is no such key then it return null (and throw NullPointerException)
+     *
+     * If this inner cache exists then put him @key with his @value
+     *
+     * At last check that inner cache contain this key inside and return result
+     *
+     * @param cache - key of inner Cache which store in outer @mainCache
+     * @param key - put to inner cache
+     * @param value - value of key in inner cache
+     * @return - if this method not throw exceptions all time return true
+     * @throws IllegalArgumentException - if one of arguments is null
+     * @throws NullPointerException - if there is no key with name @cache in outer @mainCache
+     */
     @Override
     public boolean put(String cache, String key, Object value) {
         if (cache == null || key == null || value == null) {
@@ -61,6 +103,19 @@ public class CustomCache implements CacheInterface {
         return tempCache.containsKey(key);
     }
 
+    /**
+     * Method return value of inner cache.
+     *
+     * First checks that key @cache exists in outer @mainCache
+     * Then check that @key exists in inner cache
+     *
+     * If no exception than return value
+     *
+     * @param cache - key of inner cache
+     * @param key - key of value in inner cache
+     * @return - value with type Object which store in inner cache with key @key
+     * @throws NullPointerException - if outer @mainCache not contain key - @cache or if inner cache not contain @key
+     */
     @Override
     public Object get(String cache, String key) {
         if (!mainCache.containsKey(cache)) {
@@ -76,6 +131,9 @@ public class CustomCache implements CacheInterface {
         return mainCache.get(cache).get(key);
     }
 
+    /**
+     * Method remove @mainCache which keep inside all user created inner caches and create new outer @mainCache
+     */
     @Override
     public void clearAllCache() {
         cacheManager.removeCache(NAME_MAIN_CACHE);
@@ -83,6 +141,16 @@ public class CustomCache implements CacheInterface {
         buildAndConfigureMainCache();
     }
 
+    /**
+     * Method delete specific inner cache
+     *
+     * First check that in outer @mainCache exists key - @cache
+     *
+     * Then remove this key with his value as inner cache from outer @mainCache
+     *
+     * @param cache - key in outer Cache which need to delete
+     * @throws IllegalArgumentException - if outer @mainCache not contain key - @cache
+     */
     @Override
     public void clearSomeCache(String cache) {
         if (!mainCache.containsKey(cache)) {
@@ -93,10 +161,19 @@ public class CustomCache implements CacheInterface {
         CustomLogger.logDebug(String.format("Remove Cache with name : %s", cache));
     }
 
+    /**
+     * Method return link to inner cache that stores in cacheManager.
+     *
+     * @param cache - name of cache which need to get
+     * @return - Link to inner cache. If no such name @cache in cacheManager then return null
+     */
     private static Cache<String, Object> getCache(String cache) {
         return cacheManager.getCache(cache, String.class, Object.class);
     }
 
+    /**
+     * Build and Init CacheManager
+     */
     private static void buildCacheManager() {
         // create cache manager
         cacheManager = CacheManagerBuilder.newCacheManagerBuilder().build();
@@ -104,6 +181,13 @@ public class CustomCache implements CacheInterface {
         CustomLogger.logDebug("CacheManager initialized");
     }
 
+    /**
+     * Create outer @mainCache with configuration
+     * name: @NAME_MAIN_CACHE
+     * lifecycle: @cacheLifeCycle
+     * key: String.class
+     * value: Cache.class
+     */
     private static void buildAndConfigureMainCache() {
         // create main cache <String, Cache>
         mainCache = cacheManager.createCache(NAME_MAIN_CACHE, CacheConfigurationBuilder
