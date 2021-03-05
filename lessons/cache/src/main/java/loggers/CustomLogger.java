@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  * automatically creates archive where sets currently file debug level and creates new file log.
  * When archive reaches 10 MB than creates new archive.
  *
- * >>>>ALL LOGS LIVE 24 HOURS<<<<
+ * ALL LOGS LIVE 24 HOURS
  */
 public class CustomLogger {
     static Logger loggerDebug = LoggerFactory.getLogger("logger.debug");

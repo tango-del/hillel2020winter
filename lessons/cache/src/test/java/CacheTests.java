@@ -90,6 +90,7 @@ public class CacheTests {
     @Test
     public void checkDeleteExistingCache() {
         Assertions.assertDoesNotThrow(() -> customCache.clearSomeCache("cache_three"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> customCache.clearSomeCache("cache_three"));
     }
 
     @AfterAll

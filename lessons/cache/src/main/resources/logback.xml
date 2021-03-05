@@ -86,7 +86,6 @@
         <appender-ref ref="debug_log"/>
     </logger>
 
-
     <logger name="logger.error" level="ERROR">
         <appender-ref ref="error_log"/>
     </logger>
