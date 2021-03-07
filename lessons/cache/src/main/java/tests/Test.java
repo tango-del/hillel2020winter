@@ -1,10 +1,17 @@
+package tests;
+
 import spark.Spark;
 
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-
 public class Test {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
+        
+    }
+
+    public static void testUserService() {
+
+    }
+
+    public static void testHelloWorld() {
         Spark.get("/hello", (req, res) -> "Hello World");
 
         Spark.get("/hello/:name", (req, res) -> {

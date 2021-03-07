@@ -6,7 +6,7 @@ import java.util.Scanner;
  * This program create outer Cache which can store inside n-size inner Caches.
  * Outer Cache key is String because it's immutable object.
  * Inner Caches key - String, value - Object.
- * User through scanner select one lifecycle which will set to all created Caches
+ * tests.User through scanner select one lifecycle which will set to all created Caches
  */
 public class StartProgram {
     static Scanner scanner;
