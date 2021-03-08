@@ -7,6 +7,8 @@ import java.util.Scanner;
  * Outer Cache key is String because it's immutable object.
  * Inner Caches key - String, value - Object.
  * tests.User through scanner select one lifecycle which will set to all created Caches
+ *
+ * All output messages - debug level 'info'
  */
 public class StartProgram {
     static Scanner scanner;
