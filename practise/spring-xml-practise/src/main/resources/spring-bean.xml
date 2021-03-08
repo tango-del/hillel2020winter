@@ -6,12 +6,12 @@
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="test"
-          class="tests.Test"
+          class="Test"
           scope="singleton"></bean>
 <!--          init-method="init">-->
 
 <!--    <bean id="test"-->
-<!--          class="tests.Test"-->
+<!--          class="Test"-->
 <!--          scope="prototype"-->
 <!--          init-method="init"></bean>-->
 

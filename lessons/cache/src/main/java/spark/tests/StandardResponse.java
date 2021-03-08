@@ -1,4 +1,4 @@
-package tests;
+package spark.tests;
 
 import com.google.gson.JsonElement;
 

@@ -30,7 +30,7 @@
         <property name="connection.pool_size">1</property>
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="entity.tests.User"/>
+        <mapping class="entity.User"/>
         <mapping class="entity.Address"/>
         <mapping class="entity.UserShort"/>
 

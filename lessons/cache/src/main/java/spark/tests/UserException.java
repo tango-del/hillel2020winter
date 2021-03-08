@@ -1,4 +1,4 @@
-package tests;
+package spark.tests;
 
 public class UserException extends Exception {
 

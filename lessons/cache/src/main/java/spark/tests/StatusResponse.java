@@ -1,4 +1,4 @@
-package tests;
+package spark.tests;
 
 public enum StatusResponse {
     SUCCESS("Success"), ERROR("Error");
