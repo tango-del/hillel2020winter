@@ -27,18 +27,25 @@ public class CustomCache implements CacheInterface {
      *
      * @param cacheLifeCycle - number of cache lifecycle
      */
-    public CustomCache(Integer cacheLifeCycle) {
+    public CustomCache(final Integer cacheLifeCycle) {
         this.cacheLifeCycle = cacheLifeCycle;
         buildCacheManager();
         buildAndConfigureMainCache();
     }
 
+    @Override
+    public boolean checkKeyExistsInInnerCache(final String cache, final String key) {
+        return mainCache.get(cache).containsKey(key);
+    }
+
     /**
-     * Getter for outer @mainCache to interact with SPARK framework
-     * @return - link outer @mainCache
+     * Method check outer @mainCache contains inside inner cache with this name
+     * @param cache - inner cache name
+     * @return - result if this cache exists in outer @mainCache
      */
-    public static Cache<String, Cache> getMainCache() {
-        return mainCache;
+    @Override
+    public boolean checkIfInnerCacheExistsInMainCache(final String cache) {
+        return mainCache.containsKey(cache);
     }
 
     /**
@@ -54,9 +61,9 @@ public class CustomCache implements CacheInterface {
      * @throws IllegalArgumentException - cause if key with name @cache already exists in outer @mainCache
      */
     @Override
-    public void createCache(String cache) {
+    public void createCache(final String cache) {
 
-        if (mainCache.containsKey(cache)) {
+        if (checkIfInnerCacheExistsInMainCache(cache)) {
             CustomLogger.logError(String.format("Cache with name '%s' already exists", cache));
             throw new IllegalArgumentException(String.format("Cache with name '%s' already exists%n", cache));
         }
@@ -92,7 +99,7 @@ public class CustomCache implements CacheInterface {
      * @throws NullPointerException - if there is no key with name @cache in outer @mainCache
      */
     @Override
-    public boolean put(String cache, String key, Object value) {
+    public boolean put(final String cache, final String key, final Object value) {
         if (cache == null || key == null || value == null) {
             CustomLogger.logError("One of arguments in method 'put' is null");
             throw new IllegalArgumentException("One of arguments in method 'put' is null");
@@ -125,12 +132,12 @@ public class CustomCache implements CacheInterface {
      * @throws NullPointerException - if outer @mainCache not contain key - @cache or if inner cache not contain @key
      */
     @Override
-    public Object get(String cache, String key) {
-        if (!mainCache.containsKey(cache)) {
+    public Object get(final String cache, final String key) {
+        if (!checkIfInnerCacheExistsInMainCache(cache)) {
             CustomLogger.logError(String.format("Cache not found with name : '%s'", cache));
             throw new NullPointerException(String.format("Cache not found with name : '%s'%n", cache));
         }
-        if (!mainCache.get(cache).containsKey(key)) {
+        if (!checkKeyExistsInInnerCache(cache, key)) {
             CustomLogger.logError(String.format("Cache with name '%s' don't have key : '%s'", cache, key));
             throw new NullPointerException(String.format("Cache with name '%s' don't have key : '%s'%n", cache, key));
         }
@@ -166,8 +173,8 @@ public class CustomCache implements CacheInterface {
      * @throws IllegalArgumentException - if outer @mainCache not contain key - @cache
      */
     @Override
-    public void clearSomeCache(String cache) {
-        if (!mainCache.containsKey(cache)) {
+    public void clearSomeCache(final String cache) {
+        if (!checkIfInnerCacheExistsInMainCache(cache)) {
             CustomLogger.logError(String.format("Cache with name '%s' not exists", cache));
             throw new IllegalArgumentException(String.format("Cache with name '%s' not exists%n", cache));
         }
@@ -182,7 +189,7 @@ public class CustomCache implements CacheInterface {
      * @param cache - name of cache which need to get
      * @return - Link to inner cache. If no such name @cache in cacheManager then return null
      */
-    private static Cache<String, Object> getInnerCache(String cache) {
+    private static Cache<String, Object> getInnerCache(final String cache) {
         return cacheManager.getCache(cache, String.class, Object.class);
     }
 

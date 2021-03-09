@@ -20,6 +20,21 @@ public interface CacheInterface {
     boolean put(String cache, String key, Object value);
 
     /**
+     * Method check if inner cache with this name exists in outer @mainCache
+     * @param cache - inner cache name
+     * @return - true if this cache exists, false if not
+     */
+    boolean checkIfInnerCacheExistsInMainCache(String cache);
+
+    /**
+     * Method check that key exists in inner cache with name 'cache'
+     * @param cache - cache name
+     * @param key - key of inner cache
+     * @return - true if this key exists in cache with this name, false if not exists
+     */
+    boolean checkKeyExistsInInnerCache(String cache, String key);
+
+    /**
      * Method return value of @key from inner cache which store in outer cache with @cache key
      * @param cache - key of inner cache
      * @param key - key of value in inner cache
