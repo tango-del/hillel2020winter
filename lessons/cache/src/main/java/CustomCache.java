@@ -33,6 +33,12 @@ public class CustomCache implements CacheInterface {
         buildAndConfigureMainCache();
     }
 
+    /**
+     * Method check that key exists in inner cache with name 'cache'
+     * @param cache - cache name
+     * @param key - key of inner cache
+     * @return - true if this key exists in cache with this name, false if not exists
+     */
     @Override
     public boolean checkKeyExistsInInnerCache(final String cache, final String key) {
         return mainCache.get(cache).containsKey(key);
