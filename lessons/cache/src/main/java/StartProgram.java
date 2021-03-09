@@ -1,12 +1,16 @@
 import loggers.CustomLogger;
+import spark.Spark;
 
 import java.util.Scanner;
 
 /**
  * This program create outer Cache which can store inside n-size inner Caches.
  * Outer Cache key is String because it's immutable object.
- * Inner Caches key - String, value - Object.
- * tests.User through scanner select one lifecycle which will set to all created Caches
+ * Inner Caches key - String, value - Object
+ * User through scanner select one lifecycle which will set to all created Caches
+ *
+ * To Interact with program through SPARK API uncomment method: initSpark()
+ * To Interact without SPARK and use custom cache creation use method: customCreateCache()
  *
  * All output messages - debug level 'info'
  */
@@ -17,25 +21,99 @@ public class StartProgram {
     public static void main(String[] args) {
         CustomLogger.logDebug("Program start");
 
-        selectLifeCycle();
+        if (args.length > 0) {
+//            outputHelpCommands(args[0]);
 
-        init();
+        } else {
+            selectLifeCycle();
+
+            initSpark();
+
+//        customCreateCache();
+        }
 
         CustomLogger.logDebug("Program end");
 
+    }
+
+
+
+    private static void initSpark() {
+        CustomCache customCache = new CustomCache(cacheLifeCycle);
+
+        Spark.post("/create-cache/:cache-name", ((request, response) -> {
+
+            String cacheName = request.params(":cache-name");
+
+            if (!CustomCache.getMainCache().containsKey(cacheName)) {
+
+                customCache.createCache(request.params(":cache-name"));
+                return "Created new cache";
+            } else {
+
+                return String.format("Cache with name '%s' already exists", request.params(":cache-name"));
+            }
+        }));
+
+        Spark.put("/put-value/:cache-name/:key-input/:inner-value", (request, response) -> {
+            String cacheName = request.params(":cache-name");
+            String cacheKey = request.params(":key-input");
+            String cacheValue = request.params(":inner-value");
+
+            if (!CustomCache.getMainCache().containsKey(cacheName)) {
+                return String.format("Cache with name '%s' not found", cacheName);
+            }
+            customCache.put(cacheName, cacheKey, cacheValue);
+
+            return "Added new value in inner cache";
+
+        });
+
+        Spark.get("/get-value/:cache-name/:cache-key", (request, response) -> {
+            response.type("application/json");
+
+            String cacheName = request.params(":cache-name");
+            String cacheKey = request.params(":cache-key");
+
+            if (!CustomCache.getMainCache().containsKey(cacheName)) {
+                return String.format("Cache not found with name : '%s'", cacheName);
+            }
+            if (!CustomCache.getMainCache().get(cacheName).containsKey(cacheKey)) {
+                return String.format("Cache with name '%s' don't have key : '%s'", cacheName, cacheKey);
+            }
+
+            return customCache.get(request.params(":cache-name"), request.params(":cache-key"));
+        });
+
+        Spark.delete("/delete-cache/:cache-name", ((request, response) -> {
+
+            String cacheName = request.params(":cache-name");
+
+            if (!CustomCache.getMainCache().containsKey(cacheName)) {
+                return String.format("Cache with name '%s' not exists", cacheName);
+            }
+
+            customCache.clearSomeCache(cacheName);
+            return String.format("Cache: '%s' - successfully deleted", cacheName);
+        }));
+
+        Spark.delete("/clear-all", ((request, response) -> {
+            customCache.clearAllCache();
+            return "Main Cache successfully deleted";
+        }));
     }
 
     /**
      * In this method user selects through scanner number in MINUTES.
      * Scanner initializing with stream input accept String data.
      * Trying to wrap a string in integer with catch NumberFormatException.
-     *
+     * <p>
      * If user input scanner not only numbers then will throw exception which will catch
      * and set @result - true which will cause to repeat cycle 'do' and user will input data again.
-     *
+     * <p>
      * If user input only numbers but his range will be less then 1 and more then 100 then
      * set @result - true which will cause to repeat cycle 'do' and user will input data again.
-     *
+     * <p>
      * If all conditions done then at end @cacheLifeCycle - will set number in checked range and cycle will end.
      *
      * @throws NumberFormatException - cause if Integer will try wrap String to value
@@ -77,7 +155,7 @@ public class StartProgram {
      * Delete Some Cache and delete All Caches.
      * When program end stop scanner
      */
-    private static void init() {
+    private static void customCreateCache() {
         CustomCache customCache = new CustomCache(cacheLifeCycle);
 
         // first cache
@@ -92,6 +170,9 @@ public class StartProgram {
         CustomLogger.logInfo((String) customCache.get(cacheName1, "city"));
         CustomLogger.logInfo((String) customCache.get(cacheName1, "country"));
 
+        customCache.clearSomeCache(cacheName1);
+
+        customCache.createCache(cacheName1);
 
         // second cache
         CustomLogger.logInfo("Select cache name");

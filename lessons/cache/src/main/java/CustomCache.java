@@ -34,6 +34,14 @@ public class CustomCache implements CacheInterface {
     }
 
     /**
+     * Getter for outer @mainCache to interact with SPARK framework
+     * @return - link outer @mainCache
+     */
+    public static Cache<String, Cache> getMainCache() {
+        return mainCache;
+    }
+
+    /**
      * Method create inner Cache.
      * At first check that in outer @mainCache already exists key - @cache
      *
@@ -90,7 +98,7 @@ public class CustomCache implements CacheInterface {
             throw new IllegalArgumentException("One of arguments in method 'put' is null");
         }
 
-        Cache tempCache = getCache(cache);
+        Cache tempCache = getInnerCache(cache);
 
         if (tempCache == null) {
             CustomLogger.logError(String.format("Cache with name '%s' not found", cache));
@@ -132,10 +140,15 @@ public class CustomCache implements CacheInterface {
     }
 
     /**
-     * Method remove @mainCache which keep inside all user created inner caches and create new outer @mainCache
+     * CacheManager remove all inner caches which stored inside outer @mainCache
+     * So user can create later caches with same names.
+     *
+     * Then CacheManager remove @mainCache which keep inside all user created inner caches and create new outer @mainCache
      */
     @Override
     public void clearAllCache() {
+        mainCache.forEach(f -> cacheManager.removeCache(f.getKey()));
+        CustomLogger.logDebug(String.format("CacheManager remove all inner Caches in '%s'", NAME_MAIN_CACHE));
         cacheManager.removeCache(NAME_MAIN_CACHE);
         CustomLogger.logDebug(String.format("Remove '%s'", NAME_MAIN_CACHE));
         buildAndConfigureMainCache();
@@ -147,6 +160,7 @@ public class CustomCache implements CacheInterface {
      * First check that in outer @mainCache exists key - @cache
      *
      * Then remove this key with his value as inner cache from outer @mainCache
+     * Then remove specific inner cache from CacheManager
      *
      * @param cache - key in outer Cache which need to delete
      * @throws IllegalArgumentException - if outer @mainCache not contain key - @cache
@@ -158,6 +172,7 @@ public class CustomCache implements CacheInterface {
             throw new IllegalArgumentException(String.format("Cache with name '%s' not exists%n", cache));
         }
         mainCache.remove(cache);
+        cacheManager.removeCache(cache);
         CustomLogger.logDebug(String.format("Remove Cache with name : %s", cache));
     }
 
@@ -167,7 +182,7 @@ public class CustomCache implements CacheInterface {
      * @param cache - name of cache which need to get
      * @return - Link to inner cache. If no such name @cache in cacheManager then return null
      */
-    private static Cache<String, Object> getCache(String cache) {
+    private static Cache<String, Object> getInnerCache(String cache) {
         return cacheManager.getCache(cache, String.class, Object.class);
     }
 
