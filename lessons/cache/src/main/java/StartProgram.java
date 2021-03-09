@@ -43,11 +43,11 @@ public class StartProgram {
 
             if (!customCache.checkIfInnerCacheExistsInMainCache(cacheName)) {
 
-                customCache.createCache(request.params(":cache-name"));
+                customCache.createCache(cacheName);
                 return "Created new cache";
             } else {
 
-                return String.format("Cache with name '%s' already exists", request.params(":cache-name"));
+                return String.format("Cache with name '%s' already exists", cacheName);
             }
         }));
 
@@ -78,7 +78,7 @@ public class StartProgram {
                 return String.format("Cache with name '%s' don't have key : '%s'", cacheName, cacheKey);
             }
 
-            return customCache.get(request.params(":cache-name"), request.params(":cache-key"));
+            return customCache.get(cacheName, cacheKey);
         });
 
         Spark.delete("/delete-cache/:cache-name", ((request, response) -> {
