@@ -22,7 +22,7 @@ public class StartProgram {
         CustomLogger.logDebug("Program start");
 
         if (args.length > 0) {
-//            outputHelpCommands(args[0]);
+            outputHelpCommands(args[0]);
 
         } else {
             selectLifeCycle();
@@ -35,8 +35,6 @@ public class StartProgram {
         CustomLogger.logDebug("Program end");
 
     }
-
-
 
     private static void initSpark() {
         CustomCache customCache = new CustomCache(cacheLifeCycle);
@@ -147,6 +145,43 @@ public class StartProgram {
             }
 
         } while (result);
+    }
+
+    /**
+     * Method output help information to interact with program through SPARK
+     * @param str - expect argument "-h"
+     */
+    private static void outputHelpCommands(final String str) {
+        CustomLogger.logDebug("Program started with key '-h' to output help message for interact with SPARK");
+        if (str == null) {
+            CustomLogger.logError("IllegalArgumentException: Incorrect argument message");
+            throw new IllegalArgumentException("Incorrect argument message");
+        }
+
+        if (str.equalsIgnoreCase("-h")) {
+            StringBuilder output = new StringBuilder();
+            output.append("Help commands to interact with SPARK methods:").append(System.lineSeparator());
+            output.append(">>>POST<<< request:").append(System.lineSeparator());
+            output.append("http://localhost:4567/create-cache/{cache-name} - POST inner cache with name {cache-name}").append(System.lineSeparator()).append(System.lineSeparator());
+
+            output.append(">>>PUT<<< request:").append(System.lineSeparator());
+            output.append("http://localhost:4567/put-value/{cache-name}/{cache-key}/{cache-value} - PUT inside inner cache new key with his value (type Object)").append(System.lineSeparator());
+            output.append("{cache-name} - cache name").append(System.lineSeparator());
+            output.append("{cache-key} - inner key of cache").append(System.lineSeparator());
+            output.append("{cache-value} - value of inner key (type Object)").append(System.lineSeparator()).append(System.lineSeparator());
+
+            output.append(">>>GET<<< request:").append(System.lineSeparator());
+            output.append("http://localhost:4567/get-value/{cache-name}/{cache-key} - GET key value (type Object) from inner cache which stored in outer main cache").append(System.lineSeparator());
+            output.append("{cache-name} - cache name").append(System.lineSeparator());
+            output.append("{cache-key} - inner key of cache").append(System.lineSeparator()).append(System.lineSeparator());
+
+            output.append(">>>DELETE<<< requests:").append(System.lineSeparator());
+            output.append("http://localhost:4567/delete-cache/{cache-name} - DELETE inner cache with this name if he exists").append(System.lineSeparator()).append(System.lineSeparator());
+
+            output.append("http://localhost:4567/clear-all - DELETE all inner caches and recreate main cache").append(System.lineSeparator());
+
+            CustomLogger.logInfo(output.toString());
+        }
     }
 
     /**
