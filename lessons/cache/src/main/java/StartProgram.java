@@ -15,6 +15,11 @@ import java.util.Scanner;
  * All output messages - debug level 'info'
  */
 public class StartProgram {
+    /*
+     TODO
+      допиши энд поинт который будет тушить приложение и сериализовать данные из кеша и гдето их сохранять,
+      а при старте приложения данные будут десериализоваться и с ними можно будет работать
+     */
     static Scanner scanner;
     private static Integer cacheLifeCycle;
 
@@ -35,6 +40,7 @@ public class StartProgram {
     }
 
     private static void initSpark() {
+        // TODO спросить нужно ли возвращать null
         CustomCache customCache = new CustomCache(cacheLifeCycle);
 
         Spark.post("/create-cache/:cache-name", ((request, response) -> {
