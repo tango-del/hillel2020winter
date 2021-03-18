@@ -17,6 +17,7 @@ public class SwaggerConfig {
 
     @Bean
     public Docket appApi() {
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()

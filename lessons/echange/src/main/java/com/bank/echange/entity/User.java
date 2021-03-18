@@ -5,6 +5,18 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+/**
+ * -- auto-generated definition
+ * create table user
+ * (
+ *     id         int auto_increment
+ *         primary key,
+ *     first_name varchar(255) null,
+ *     last_name  varchar(255) null,
+ *     phone      varchar(255) null
+ * );
+ */
+
 @Data
 @Entity
 @Accessors(chain = true)

@@ -21,11 +21,12 @@ public class UserController {
     private final UserRepository userRepository;
 
     @PostMapping
-    public Long createUser(@RequestBody UserDto user) {
+    public Long createUser(@RequestBody UserDto user)  {
         userRepository.save(new User()
-        .setFirstName(user.getFirstName()))
+                .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
-                .setPhone(user.getPhone());
+                .setPhone(user.getPhone())
+        );
         return -1L;
     }
 }
