@@ -19,7 +19,7 @@ public class UserDomExample_1 {
     private static ArrayList<User> users = new ArrayList<>();
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilder builder = DocumentBuilderFactory.newNSInstance().newDocumentBuilder();
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
         Document document = builder.parse(new File(UserSaxExample.class.getClassLoader().getResource("phoneBook.xml").getFile()));
 
