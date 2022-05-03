@@ -5,6 +5,7 @@ import lesson17.Players.User;
 import lesson17.enums.Signs;
 import lesson17.exceptions.UnsupportedSignException;
 import lesson17.interfaces.GameWork;
+
 import java.io.IOException;
 
 public class GameFunctions implements GameWork {
@@ -106,70 +107,82 @@ public class GameFunctions implements GameWork {
     @Override
     public void winnerInRound(User user, Computer computer) throws UnsupportedSignException, IOException {
         switch (user.getSigns()) {
-            case ROCK -> {
+            case ROCK: {
                 switch (computer.getSigns()) {
-                    case ROCK -> {
+                    case ROCK: {
                         StartGame.str.append("user - rock, comp - rock --> NO WINNER")
                                 .append(System.lineSeparator());
                         System.out.println("user - rock, comp - rock --> NO WINNER");
+                        break;
                     }
-                    case SCISSORS -> {
+                    case SCISSORS: {
                         StartGame.str.append("user - rock, comp - scissors --> USER WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - rock, comp - scissors --> USER WIN");
                         ++userQuantityWinRounds;
+                        break;
                     }
-                    case PAPER -> {
+                    case PAPER: {
                         StartGame.str.append("user - rock, comp - paper --> COMP WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - rock, comp - paper --> COMP WIN");
                         ++computerQuantityWinRounds;
+                        break;
                     }
                 }
+                break;
             }
-            case SCISSORS -> {
+            case SCISSORS: {
                 switch (computer.getSigns()) {
-                    case ROCK -> {
+                    case ROCK: {
                         StartGame.str.append("user - scissors, comp - rock -> COMP WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - rock -> COMP WIN");
                         ++computerQuantityWinRounds;
+                        break;
                     }
-                    case SCISSORS -> {
+                    case SCISSORS: {
                         StartGame.str.append("user - scissors, comp - scissors --> НИЧЬЯ")
                                 .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - scissors --> НИЧЬЯ");
+                        break;
                     }
-                    case PAPER -> {
+                    case PAPER: {
                         StartGame.str.append("user - scissors, comp - paper --> USER WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - scissors, comp - paper --> USER WIN");
                         ++userQuantityWinRounds;
+                        break;
                     }
                 }
+                break;
             }
-            case PAPER -> {
+            case PAPER: {
                 switch (computer.getSigns()) {
-                    case ROCK -> {
+                    case ROCK: {
                         StartGame.str.append("user - paper, comp - rock --> USER WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - paper, comp - rock --> USER WIN");
                         ++userQuantityWinRounds;
+                        break;
                     }
-                    case SCISSORS -> {
+                    case SCISSORS: {
                         StartGame.str.append("user - paper, comp - scissors --> COMP WIN")
                                 .append(System.lineSeparator());
                         System.out.println("user - paper, comp - scissors --> COMP WIN");
                         ++computerQuantityWinRounds;
+                        break;
                     }
-                    case PAPER -> {
+                    case PAPER: {
                         StartGame.str.append("user - paper, comp - paper --> НИЧЬЯ")
                                 .append(System.lineSeparator());
                         System.out.println("user - paper, comp - paper --> НИЧЬЯ");
+                        break;
                     }
                 }
+                break;
             }
-            default -> {
+            default: {
                 StartGame.str.append(">EXCEPTION<: ")
                         .append("You choose wrong Sign")
                         .append(System.lineSeparator());
